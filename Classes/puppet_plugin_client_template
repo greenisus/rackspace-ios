@@ -1,0 +1,4 @@
+[agent]
+  server = <puppet_server>
+  report = true
+  pluginsync = true

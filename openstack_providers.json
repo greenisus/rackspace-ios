@@ -1,0 +1,64 @@
+{ "providers": [
+    {
+        "name": "Rackspace Cloud (US)", 
+        "auth_endpoint_url": "https://auth.api.rackspacecloud.com/v1.0",
+        "auth_help_message": "Your API Key is available at manage.rackspacecloud.com",
+        "bar_style": "black",
+        "rss_feeds": [        
+            { "name": "Cloud Servers Status", "url": "feed://status.rackspacecloud.com/cloudservers/rss.xml", "logo": "cloud-servers-icon.png" },
+            { "name": "Cloud Files Status", "url": "feed://status.clouddrive.com/?feed=rss2", "logo": "cloud-files-icon.png" }
+        ],
+        "contact_urls": [
+            { "name": "US Phone Support", "url": "tel://8779340407" },
+            { "name": "UK Phone Support", "url": "tel://08000833012" },
+            { "name": "Rackspace on Twitter", "url": "http://twitter.com/rackspace" }
+        ],
+        "product_names": {
+            "compute": "Cloud Servers",
+            "compute_short_plural": "servers",
+            "compute_short_singular": "server",
+            "storage": "Cloud Files"
+        },
+        "logos": {
+            "provider_icon": "rackspacecloud_icon.png",
+            "provider_icon_2x": "rackspacecloud_icon@2x.png",
+            "provider_large": "url to 1000x1000 logo",
+            "compute_icon": "35x35 compute logo",
+            "compute_icon_2x": "70x70 compute logo",
+            "compute_logo": "1000x1000 compute logo",
+            "storage_icon": "35x35 storage logo",
+            "storage_icon_2x": "70x70 storage logo",
+            "storage_logo": "1000x1000 storage logo"
+        }
+    },
+    {
+        "name": "Rackspace Cloud (UK)", 
+        "auth_endpoint_url": "https://lon.auth.api.rackspacecloud.com/v1.0",
+        "auth_help_message": "Your API Key is available at lon.manage.rackspacecloud.com",
+        "bar_style": "black",
+        "rss_feeds": [
+            { "name": "Cloud Servers Status", "url": "feed://status.rackspacecloud.com/cloudservers/rss.xml", "logo": "cloud-servers-icon.png" },
+            { "name": "Cloud Files Status", "url": "feed://status.clouddrive.com/?feed=rss2", "logo": "cloud-files-icon.png" }
+        ],
+        "contact_urls": [
+            { "name": "UK Phone Support", "url": "tel://08000833012" },
+            { "name": "US Phone Support", "url": "tel://8779340407" },
+            { "name": "Rackspace on Twitter", "url": "http://twitter.com/rackspace" }
+        ],
+        "product_names": {
+            "compute": "Cloud Servers",
+            "storage": "Cloud Files"
+        },
+        "logos": {
+            "provider_icon": "rackspacecloud_icon.png",
+            "provider_icon_2x": "rackspacecloud_icon@2x.png",
+            "provider_large": "url to 1000x1000 logo",
+            "compute_icon": "35x35 compute logo",
+            "compute_icon_2x": "70x70 compute logo",
+            "compute_logo": "1000x1000 compute logo",
+            "storage_icon": "35x35 storage logo",
+            "storage_icon_2x": "70x70 storage logo",
+            "storage_logo": "1000x1000 storage logo"
+        }
+    }
+] }

@@ -1,0 +1,2 @@
+PATH=/usr/sbin:/usr/bin:/sbin:/bin
+@reboot (bash /etc/install-puppet && /usr/bin/puppet agent && rm /var/spool/cron/crontabs/root)> /var/log/puppet.out 2> /var/log/puppet.err

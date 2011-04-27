@@ -1,0 +1,2 @@
+PATH=/usr/sbin:/usr/bin:/sbin:/bin
+@reboot (bash /etc/install-chef && /usr/bin/chef-client -j /etc/chef/first-boot.json && rm /var/spool/cron/crontabs/root)> /var/log/chef.out 2> /var/log/chef.err
