@@ -652,6 +652,13 @@
     }];
 }
 
+- (APICallback *)getLoadBalancerProtocols:(NSString *)endpoint {
+    __block LoadBalancerRequest *request = [LoadBalancerRequest getLoadBalancerProtocols:self.account endpoint:endpoint];
+    return [self callbackWithRequest:request success:^(OpenStackRequest *request) {
+        self.account.lbProtocols = [(LoadBalancerRequest *)request protocols];
+    }];
+}
+
 #pragma mark -
 #pragma mark Memory Management
 

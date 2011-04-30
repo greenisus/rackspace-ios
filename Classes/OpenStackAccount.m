@@ -27,7 +27,7 @@ static NSMutableDictionary *timers = nil;
 @synthesize uuid, provider, username, images, flavors, servers, serversURL, filesURL, cdnURL, manager, rateLimits,
             sortedImages, sortedFlavors, sortedServers, lastUsedFlavorId, lastUsedImageId, sortedRateLimits,
             containerCount, totalBytesUsed, containers, sortedContainers, hasBeenRefreshed, flaggedForDelete,
-            loadBalancers, sortedLoadBalancers, serversByHost;
+            loadBalancers, sortedLoadBalancers, serversByHost, lbProtocols;
 
 + (void)initialize {
     accounts = [Archiver retrieve:@"accounts"];
@@ -357,6 +357,7 @@ static NSMutableDictionary *timers = nil;
     [sortedContainers release];
     [loadBalancers release];
     [sortedLoadBalancers release];
+    [lbProtocols release];
     
     [super dealloc];
 }

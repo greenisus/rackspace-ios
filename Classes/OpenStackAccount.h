@@ -58,6 +58,8 @@
     BOOL flaggedForDelete;
     
     NSMutableDictionary *serversByHost;
+    
+    NSMutableArray *lbProtocols;
 }
 
 @property (assign) BOOL hasBeenRefreshed;
@@ -88,6 +90,7 @@
 @property (retain) NSMutableDictionary *loadBalancers;
 @property (retain) NSArray *sortedLoadBalancers;
 @property (retain) NSMutableDictionary *serversByHost;
+@property (retain) NSMutableArray *lbProtocols;
 
 + (NSArray *)accounts;
 - (BOOL)persist;

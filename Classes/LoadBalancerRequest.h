@@ -14,7 +14,10 @@
 }
 
 + (LoadBalancerRequest *)getLoadBalancersRequest:(OpenStackAccount *)account endpoint:(NSString *)endpoint;
-
 - (NSMutableDictionary *)loadBalancers;
+
++ (LoadBalancerRequest *)getLoadBalancerProtocols:(OpenStackAccount *)account endpoint:(NSString *)endpoint;
+- (NSMutableArray *)protocols;
+
 
 @end

@@ -8,10 +8,11 @@
 
 #import "ComputeModel.h"
 
+@class LoadBalancerProtocol;
+
 @interface LoadBalancer : ComputeModel <NSCoding> {
 
-    NSString *protocol;
-    NSUInteger port;
+    LoadBalancerProtocol *protocol;
     NSString *algorithm;
     NSString *status;
     NSMutableArray *virtualIPs;
@@ -37,8 +38,7 @@ https://dfw.loadbalancers.api.rackspacecloud.com/v1.0/420600/
 */
 }
 
-@property (retain) NSString *protocol;
-@property (assign) NSUInteger port;
+@property (retain) LoadBalancerProtocol *protocol;
 @property (retain) NSString *algorithm;
 @property (retain) NSString *status;
 @property (retain) NSMutableArray *virtualIPs;

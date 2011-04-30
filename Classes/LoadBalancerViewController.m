@@ -10,6 +10,7 @@
 #import "LoadBalancer.h"
 #import <QuartzCore/QuartzCore.h>
 #import "NameAndStatusTitleView.h"
+#import "LoadBalancerProtocol.h"
 #import "Server.h"
 
 #define kDetails 0
@@ -156,11 +157,11 @@
                 break;            
             case 1:
                 cell.textLabel.text = @"Protocol";
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ on Port %i", self.loadBalancer.protocol, self.loadBalancer.port];
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ on Port %i", self.loadBalancer.protocol.name, self.loadBalancer.protocol.port];
                 break;            
             case 2:
                 cell.textLabel.text = @"Port";
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"%i", self.loadBalancer.port];
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"%i", self.loadBalancer.protocol.port];
                 break;            
             case 3:
                 cell.textLabel.text = @"Cluster Name";

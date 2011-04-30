@@ -13,6 +13,16 @@
 		2705F3ED12E7FA5900949131 /* RSTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2705F3E912E7FA5900949131 /* RSTextFieldCell.m */; };
 		270878F213282104006D4EE3 /* NSObject+NSCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 270878F013282104006D4EE3 /* NSObject+NSCoding.m */; };
 		270878F413282104006D4EE3 /* NSObject+NSCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 270878F013282104006D4EE3 /* NSObject+NSCoding.m */; };
+		2710BBF4136B4996003C8CFF /* LoadBalancerProtocol.h in Sources */ = {isa = PBXBuildFile; fileRef = 2710BBF2136B4996003C8CFF /* LoadBalancerProtocol.h */; };
+		2710BBF5136B4996003C8CFF /* LoadBalancerProtocol.h in Sources */ = {isa = PBXBuildFile; fileRef = 2710BBF2136B4996003C8CFF /* LoadBalancerProtocol.h */; };
+		2710BBF6136B4996003C8CFF /* LoadBalancerProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 2710BBF3136B4996003C8CFF /* LoadBalancerProtocol.m */; };
+		2710BBF7136B4996003C8CFF /* LoadBalancerProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 2710BBF3136B4996003C8CFF /* LoadBalancerProtocol.m */; };
+		2710BC13136B54A9003C8CFF /* LBProtocolViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 2710BC10136B54A9003C8CFF /* LBProtocolViewController.h */; };
+		2710BC14136B54A9003C8CFF /* LBProtocolViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 2710BC10136B54A9003C8CFF /* LBProtocolViewController.h */; };
+		2710BC15136B54A9003C8CFF /* LBProtocolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2710BC11136B54A9003C8CFF /* LBProtocolViewController.m */; };
+		2710BC16136B54A9003C8CFF /* LBProtocolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2710BC11136B54A9003C8CFF /* LBProtocolViewController.m */; };
+		2710BC17136B54A9003C8CFF /* LBProtocolViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2710BC12136B54A9003C8CFF /* LBProtocolViewController.xib */; };
+		2710BC18136B54A9003C8CFF /* LBProtocolViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2710BC12136B54A9003C8CFF /* LBProtocolViewController.xib */; };
 		271726F112555EC0003A1319 /* Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = 271726EF12555EC0003A1319 /* Provider.m */; };
 		2717275A12565ED9003A1319 /* OpenStackAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 2717275812565ED9003A1319 /* OpenStackAccount.m */; };
 		2717282512567D61003A1319 /* Keychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 2717282312567D61003A1319 /* Keychain.m */; };
@@ -701,6 +711,11 @@
 		2705F3E912E7FA5900949131 /* RSTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSTextFieldCell.m; sourceTree = "<group>"; };
 		270878EF13282104006D4EE3 /* NSObject+NSCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = "NSObject+NSCoding.h"; sourceTree = "<group>"; };
 		270878F013282104006D4EE3 /* NSObject+NSCoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+NSCoding.m"; sourceTree = "<group>"; };
+		2710BBF2136B4996003C8CFF /* LoadBalancerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = LoadBalancerProtocol.h; sourceTree = "<group>"; };
+		2710BBF3136B4996003C8CFF /* LoadBalancerProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadBalancerProtocol.m; sourceTree = "<group>"; };
+		2710BC10136B54A9003C8CFF /* LBProtocolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = LBProtocolViewController.h; sourceTree = "<group>"; };
+		2710BC11136B54A9003C8CFF /* LBProtocolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBProtocolViewController.m; sourceTree = "<group>"; };
+		2710BC12136B54A9003C8CFF /* LBProtocolViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBProtocolViewController.xib; sourceTree = "<group>"; };
 		271726EE12555EC0003A1319 /* Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Provider.h; sourceTree = "<group>"; };
 		271726EF12555EC0003A1319 /* Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Provider.m; sourceTree = "<group>"; };
 		2717275712565ED9003A1319 /* OpenStackAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenStackAccount.h; sourceTree = "<group>"; };
@@ -1512,6 +1527,8 @@
 				27551C251303395A0004994F /* LoadBalancerNode.m */,
 				27551C2E13033A8D0004994F /* LoadBalancerUsage.h */,
 				27551C2F13033A8D0004994F /* LoadBalancerUsage.m */,
+				2710BBF2136B4996003C8CFF /* LoadBalancerProtocol.h */,
+				2710BBF3136B4996003C8CFF /* LoadBalancerProtocol.m */,
 			);
 			name = "Load Balancing";
 			sourceTree = "<group>";
@@ -1649,6 +1666,9 @@
 				277D88B3134F8235003DB662 /* AddLoadBalancerAlgorithmViewController.h */,
 				277D88B4134F8236003DB662 /* AddLoadBalancerAlgorithmViewController.m */,
 				277D88B5134F8236003DB662 /* AddLoadBalancerAlgorithmViewController.xib */,
+				2710BC10136B54A9003C8CFF /* LBProtocolViewController.h */,
+				2710BC11136B54A9003C8CFF /* LBProtocolViewController.m */,
+				2710BC12136B54A9003C8CFF /* LBProtocolViewController.xib */,
 			);
 			name = "Add Load Balancer";
 			sourceTree = "<group>";
@@ -2708,6 +2728,7 @@
 				276868491368D55A00B04AF3 /* rackspacecloud_icon.png in Resources */,
 				2768684B1368D55A00B04AF3 /* rackspacecloud_icon@2x.png in Resources */,
 				2768684D1368D55A00B04AF3 /* rackspacecloud1081.png in Resources */,
+				2710BC17136B54A9003C8CFF /* LBProtocolViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2908,6 +2929,7 @@
 				2768684A1368D55A00B04AF3 /* rackspacecloud_icon.png in Resources */,
 				2768684C1368D55A00B04AF3 /* rackspacecloud_icon@2x.png in Resources */,
 				2768684E1368D55A00B04AF3 /* rackspacecloud1081.png in Resources */,
+				2710BC18136B54A9003C8CFF /* LBProtocolViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3073,6 +3095,10 @@
 				2774872C1358D0D90056B45F /* ABTableViewCell.m in Sources */,
 				277487301358D0FE0056B45F /* FirstLastExampleTableViewCell.h in Sources */,
 				277487321358D0FE0056B45F /* FirstLastExampleTableViewCell.m in Sources */,
+				2710BBF4136B4996003C8CFF /* LoadBalancerProtocol.h in Sources */,
+				2710BBF6136B4996003C8CFF /* LoadBalancerProtocol.m in Sources */,
+				2710BC13136B54A9003C8CFF /* LBProtocolViewController.h in Sources */,
+				2710BC15136B54A9003C8CFF /* LBProtocolViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3207,6 +3233,10 @@
 				277D88B9134F8237003DB662 /* AddLoadBalancerAlgorithmViewController.m in Sources */,
 				2774872D1358D0D90056B45F /* ABTableViewCell.m in Sources */,
 				277487331358D0FE0056B45F /* FirstLastExampleTableViewCell.m in Sources */,
+				2710BBF5136B4996003C8CFF /* LoadBalancerProtocol.h in Sources */,
+				2710BBF7136B4996003C8CFF /* LoadBalancerProtocol.m in Sources */,
+				2710BC14136B54A9003C8CFF /* LBProtocolViewController.h in Sources */,
+				2710BC16136B54A9003C8CFF /* LBProtocolViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,11 +10,12 @@
 #import "VirtualIP.h"
 #import "LoadBalancerNode.h"
 #import "NSObject+NSCoding.h"
+#import "LoadBalancerProtocol.h"
 
 
 @implementation LoadBalancer
 
-@synthesize protocol, port, algorithm, status, virtualIPs, created, updated, maxConcurrentConnections,
+@synthesize protocol, algorithm, status, virtualIPs, created, updated, maxConcurrentConnections,
             connectionLoggingEnabled, nodes, connectionThrottleMinConnections,
             connectionThrottleMaxConnections, connectionThrottleMaxConnectionRate,
             connectionThrottleRateInterval, clusterName, sessionPersistenceType, progress;
@@ -38,8 +39,12 @@
 
 + (LoadBalancer *)fromJSON:(NSDictionary *)dict {
     LoadBalancer *loadBalancer = [[[LoadBalancer alloc] initWithJSONDict:dict] autorelease];
-    loadBalancer.protocol = [dict objectForKey:@"protocol"];
-    loadBalancer.port = [loadBalancer intForKey:@"port" inDict:dict];
+
+    LoadBalancerProtocol *p = [[[LoadBalancerProtocol alloc] init] autorelease];
+    p.name = [dict objectForKey:@"protocol"];
+    p.port = [[dict objectForKey:@"port"] intValue];
+    loadBalancer.protocol = p;
+    
     loadBalancer.algorithm = [dict objectForKey:@"algorithm"];
     loadBalancer.status = [dict objectForKey:@"status"];
     
@@ -78,8 +83,8 @@
     NSString *json = @"{ \"loadBalancer\": { ";
 
     json = [json stringByAppendingString:[NSString stringWithFormat:@"\"name\": \"%@\", ", self.name]];
-    json = [json stringByAppendingString:[NSString stringWithFormat:@"\"protocol\": \"%@\", ", self.protocol]];
-    json = [json stringByAppendingString:[NSString stringWithFormat:@"\"port\": \"%@\", ", self.port]];
+    json = [json stringByAppendingString:[NSString stringWithFormat:@"\"protocol\": \"%@\", ", self.protocol.name]];
+    json = [json stringByAppendingString:[NSString stringWithFormat:@"\"port\": \"%i\", ", self.protocol.port]];
     json = [json stringByAppendingString:[NSString stringWithFormat:@"\"algorithm\": \"%@\", ", self.algorithm]];
     
     json = [json stringByAppendingString:@"\"virtualIps\": ["];

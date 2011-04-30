@@ -13,6 +13,7 @@
 #import "UIColor+MoreColors.h"
 #import "AddLoadBalancerAlgorithmViewController.h"
 #import "LoadBalancer.h"
+#import "LBProtocolViewController.h"
 
 #define kName 0
 #define kProtocol 1
@@ -165,6 +166,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kContinue) {
         [self nextButtonPressed:nil];
+    } else if (indexPath.section == kProtocol) {
+        LoadBalancer *lb = [[[LoadBalancer alloc] init] autorelease];
+        LBProtocolViewController *vc = [[LBProtocolViewController alloc] initWithAccount:self.account loadBalancer:lb];
+        [self.navigationController pushViewController:vc animated:YES];
+        [vc release];
     }
 }
 

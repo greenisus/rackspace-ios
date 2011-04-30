@@ -10,6 +10,7 @@
 #import "OpenStackAccount.h"
 #import "JSON.h"
 #import "LoadBalancer.h"
+#import "LoadBalancerProtocol.h"
 
 
 @implementation LoadBalancerRequest
@@ -72,5 +73,21 @@
     [parser release];
     return objects;
 }
+
++ (LoadBalancerRequest *)getLoadBalancerProtocols:(OpenStackAccount *)account endpoint:(NSString *)endpoint {
+    return [LoadBalancerRequest lbRequest:account method:@"GET" endpoint:endpoint path:@"/loadbalancers/protocols"];
+}
+
+- (NSMutableArray *)protocols {
+    SBJSON *parser = [[SBJSON alloc] init];
+    NSArray *jsonObjects = [[parser objectWithString:[self responseString]] objectForKey:@"protocols"];
+    NSMutableArray *objects = [[[NSMutableArray alloc] initWithCapacity:[jsonObjects count]] autorelease];
+    for (NSDictionary *dict in jsonObjects) {
+        [objects addObject:[LoadBalancerProtocol fromJSON:dict]];
+    }
+    [parser release];
+    return objects;
+}
+
  
 @end
