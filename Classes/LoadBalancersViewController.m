@@ -12,7 +12,7 @@
 #import "NSObject+Conveniences.h"
 #import "UIViewController+Conveniences.h"
 #import "LoadBalancerViewController.h"
-#import "AddLoadBalancerRegionViewController.h"
+#import "AddLoadBalancerViewController.h"
 
 
 @implementation LoadBalancersViewController
@@ -148,7 +148,7 @@
 #pragma - Button Handlers
 
 - (void)addButtonPressed:(id)sender {
-    AddLoadBalancerRegionViewController *vc = [[AddLoadBalancerRegionViewController alloc] initWithAccount:self.account];
+    AddLoadBalancerViewController *vc = [[AddLoadBalancerViewController alloc] initWithAccount:self.account];
     [self presentModalViewControllerWithNavigation:vc];
     [vc release];
 }

@@ -1,8 +1,8 @@
 //
-//  AddLoadBalancerNameViewController.h
+//  LBVirtualIPTypeViewController.h
 //  OpenStack
 //
-//  Created by Michael Mayo on 4/8/11.
+//  Created by Mike Mayo on 5/2/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
@@ -10,14 +10,16 @@
 
 @class OpenStackAccount, LoadBalancer;
 
-@interface AddLoadBalancerNameViewController : UITableViewController {
+@interface LBVirtualIPTypeViewController : UITableViewController {
     OpenStackAccount *account;
     LoadBalancer *loadBalancer;
+    @private
+    NSDictionary *descriptions;
 }
 
 @property (retain) OpenStackAccount *account;
 @property (retain) LoadBalancer *loadBalancer;
 
-- (id)initWithAccount:(OpenStackAccount *)account;
+- (id)initWithAccount:(OpenStackAccount *)account loadBalancer:(LoadBalancer *)loadBalancer;
 
 @end

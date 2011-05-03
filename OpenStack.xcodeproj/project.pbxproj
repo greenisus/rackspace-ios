@@ -144,6 +144,12 @@
 		27551C3313033A8D0004994F /* LoadBalancerUsage.m in Sources */ = {isa = PBXBuildFile; fileRef = 27551C2F13033A8D0004994F /* LoadBalancerUsage.m */; };
 		27551DBD130486C50004994F /* LoadBalancerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27551DBB130486C50004994F /* LoadBalancerRequest.m */; };
 		27551DBF130486C50004994F /* LoadBalancerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27551DBB130486C50004994F /* LoadBalancerRequest.m */; };
+		27560830136F3078009EB5BA /* LBVirtualIPTypeViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 2756082D136F3078009EB5BA /* LBVirtualIPTypeViewController.h */; };
+		27560831136F3078009EB5BA /* LBVirtualIPTypeViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 2756082D136F3078009EB5BA /* LBVirtualIPTypeViewController.h */; };
+		27560832136F3078009EB5BA /* LBVirtualIPTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2756082E136F3078009EB5BA /* LBVirtualIPTypeViewController.m */; };
+		27560833136F3078009EB5BA /* LBVirtualIPTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2756082E136F3078009EB5BA /* LBVirtualIPTypeViewController.m */; };
+		27560834136F3078009EB5BA /* LBVirtualIPTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2756082F136F3078009EB5BA /* LBVirtualIPTypeViewController.xib */; };
+		27560835136F3078009EB5BA /* LBVirtualIPTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2756082F136F3078009EB5BA /* LBVirtualIPTypeViewController.xib */; };
 		275B3E3E12D99B86003DF100 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C5D1CF12D690790085648A /* MediaPlayer.framework */; };
 		275B421212DBAE86003DF100 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 275B421112DBAE86003DF100 /* MainWindow-iPad.xib */; };
 		275B44B112DBC5A1003DF100 /* MainWindow-Rackspace-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 275B44B012DBC5A1003DF100 /* MainWindow-Rackspace-iPad.xib */; };
@@ -435,9 +441,9 @@
 		277D888E134F6AB3003DB662 /* AddLoadBalancerRegionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 277D8889134F6AB3003DB662 /* AddLoadBalancerRegionViewController.m */; };
 		277D888F134F6AB3003DB662 /* AddLoadBalancerRegionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 277D888A134F6AB3003DB662 /* AddLoadBalancerRegionViewController.xib */; };
 		277D8890134F6AB3003DB662 /* AddLoadBalancerRegionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 277D888A134F6AB3003DB662 /* AddLoadBalancerRegionViewController.xib */; };
-		277D8895134F7231003DB662 /* AddLoadBalancerNameViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 277D8892134F7231003DB662 /* AddLoadBalancerNameViewController.h */; };
-		277D8897134F7231003DB662 /* AddLoadBalancerNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 277D8893134F7231003DB662 /* AddLoadBalancerNameViewController.m */; };
-		277D8898134F7231003DB662 /* AddLoadBalancerNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 277D8893134F7231003DB662 /* AddLoadBalancerNameViewController.m */; };
+		277D8895134F7231003DB662 /* AddLoadBalancerViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 277D8892134F7231003DB662 /* AddLoadBalancerViewController.h */; };
+		277D8897134F7231003DB662 /* AddLoadBalancerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 277D8893134F7231003DB662 /* AddLoadBalancerViewController.m */; };
+		277D8898134F7231003DB662 /* AddLoadBalancerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 277D8893134F7231003DB662 /* AddLoadBalancerViewController.m */; };
 		277D8899134F7231003DB662 /* AddLoadBalancerNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 277D8894134F7231003DB662 /* AddLoadBalancerNameViewController.xib */; };
 		277D889A134F7231003DB662 /* AddLoadBalancerNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 277D8894134F7231003DB662 /* AddLoadBalancerNameViewController.xib */; };
 		277D88B6134F8237003DB662 /* AddLoadBalancerAlgorithmViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 277D88B3134F8235003DB662 /* AddLoadBalancerAlgorithmViewController.h */; };
@@ -821,6 +827,9 @@
 		27551C2F13033A8D0004994F /* LoadBalancerUsage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadBalancerUsage.m; sourceTree = "<group>"; };
 		27551DBA130486C50004994F /* LoadBalancerRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = LoadBalancerRequest.h; sourceTree = "<group>"; };
 		27551DBB130486C50004994F /* LoadBalancerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadBalancerRequest.m; sourceTree = "<group>"; };
+		2756082D136F3078009EB5BA /* LBVirtualIPTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = LBVirtualIPTypeViewController.h; sourceTree = "<group>"; };
+		2756082E136F3078009EB5BA /* LBVirtualIPTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBVirtualIPTypeViewController.m; sourceTree = "<group>"; };
+		2756082F136F3078009EB5BA /* LBVirtualIPTypeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBVirtualIPTypeViewController.xib; sourceTree = "<group>"; };
 		275B421112DBAE86003DF100 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "Resources-iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		275B44B012DBC5A1003DF100 /* MainWindow-Rackspace-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "MainWindow-Rackspace-iPad.xib"; sourceTree = "<group>"; };
 		275B44CB12DBC7A3003DF100 /* RootViewController-Rackspace.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "RootViewController-Rackspace.xib"; sourceTree = "<group>"; };
@@ -977,8 +986,8 @@
 		277D8888134F6AB3003DB662 /* AddLoadBalancerRegionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = AddLoadBalancerRegionViewController.h; sourceTree = "<group>"; };
 		277D8889134F6AB3003DB662 /* AddLoadBalancerRegionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddLoadBalancerRegionViewController.m; sourceTree = "<group>"; };
 		277D888A134F6AB3003DB662 /* AddLoadBalancerRegionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddLoadBalancerRegionViewController.xib; sourceTree = "<group>"; };
-		277D8892134F7231003DB662 /* AddLoadBalancerNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = AddLoadBalancerNameViewController.h; sourceTree = "<group>"; };
-		277D8893134F7231003DB662 /* AddLoadBalancerNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddLoadBalancerNameViewController.m; sourceTree = "<group>"; };
+		277D8892134F7231003DB662 /* AddLoadBalancerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = AddLoadBalancerViewController.h; sourceTree = "<group>"; };
+		277D8893134F7231003DB662 /* AddLoadBalancerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddLoadBalancerViewController.m; sourceTree = "<group>"; };
 		277D8894134F7231003DB662 /* AddLoadBalancerNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddLoadBalancerNameViewController.xib; sourceTree = "<group>"; };
 		277D88B3134F8235003DB662 /* AddLoadBalancerAlgorithmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = AddLoadBalancerAlgorithmViewController.h; sourceTree = "<group>"; };
 		277D88B4134F8236003DB662 /* AddLoadBalancerAlgorithmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddLoadBalancerAlgorithmViewController.m; sourceTree = "<group>"; };
@@ -1660,8 +1669,8 @@
 				277D8888134F6AB3003DB662 /* AddLoadBalancerRegionViewController.h */,
 				277D8889134F6AB3003DB662 /* AddLoadBalancerRegionViewController.m */,
 				277D888A134F6AB3003DB662 /* AddLoadBalancerRegionViewController.xib */,
-				277D8892134F7231003DB662 /* AddLoadBalancerNameViewController.h */,
-				277D8893134F7231003DB662 /* AddLoadBalancerNameViewController.m */,
+				277D8892134F7231003DB662 /* AddLoadBalancerViewController.h */,
+				277D8893134F7231003DB662 /* AddLoadBalancerViewController.m */,
 				277D8894134F7231003DB662 /* AddLoadBalancerNameViewController.xib */,
 				277D88B3134F8235003DB662 /* AddLoadBalancerAlgorithmViewController.h */,
 				277D88B4134F8236003DB662 /* AddLoadBalancerAlgorithmViewController.m */,
@@ -1669,6 +1678,9 @@
 				2710BC10136B54A9003C8CFF /* LBProtocolViewController.h */,
 				2710BC11136B54A9003C8CFF /* LBProtocolViewController.m */,
 				2710BC12136B54A9003C8CFF /* LBProtocolViewController.xib */,
+				2756082D136F3078009EB5BA /* LBVirtualIPTypeViewController.h */,
+				2756082E136F3078009EB5BA /* LBVirtualIPTypeViewController.m */,
+				2756082F136F3078009EB5BA /* LBVirtualIPTypeViewController.xib */,
 			);
 			name = "Add Load Balancer";
 			sourceTree = "<group>";
@@ -2729,6 +2741,7 @@
 				2768684B1368D55A00B04AF3 /* rackspacecloud_icon@2x.png in Resources */,
 				2768684D1368D55A00B04AF3 /* rackspacecloud1081.png in Resources */,
 				2710BC17136B54A9003C8CFF /* LBProtocolViewController.xib in Resources */,
+				27560834136F3078009EB5BA /* LBVirtualIPTypeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2930,6 +2943,7 @@
 				2768684C1368D55A00B04AF3 /* rackspacecloud_icon@2x.png in Resources */,
 				2768684E1368D55A00B04AF3 /* rackspacecloud1081.png in Resources */,
 				2710BC18136B54A9003C8CFF /* LBProtocolViewController.xib in Resources */,
+				27560835136F3078009EB5BA /* LBVirtualIPTypeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3087,8 +3101,8 @@
 				2781F99D133D24060085E1EA /* LoadBalancerViewController.m in Sources */,
 				277D888B134F6AB3003DB662 /* AddLoadBalancerRegionViewController.h in Sources */,
 				277D888D134F6AB3003DB662 /* AddLoadBalancerRegionViewController.m in Sources */,
-				277D8895134F7231003DB662 /* AddLoadBalancerNameViewController.h in Sources */,
-				277D8897134F7231003DB662 /* AddLoadBalancerNameViewController.m in Sources */,
+				277D8895134F7231003DB662 /* AddLoadBalancerViewController.h in Sources */,
+				277D8897134F7231003DB662 /* AddLoadBalancerViewController.m in Sources */,
 				277D88B6134F8237003DB662 /* AddLoadBalancerAlgorithmViewController.h in Sources */,
 				277D88B8134F8237003DB662 /* AddLoadBalancerAlgorithmViewController.m in Sources */,
 				2774872A1358D0D90056B45F /* ABTableViewCell.h in Sources */,
@@ -3099,6 +3113,8 @@
 				2710BBF6136B4996003C8CFF /* LoadBalancerProtocol.m in Sources */,
 				2710BC13136B54A9003C8CFF /* LBProtocolViewController.h in Sources */,
 				2710BC15136B54A9003C8CFF /* LBProtocolViewController.m in Sources */,
+				27560830136F3078009EB5BA /* LBVirtualIPTypeViewController.h in Sources */,
+				27560832136F3078009EB5BA /* LBVirtualIPTypeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3229,7 +3245,7 @@
 				277BF6A6133A712E00C36FFA /* APICallback.m in Sources */,
 				2781F99E133D24060085E1EA /* LoadBalancerViewController.m in Sources */,
 				277D888E134F6AB3003DB662 /* AddLoadBalancerRegionViewController.m in Sources */,
-				277D8898134F7231003DB662 /* AddLoadBalancerNameViewController.m in Sources */,
+				277D8898134F7231003DB662 /* AddLoadBalancerViewController.m in Sources */,
 				277D88B9134F8237003DB662 /* AddLoadBalancerAlgorithmViewController.m in Sources */,
 				2774872D1358D0D90056B45F /* ABTableViewCell.m in Sources */,
 				277487331358D0FE0056B45F /* FirstLastExampleTableViewCell.m in Sources */,
@@ -3237,6 +3253,8 @@
 				2710BBF7136B4996003C8CFF /* LoadBalancerProtocol.m in Sources */,
 				2710BC14136B54A9003C8CFF /* LBProtocolViewController.h in Sources */,
 				2710BC16136B54A9003C8CFF /* LBProtocolViewController.m in Sources */,
+				27560831136F3078009EB5BA /* LBVirtualIPTypeViewController.h in Sources */,
+				27560833136F3078009EB5BA /* LBVirtualIPTypeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

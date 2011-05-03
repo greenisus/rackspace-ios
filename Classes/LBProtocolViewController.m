@@ -41,7 +41,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self addDoneButton];
+    //[self addDoneButton];
     self.navigationItem.title = @"Protocol";
     
     // default is HTTP on port 80

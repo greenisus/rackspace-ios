@@ -17,6 +17,7 @@
 #import "Flavor.h"
 #import "AccountManager.h"
 #import "LoadBalancer.h"
+#import "APICallback.h"
 
 
 static NSArray *accounts = nil;
@@ -109,22 +110,27 @@ static NSMutableDictionary *timers = nil;
         self.manager.account = self;
     }
 
-    [self.manager getImages];
-    [self.manager getFlavors];
-    [self.manager getServers];
-    [self.manager getLimits];
-    //[self.manager getStorageAccountInfo];
-    [self.manager getContainers];
-
-    for (NSString *endpoint in [self loadBalancerURLs]) {
-        [self.manager getLoadBalancers:endpoint];
-    }
-
-    // handle success; don't worry about failure
-    getLimitsObserver = [[NSNotificationCenter defaultCenter] addObserverForName:@"getLimitsSucceeded" object:self
-                                                                           queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification* notification) 
-    {
-        [self performSelectorOnMainThread:@selector(observeGetLimits:) withObject:[notification.userInfo objectForKey:@"request"] waitUntilDone:NO];
+    [[self.manager authenticate] success:^(OpenStackRequest *request){
+        
+        [self.manager getImages];
+        [self.manager getFlavors];
+        [self.manager getServers];
+        [self.manager getLimits];
+        [self.manager getContainers];
+        
+        //[self.manager getStorageAccountInfo];
+        
+        for (NSString *endpoint in [self loadBalancerURLs]) {
+            [self.manager getLoadBalancers:endpoint];
+        }
+        
+        // handle success; don't worry about failure
+        getLimitsObserver = [[NSNotificationCenter defaultCenter] addObserverForName:@"getLimitsSucceeded" object:self
+                                                                               queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification* notification) 
+                             {
+                                 [self performSelectorOnMainThread:@selector(observeGetLimits:) withObject:[notification.userInfo objectForKey:@"request"] waitUntilDone:NO];
+                             }];
+    } failure:^(OpenStackRequest *request){
     }];
     
     NSLog(@"End refreshing method");

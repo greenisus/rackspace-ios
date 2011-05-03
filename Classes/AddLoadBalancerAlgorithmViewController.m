@@ -50,7 +50,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"Algorithm";
-    [self addNextButton];
 }
 
 #pragma mark - Table view data source

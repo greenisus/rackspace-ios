@@ -6,7 +6,7 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "AddLoadBalancerNameViewController.h"
+#import "AddLoadBalancerViewController.h"
 #import "OpenStackAccount.h"
 #import "UIViewController+Conveniences.h"
 #import "RSTextFieldCell.h"
@@ -14,13 +14,23 @@
 #import "AddLoadBalancerAlgorithmViewController.h"
 #import "LoadBalancer.h"
 #import "LBProtocolViewController.h"
+#import "LBVirtualIPTypeViewController.h"
+#import "AddLoadBalancerRegionViewController.h"
+#import "AddLoadBalancerAlgorithmViewController.h"
+#import "Server.h"
+#import "Flavor.h"
+#import "Image.h"
+
+#define kDetailsSection 0
+#define kNodesSection 1
 
 #define kName 0
 #define kProtocol 1
 #define kVirtualIPType 2
-#define kContinue 3
+#define kRegion 3
+#define kAlgorithm 4
 
-@implementation AddLoadBalancerNameViewController
+@implementation AddLoadBalancerViewController
 
 @synthesize account, loadBalancer;
 
@@ -42,8 +52,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"Name";
-    [self addNextButton];
+    self.navigationItem.title = @"Add Load Balancer";
+    //[self addNextButton];
+    [self addSaveButton];
+    [self addCancelButton];
 }
 
 - (void)viewDidUnload {
@@ -52,49 +64,17 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    if (section == kProtocol) {
-        return @"Nodes will use this protocol and port by default.";
-    } else if (section == kVirtualIPType) {
-        return @"Virtual IPs are accessible over the Internet.";
+    if (section == kDetailsSection) {
+        return 5;
     } else {
-        return @"";
+        return [self.account.sortedServers count];
     }
 }
 
@@ -110,25 +90,10 @@
     return cell;
 }
 
-- (UITableViewCell *)continueCell:(UITableView *)tableView {
-    static NSString *CellIdentifier = @"ContinueCell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-        cell.textLabel.textColor = [UIColor value1DetailTextLabelColor];
-        cell.textLabel.textAlignment = UITextAlignmentCenter;
-        cell.textLabel.text = @"Continue";
-    }
-    return cell;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == kName) {
+    if (indexPath.section == kDetailsSection && indexPath.row == kName) {
         return [self nameCell:tableView];
-    } else if (indexPath.section == kContinue) {
-        return [self continueCell:tableView];
-    } else {
+    } else if (indexPath.section == kDetailsSection) {
         static NSString *CellIdentifier = @"Cell";
         
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -137,7 +102,7 @@
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         
-        switch (indexPath.section) {
+        switch (indexPath.row) {
             case kProtocol:
                 cell.textLabel.text = @"Protocol";
                 cell.detailTextLabel.text = @"HTTP on Port 80";
@@ -146,13 +111,40 @@
                 cell.textLabel.text = @"Virtual IP Type";
                 cell.detailTextLabel.text = @"Shared Virtual IP";
                 break;
+            case kRegion:
+                cell.textLabel.text = @"Region";
+                cell.detailTextLabel.text = @"ORD";
+                break;
+            case kAlgorithm:
+                cell.textLabel.text = @"Algorithm";
+                cell.detailTextLabel.text = @"Round Robin";
+                break;
             default:
                 break;
         }
         
         
         return cell;
-    }    
+    } else {
+        static NSString *CellIdentifier = @"NodeCell";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+        
+        Server *server = [self.account.sortedServers objectAtIndex:indexPath.row];
+        cell.textLabel.text = server.name;
+        cell.detailTextLabel.text = server.flavor.name;
+        if ([[server.image logoPrefix] isEqualToString:@"custom"]) {
+            cell.imageView.image = [UIImage imageNamed:@"cloud-servers-icon.png"];
+        } else {
+            cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@-icon.png", [server.image logoPrefix]]];
+        }
+        
+        return cell;
+    }
 }
 
 #pragma mark - Table view delegate
@@ -164,11 +156,22 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == kContinue) {
-        [self nextButtonPressed:nil];
-    } else if (indexPath.section == kProtocol) {
+    if (indexPath.row == kProtocol) {
         LoadBalancer *lb = [[[LoadBalancer alloc] init] autorelease];
         LBProtocolViewController *vc = [[LBProtocolViewController alloc] initWithAccount:self.account loadBalancer:lb];
+        [self.navigationController pushViewController:vc animated:YES];
+        [vc release];
+    } else if (indexPath.row == kVirtualIPType) {
+        LoadBalancer *lb = [[[LoadBalancer alloc] init] autorelease];
+        LBVirtualIPTypeViewController *vc = [[LBVirtualIPTypeViewController alloc] initWithAccount:self.account loadBalancer:lb];
+        [self.navigationController pushViewController:vc animated:YES];
+        [vc release];
+    } else if (indexPath.row == kRegion) {
+        AddLoadBalancerRegionViewController *vc = [[AddLoadBalancerRegionViewController alloc] initWithAccount:self.account];
+        [self.navigationController pushViewController:vc animated:YES];
+        [vc release];
+    } else if (indexPath.row == kAlgorithm) {
+        AddLoadBalancerAlgorithmViewController *vc = [[AddLoadBalancerAlgorithmViewController alloc] initWithAccount:self.account];
         [self.navigationController pushViewController:vc animated:YES];
         [vc release];
     }

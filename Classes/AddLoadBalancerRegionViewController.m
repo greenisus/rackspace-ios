@@ -9,7 +9,7 @@
 #import "AddLoadBalancerRegionViewController.h"
 #import "OpenStackAccount.h"
 #import "UIViewController+Conveniences.h"
-#import "AddLoadBalancerNameViewController.h"
+#import "AddLoadBalancerViewController.h"
 #import "LoadBalancer.h"
 
 #define kRegion 0
@@ -40,7 +40,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"Region";
-    [self addCancelButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -90,12 +89,12 @@
         case kORD:
             cell.textLabel.text = @"Chicago";
             cell.detailTextLabel.text = @"ORD Region";
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
             break;
         case kDFW:
             cell.textLabel.text = @"Dallas";
             cell.detailTextLabel.text = @"DFW Region";
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.accessoryType = UITableViewCellAccessoryNone;
             break;
         default:
             break;
@@ -107,9 +106,12 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    AddLoadBalancerNameViewController *vc = [[AddLoadBalancerNameViewController alloc] initWithAccount:self.account];
+    [self.navigationController popViewControllerAnimated:YES];
+    /*
+    AddLoadBalancerViewController *vc = [[AddLoadBalancerViewController alloc] initWithAccount:self.account];
     [self.navigationController pushViewController:vc animated:YES];
     [vc release];
+     */
 }
 
 @end

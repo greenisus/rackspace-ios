@@ -26,6 +26,8 @@
 - (void)notify:(NSString *)name request:(OpenStackRequest *)request;
 - (void)notify:(NSString *)name request:(OpenStackRequest *)request object:(id)object;
     
+- (APICallback *)authenticate;
+
 // compute
 
 - (void)getLimits;
