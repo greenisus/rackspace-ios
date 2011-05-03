@@ -21,6 +21,7 @@
     NSUInteger maxConcurrentConnections;
     BOOL connectionLoggingEnabled;
     NSMutableArray *nodes;
+    NSMutableArray *cloudServerNodes;
     NSString *sessionPersistenceType;    
     NSUInteger connectionThrottleMinConnections;
     NSUInteger connectionThrottleMaxConnections;
@@ -47,6 +48,7 @@ https://dfw.loadbalancers.api.rackspacecloud.com/v1.0/420600/
 @property (assign) NSUInteger maxConcurrentConnections;
 @property (assign) BOOL connectionLoggingEnabled;
 @property (retain) NSMutableArray *nodes;
+@property (retain) NSMutableArray *cloudServerNodes;
 @property (retain) NSString *sessionPersistenceType;    
 @property (assign) NSUInteger connectionThrottleMinConnections;
 @property (assign) NSUInteger connectionThrottleMaxConnections;

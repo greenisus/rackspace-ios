@@ -18,7 +18,8 @@
 @synthesize protocol, algorithm, status, virtualIPs, created, updated, maxConcurrentConnections,
             connectionLoggingEnabled, nodes, connectionThrottleMinConnections,
             connectionThrottleMaxConnections, connectionThrottleMaxConnectionRate,
-            connectionThrottleRateInterval, clusterName, sessionPersistenceType, progress;
+            connectionThrottleRateInterval, clusterName, sessionPersistenceType, progress,
+            cloudServerNodes;
 
 #pragma mark -
 #pragma mark Serialization
@@ -128,6 +129,7 @@
     [nodes release];
     [sessionPersistenceType release];
     [clusterName release];
+    [cloudServerNodes release];
     [super dealloc];
 }
 

@@ -20,6 +20,7 @@
 #import "Server.h"
 #import "Flavor.h"
 #import "Image.h"
+#import "LoadBalancerNode.h"
 
 #define kDetailsSection 0
 #define kNodesSection 1
@@ -74,7 +75,7 @@
     if (section == kDetailsSection) {
         return 5;
     } else {
-        return [self.account.sortedServers count];
+        return [self.loadBalancer.cloudServerNodes count] + [self.loadBalancer.nodes count] + 1;
     }
 }
 
@@ -133,15 +134,27 @@
             cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
+
         
-        Server *server = [self.account.sortedServers objectAtIndex:indexPath.row];
-        cell.textLabel.text = server.name;
-        cell.detailTextLabel.text = server.flavor.name;
-        if ([[server.image logoPrefix] isEqualToString:@"custom"]) {
-            cell.imageView.image = [UIImage imageNamed:@"cloud-servers-icon.png"];
+        if (indexPath.row == [self.loadBalancer.cloudServerNodes count] + [self.loadBalancer.nodes count]) {
+            cell.textLabel.text = @"Add Node";
+        } else if (indexPath.row < [self.loadBalancer.cloudServerNodes count]) {
+            Server *server = [self.loadBalancer.cloudServerNodes objectAtIndex:indexPath.row];
+            cell.textLabel.text = server.name;
+            cell.detailTextLabel.text = server.flavor.name;
+            if ([[server.image logoPrefix] isEqualToString:@"custom"]) {
+                cell.imageView.image = [UIImage imageNamed:@"cloud-servers-icon.png"];
+            } else {
+                cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@-icon.png", [server.image logoPrefix]]];
+            }
         } else {
-            cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@-icon.png", [server.image logoPrefix]]];
+            NSInteger index = indexPath.row - [self.loadBalancer.cloudServerNodes count];
+            LoadBalancerNode *node = [self.loadBalancer.nodes objectAtIndex:index];
+            cell.textLabel.text = node.address;
+            cell.detailTextLabel.text = @"";
+            cell.imageView.image = nil;
         }
+        
         
         return cell;
     }
