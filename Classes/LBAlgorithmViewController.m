@@ -1,0 +1,121 @@
+//
+//  LBAlgorithmViewController.m
+//  OpenStack
+//
+//  Created by Mike Mayo on 5/3/11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//
+
+#import "LBAlgorithmViewController.h"
+
+#define kRandom 0
+#define kRoundRobin 1
+#define kWeightedRoundRobin 2
+#define kLeastConnections 3
+#define kWeightedLeastConnections 4
+
+@implementation LBAlgorithmViewController
+
+- (id)initWithStyle:(UITableViewStyle)style {
+    self = [super initWithStyle:style];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)dealloc {
+    [descriptions release];
+    [super dealloc];
+}
+
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.navigationItem.title = @"Algorithm";
+    descriptions = [[NSDictionary alloc] initWithObjectsAndKeys:
+                        @"Directs traffic to a randomly selected node.", @"Random",
+                        @"Directs traffic in a circular pattern to each node of a load balancer in succession.", @"Round Robin",
+                        @"Directs traffic in a circular pattern to each node of a load balancer in succession with a larger proportion of requests being serviced by nodes with a greater weight.", @"Weighted Round Robin",
+                        @"Directs traffic to the node with the fewest open connections to the load balancer.", @"Least Connections",
+                        @"Directs traffic to the node with the fewest open connections between the load balancer.  Nodes with a larger weight will service more connections at any one time.", @"Weighted Least Connections",
+                        nil];
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 5;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 2;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        return tableView.rowHeight;
+    } else {
+        NSString *description = @"";
+        if (indexPath.section == kRandom) {
+            description = [descriptions objectForKey:@"Random"];
+        } else if (indexPath.section == kRoundRobin) {
+            description = [descriptions objectForKey:@"Round Robin"];
+        } else if (indexPath.section == kWeightedRoundRobin) {
+            description = [descriptions objectForKey:@"Weighted Round Robin"];
+        } else if (indexPath.section == kLeastConnections) {
+            description = [descriptions objectForKey:@"Least Connections"];
+        } else if (indexPath.section == kWeightedLeastConnections) {
+            description = [descriptions objectForKey:@"Weighted Least Connections"];
+        }
+        UIFont *font = [UIFont systemFontOfSize:14];
+        CGSize size = [description sizeWithFont:font constrainedToSize:CGSizeMake(tableView.frame.size.width - 40, 25000) lineBreakMode:UILineBreakModeWordWrap];
+        return 30 + size.height;
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell.detailTextLabel.numberOfLines = 0;
+    }
+    
+    switch (indexPath.section) {
+        case kRandom:
+            cell.textLabel.text = @"Random";
+            break;
+        case kRoundRobin:
+            cell.textLabel.text = @"Round Robin";
+            break;
+        case kWeightedRoundRobin:
+            cell.textLabel.text = @"Weighted Round Robin";
+            break;
+        case kLeastConnections:
+            cell.textLabel.text = @"Least Connections";
+            break;
+        case kWeightedLeastConnections:
+            cell.textLabel.text = @"Weighted Least Connections";
+            break;
+        default:
+            break;
+    }
+    
+    cell.detailTextLabel.text = @"";
+    if (indexPath.row == 1) {
+        cell.detailTextLabel.text = [descriptions objectForKey:cell.textLabel.text];
+        cell.textLabel.text = @"";
+    }
+    
+    return cell;
+}
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+}
+
+@end

@@ -16,7 +16,7 @@
 #import "LBProtocolViewController.h"
 #import "LBVirtualIPTypeViewController.h"
 #import "AddLoadBalancerRegionViewController.h"
-#import "AddLoadBalancerAlgorithmViewController.h"
+#import "LBAlgorithmViewController.h"
 #import "Server.h"
 #import "Flavor.h"
 #import "Image.h"
@@ -184,7 +184,7 @@
         [self.navigationController pushViewController:vc animated:YES];
         [vc release];
     } else if (indexPath.row == kAlgorithm) {
-        AddLoadBalancerAlgorithmViewController *vc = [[AddLoadBalancerAlgorithmViewController alloc] initWithAccount:self.account];
+        LBAlgorithmViewController *vc = [[LBAlgorithmViewController alloc] initWithNibName:@"LBAlgorithmViewController" bundle:nil];
         [self.navigationController pushViewController:vc animated:YES];
         [vc release];
     }

@@ -115,7 +115,6 @@
     return 2;
 }
 
-//33 + size
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         return tableView.rowHeight;

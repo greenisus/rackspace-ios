@@ -657,6 +657,12 @@
 		27CD1E03129DBFC9006507BB /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 27CD1DD7129DBFC9006507BB /* ASINetworkQueue.m */; };
 		27CD2A8C12A8EF99006507BB /* RateLimit.m in Sources */ = {isa = PBXBuildFile; fileRef = 27CD2A8A12A8EF99006507BB /* RateLimit.m */; };
 		27CD2A8E12A8EF99006507BB /* RateLimit.m in Sources */ = {isa = PBXBuildFile; fileRef = 27CD2A8A12A8EF99006507BB /* RateLimit.m */; };
+		27CFD8311370C54600116BBD /* LBAlgorithmViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 27CFD82E1370C54500116BBD /* LBAlgorithmViewController.h */; };
+		27CFD8321370C54600116BBD /* LBAlgorithmViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 27CFD82E1370C54500116BBD /* LBAlgorithmViewController.h */; };
+		27CFD8331370C54600116BBD /* LBAlgorithmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27CFD82F1370C54500116BBD /* LBAlgorithmViewController.m */; };
+		27CFD8341370C54600116BBD /* LBAlgorithmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27CFD82F1370C54500116BBD /* LBAlgorithmViewController.m */; };
+		27CFD8351370C54600116BBD /* LBAlgorithmViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27CFD8301370C54600116BBD /* LBAlgorithmViewController.xib */; };
+		27CFD8361370C54600116BBD /* LBAlgorithmViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27CFD8301370C54600116BBD /* LBAlgorithmViewController.xib */; };
 		27D5E226130F032400404EC2 /* LoadBalancersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27D5E223130F032400404EC2 /* LoadBalancersViewController.m */; };
 		27D5E227130F032400404EC2 /* LoadBalancersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27D5E224130F032400404EC2 /* LoadBalancersViewController.xib */; };
 		27D5E229130F032400404EC2 /* LoadBalancersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27D5E223130F032400404EC2 /* LoadBalancersViewController.m */; };
@@ -1142,6 +1148,9 @@
 		27CD1DD8129DBFC9006507BB /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
 		27CD2A8912A8EF98006507BB /* RateLimit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = RateLimit.h; sourceTree = "<group>"; };
 		27CD2A8A12A8EF99006507BB /* RateLimit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateLimit.m; sourceTree = "<group>"; };
+		27CFD82E1370C54500116BBD /* LBAlgorithmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = LBAlgorithmViewController.h; sourceTree = "<group>"; };
+		27CFD82F1370C54500116BBD /* LBAlgorithmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBAlgorithmViewController.m; sourceTree = "<group>"; };
+		27CFD8301370C54600116BBD /* LBAlgorithmViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBAlgorithmViewController.xib; sourceTree = "<group>"; };
 		27D5E222130F032400404EC2 /* LoadBalancersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = LoadBalancersViewController.h; sourceTree = "<group>"; };
 		27D5E223130F032400404EC2 /* LoadBalancersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadBalancersViewController.m; sourceTree = "<group>"; };
 		27D5E224130F032400404EC2 /* LoadBalancersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadBalancersViewController.xib; sourceTree = "<group>"; };
@@ -1681,6 +1690,9 @@
 				2756082D136F3078009EB5BA /* LBVirtualIPTypeViewController.h */,
 				2756082E136F3078009EB5BA /* LBVirtualIPTypeViewController.m */,
 				2756082F136F3078009EB5BA /* LBVirtualIPTypeViewController.xib */,
+				27CFD82E1370C54500116BBD /* LBAlgorithmViewController.h */,
+				27CFD82F1370C54500116BBD /* LBAlgorithmViewController.m */,
+				27CFD8301370C54600116BBD /* LBAlgorithmViewController.xib */,
 			);
 			name = "Add Load Balancer";
 			sourceTree = "<group>";
@@ -2742,6 +2754,7 @@
 				2768684D1368D55A00B04AF3 /* rackspacecloud1081.png in Resources */,
 				2710BC17136B54A9003C8CFF /* LBProtocolViewController.xib in Resources */,
 				27560834136F3078009EB5BA /* LBVirtualIPTypeViewController.xib in Resources */,
+				27CFD8351370C54600116BBD /* LBAlgorithmViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2944,6 +2957,7 @@
 				2768684E1368D55A00B04AF3 /* rackspacecloud1081.png in Resources */,
 				2710BC18136B54A9003C8CFF /* LBProtocolViewController.xib in Resources */,
 				27560835136F3078009EB5BA /* LBVirtualIPTypeViewController.xib in Resources */,
+				27CFD8361370C54600116BBD /* LBAlgorithmViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3115,6 +3129,8 @@
 				2710BC15136B54A9003C8CFF /* LBProtocolViewController.m in Sources */,
 				27560830136F3078009EB5BA /* LBVirtualIPTypeViewController.h in Sources */,
 				27560832136F3078009EB5BA /* LBVirtualIPTypeViewController.m in Sources */,
+				27CFD8311370C54600116BBD /* LBAlgorithmViewController.h in Sources */,
+				27CFD8331370C54600116BBD /* LBAlgorithmViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3255,6 +3271,8 @@
 				2710BC16136B54A9003C8CFF /* LBProtocolViewController.m in Sources */,
 				27560831136F3078009EB5BA /* LBVirtualIPTypeViewController.h in Sources */,
 				27560833136F3078009EB5BA /* LBVirtualIPTypeViewController.m in Sources */,
+				27CFD8321370C54600116BBD /* LBAlgorithmViewController.h in Sources */,
+				27CFD8341370C54600116BBD /* LBAlgorithmViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
