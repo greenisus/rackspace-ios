@@ -132,6 +132,11 @@
     return NO;
 }
 
+- (BOOL)textField:(UITextField *)tf shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    self.loadBalancer.protocol.port = [[textField.text stringByReplacingCharactersInRange:range withString:string] intValue];
+    return YES;
+}
+
 #pragma mark - Button Handler
 
 - (void)doneButtonPressed:(id)sender {

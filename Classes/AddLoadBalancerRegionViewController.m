@@ -88,13 +88,13 @@
     switch (indexPath.row) {
         case kORD:
             cell.textLabel.text = @"Chicago";
-            cell.detailTextLabel.text = @"ORD Region";
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            cell.detailTextLabel.text = @"ORD Region";            
+            cell.accessoryType = [self.loadBalancer.region isEqualToString:@"ORD"] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
             break;
         case kDFW:
             cell.textLabel.text = @"Dallas";
             cell.detailTextLabel.text = @"DFW Region";
-            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.accessoryType = [self.loadBalancer.region isEqualToString:@"DFW"] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
             break;
         default:
             break;
@@ -106,6 +106,12 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == kORD) {
+        self.loadBalancer.region = @"ORD";
+    } else if (indexPath.row == kDFW) {
+        self.loadBalancer.region = @"DFW";
+    }
+    
     [self.navigationController popViewControllerAnimated:YES];
     /*
     AddLoadBalancerViewController *vc = [[AddLoadBalancerViewController alloc] initWithAccount:self.account];

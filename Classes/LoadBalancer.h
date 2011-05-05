@@ -15,6 +15,7 @@
     LoadBalancerProtocol *protocol;
     NSString *algorithm;
     NSString *status;
+    NSString *virtualIPType;
     NSMutableArray *virtualIPs;
     NSDate *created;
     NSDate *updated;
@@ -29,6 +30,7 @@
     NSUInteger connectionThrottleRateInterval;
     NSString *clusterName;
     NSInteger progress;
+    NSString *region;
 
 /*
 ORD Region:
@@ -42,6 +44,7 @@ https://dfw.loadbalancers.api.rackspacecloud.com/v1.0/420600/
 @property (retain) LoadBalancerProtocol *protocol;
 @property (retain) NSString *algorithm;
 @property (retain) NSString *status;
+@property (retain) NSString *virtualIPType;
 @property (retain) NSMutableArray *virtualIPs;
 @property (retain) NSDate *created;
 @property (retain) NSDate *updated;
@@ -56,6 +59,7 @@ https://dfw.loadbalancers.api.rackspacecloud.com/v1.0/420600/
 @property (assign) NSUInteger connectionThrottleRateInterval;
 @property (retain) NSString *clusterName;
 @property (assign) NSInteger progress;
+@property (assign) NSString *region;
 
 + (LoadBalancer *)fromJSON:(NSDictionary *)dict;
 - (BOOL)shouldBePolled;

@@ -19,7 +19,7 @@
             connectionLoggingEnabled, nodes, connectionThrottleMinConnections,
             connectionThrottleMaxConnections, connectionThrottleMaxConnectionRate,
             connectionThrottleRateInterval, clusterName, sessionPersistenceType, progress,
-            cloudServerNodes;
+            cloudServerNodes, virtualIPType, region;
 
 #pragma mark -
 #pragma mark Serialization
@@ -130,6 +130,8 @@
     [sessionPersistenceType release];
     [clusterName release];
     [cloudServerNodes release];
+    [virtualIPType release];
+    [region release];
     [super dealloc];
 }
 

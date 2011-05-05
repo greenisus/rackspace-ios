@@ -64,12 +64,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"Virtual IP Type";
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.tableView.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)viewDidUnload
@@ -139,15 +134,23 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell.textLabel.backgroundColor = [UIColor clearColor];
         cell.detailTextLabel.numberOfLines = 0;
     }
     
     // Configure the cell...
+    if (indexPath.row == 0) {
+        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+        cell.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"grey-highlight.png"]] autorelease];
+        cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"purple-highlight.png"]] autorelease];
+    } else {
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+
     if (indexPath.section == kPublic) {
         if (indexPath.row == 0) {
             cell.textLabel.text = @"Public";
             cell.detailTextLabel.text = @"";
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
         } else {
             cell.textLabel.text = @"";
             cell.detailTextLabel.text = [descriptions objectForKey:@"Public"];
@@ -170,6 +173,11 @@
         }
     }
     
+    if ([self.loadBalancer.virtualIPType isEqualToString:cell.textLabel.text]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
     
     return cell;
 }
@@ -215,16 +223,24 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+- (void)selectRow:(NSTimer *)timer {
+    [self.tableView selectRowAtIndexPath:[timer.userInfo objectForKey:@"indexPath"] animated:NO scrollPosition:UITableViewScrollPositionNone];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == kPublic) {
+        self.loadBalancer.virtualIPType = @"Public";
+    } else if (indexPath.section == kServiceNet) {
+        self.loadBalancer.virtualIPType = @"ServiceNet";
+    } else if (indexPath.section == kSharedVirtualIP) {
+        self.loadBalancer.virtualIPType = @"Shared Virtual IP";
+    }    
+
+    [self.navigationController popViewControllerAnimated:YES];
+//    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSIndexPath indexPathForRow:0 inSection:indexPath.section] forKey:@"indexPath"];
+//    [NSTimer scheduledTimerWithTimeInterval:0.10 target:self.tableView selector:@selector(reloadData) userInfo:nil repeats:NO];
+//    [NSTimer scheduledTimerWithTimeInterval:0.15 target:self selector:@selector(selectRow:) userInfo:userInfo repeats:NO];
+    
 }
 
 @end
