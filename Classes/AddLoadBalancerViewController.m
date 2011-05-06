@@ -89,7 +89,7 @@
     if (section == kDetailsSection) {
         return 5;
     } else {
-        return [self.loadBalancer.cloudServerNodes count] + [self.loadBalancer.nodes count] + 1;
+        return 1;
     }
 }
 
@@ -148,29 +148,10 @@
             cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
+        
+        cell.textLabel.text = @"Nodes";
+        cell.detailTextLabel.text = @"5 Nodes";
 
-        
-        if (indexPath.row == [self.loadBalancer.cloudServerNodes count] + [self.loadBalancer.nodes count]) {
-            cell.textLabel.text = @"Nodes";
-            cell.detailTextLabel.text = @"5 Nodes";
-        } else if (indexPath.row < [self.loadBalancer.cloudServerNodes count]) {
-            Server *server = [self.loadBalancer.cloudServerNodes objectAtIndex:indexPath.row];
-            cell.textLabel.text = server.name;
-            cell.detailTextLabel.text = server.flavor.name;
-            if ([[server.image logoPrefix] isEqualToString:@"custom"]) {
-                cell.imageView.image = [UIImage imageNamed:@"cloud-servers-icon.png"];
-            } else {
-                cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@-icon.png", [server.image logoPrefix]]];
-            }
-        } else {
-            NSInteger index = indexPath.row - [self.loadBalancer.cloudServerNodes count];
-            LoadBalancerNode *node = [self.loadBalancer.nodes objectAtIndex:index];
-            cell.textLabel.text = node.address;
-            cell.detailTextLabel.text = @"";
-            cell.imageView.image = nil;
-        }
-        
-        
         return cell;
     }
 }

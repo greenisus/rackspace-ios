@@ -66,6 +66,11 @@
         cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     }
     
+    if ([indexPathTextFields count] <= indexPath.row) {
+        [cell.textField becomeFirstResponder];
+        [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
+    
     [textFieldIndexPaths setObject:indexPath forKey:cell.textField];
     [indexPathTextFields setObject:cell.textField forKey:indexPath];
     
@@ -150,19 +155,23 @@
 
 #pragma mark - Text field delegate
 
-- (void)refreshFocus:(NSTimer *)timer {
-    [[indexPathTextFields objectForKey:[timer.userInfo objectForKey:@"indexPath"]] becomeFirstResponder];
-}
+//- (void)refreshFocus:(NSTimer *)timer {
+//    [[indexPathTextFields objectForKey:[timer.userInfo objectForKey:@"indexPath"]] becomeFirstResponder];
+//}
+
+//- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+//    
+//}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self addIPRow];
     
-    NSIndexPath *indexPath = [textFieldIndexPaths objectForKey:textField];    
-    NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:indexPath.row + 1 inSection:kNodes];
-
-    NSLog(@"indexPaths: %i to %i", indexPath.row, newIndexPath.row);
+//    NSIndexPath *indexPath = [textFieldIndexPaths objectForKey:textField];    
+//    NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:indexPath.row + 1 inSection:kNodes];
+//
+//    NSLog(@"indexPaths: %i to %i", indexPath.row, newIndexPath.row);
     
-    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(refreshFocus:) userInfo:[NSDictionary dictionaryWithObject:newIndexPath forKey:@"indexPath"] repeats:NO];
+    //[NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(refreshFocus:) userInfo:[NSDictionary dictionaryWithObject:newIndexPath forKey:@"indexPath"] repeats:NO];
     
     //[[indexPathTextFields objectForKey:newIndexPath] becomeFirstResponder];
     
