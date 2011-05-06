@@ -37,11 +37,11 @@
 
 - (void)incrementRefreshCount {
     refreshCount++;
-    if (refreshCount == 2) {
+    //if (refreshCount == 2) {
         self.account.hasBeenRefreshed = YES;
         [self hideToolbarActivityMessage];
         refreshButton.enabled = YES;
-    }
+    //}
 }
 
 - (void)viewDidLoad {
@@ -149,7 +149,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (!self.account.hasBeenRefreshed) {
-        [self showToolbarActivityMessage:@"Refreshing data..."];
+        //[self showToolbarActivityMessage:@"Refreshing data..."];
         [self.account refreshCollections];
     }
 }
@@ -189,7 +189,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
@@ -337,9 +337,9 @@
 #pragma mark Button Handlers
 
 - (void)refreshButtonPressed:(id)sender {
-    refreshButton.enabled = NO;
+    //refreshButton.enabled = NO;
     refreshCount = 0;
-    [self showToolbarActivityMessage:@"Refreshing data..."];
+    //[self showToolbarActivityMessage:@"Refreshing data..."];
     [self.account refreshCollections];    
 }
 

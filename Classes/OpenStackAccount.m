@@ -114,9 +114,9 @@ static NSMutableDictionary *timers = nil;
         
         [self.manager getImages];
         [self.manager getFlavors];
-        [self.manager getServers];
+        //[self.manager getServers];
         [self.manager getLimits];
-        [self.manager getContainers];
+        //[self.manager getContainers];
         
         //[self.manager getStorageAccountInfo];
         
