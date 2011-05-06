@@ -15,6 +15,7 @@
 #import "Flavor.h"
 #import "Image.h"
 #import "RSTextFieldCell.h"
+#import "UIViewController+Conveniences.h"
 
 #define kNodes 0
 #define kCloudServers 1
@@ -69,16 +70,11 @@
     if ([indexPathTextFields count] <= indexPath.row) {
         [cell.textField becomeFirstResponder];
         [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        [self addDoneButton];
     }
     
     [textFieldIndexPaths setObject:indexPath forKey:cell.textField];
     [indexPathTextFields setObject:cell.textField forKey:indexPath];
-    
-//    if ([textFields count] < indexPath.row) {
-//        [textFields replaceObjectAtIndex:indexPath.row withObject:cell.textField];
-//    } else {
-//        [textFields addObject:cell.textField];
-//    }
     
     return cell;
 }
@@ -186,6 +182,14 @@
     
     
     return NO;
+}
+
+- (void)doneButtonPressed:(id)sender {
+    for (NSIndexPath *indexPath in indexPathTextFields) {
+        [[indexPathTextFields objectForKey:indexPath] resignFirstResponder];
+    }
+    
+    self.navigationItem.rightBarButtonItem = nil;
 }
 
 @end
