@@ -21,6 +21,15 @@
             connectionThrottleRateInterval, clusterName, sessionPersistenceType, progress,
             cloudServerNodes, virtualIPType, region;
 
+- (id)init {
+    self = [super init];
+    if (self) {
+        self.nodes = [[NSMutableArray alloc] init];
+        self.cloudServerNodes = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
+
 #pragma mark -
 #pragma mark Serialization
 

@@ -175,8 +175,10 @@
     
     if ([self.loadBalancer.virtualIPType isEqualToString:cell.textLabel.text]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
+        [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
     
     return cell;
@@ -228,6 +230,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 1) {
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:indexPath.section] animated:NO scrollPosition:UITableViewScrollPositionNone];
+    }
+    
     if (indexPath.section == kPublic) {
         self.loadBalancer.virtualIPType = @"Public";
     } else if (indexPath.section == kServiceNet) {
@@ -237,10 +243,6 @@
     }    
 
     [self.navigationController popViewControllerAnimated:YES];
-//    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSIndexPath indexPathForRow:0 inSection:indexPath.section] forKey:@"indexPath"];
-//    [NSTimer scheduledTimerWithTimeInterval:0.10 target:self.tableView selector:@selector(reloadData) userInfo:nil repeats:NO];
-//    [NSTimer scheduledTimerWithTimeInterval:0.15 target:self selector:@selector(selectRow:) userInfo:userInfo repeats:NO];
-    
 }
 
 @end

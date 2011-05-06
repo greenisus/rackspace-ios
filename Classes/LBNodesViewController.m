@@ -14,6 +14,7 @@
 #import "Server.h"
 #import "Flavor.h"
 #import "Image.h"
+#import "RSTextFieldCell.h"
 
 #define kNodes 0
 #define kCloudServers 1
@@ -43,10 +44,23 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == kNodes) {
+        NSLog(@"rows: %i", [self.loadBalancer.nodes count] + 1);
         return [self.loadBalancer.nodes count] + 1;
     } else {
         return 1; //[self.account.servers count] + 1;
     }
+}
+
+- (RSTextFieldCell *)tableView:(UITableView *)tableView ipCellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"IPCell";
+    
+    RSTextFieldCell *cell = (RSTextFieldCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[RSTextFieldCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+        cell.textField.delegate = self;
+        cell.textField.returnKeyType = UIReturnKeyNext;
+    }
+    return cell;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -59,8 +73,12 @@
     
     // Configure the cell...
     if (indexPath.section == kNodes) {
-        cell.textLabel.text = @"Add Nodes by IP";
-        cell.imageView.image = [UIImage imageNamed:@"green-add-button.png"];
+        if (indexPath.row == [self.loadBalancer.nodes count]) {
+            cell.textLabel.text = @"Add IP Addresses";
+            cell.imageView.image = [UIImage imageNamed:@"green-add-button.png"];
+        } else {
+            return [self tableView:tableView ipCellForRowAtIndexPath:indexPath];
+        }
     } else if (indexPath.section == kCloudServers) {
         cell.textLabel.text = @"Add Cloud Servers";
         cell.imageView.image = [UIImage imageNamed:@"green-add-button.png"];
@@ -73,7 +91,7 @@
         } else {
             cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@-icon.png", [server.image logoPrefix]]];
         }
-         */
+        */
     }
     
     return cell;
@@ -100,7 +118,30 @@
 
 #pragma mark - Table view delegate
 
+- (void)addIPRow {
+    LoadBalancerNode *node = [[[LoadBalancerNode alloc] init] autorelease];
+    [self.loadBalancer.nodes addObject:node];
+    NSArray *indexPath = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.loadBalancer.nodes count] - 1 inSection:kNodes]];
+    [self.tableView insertRowsAtIndexPaths:indexPath withRowAnimation:UITableViewScrollPositionBottom];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == kNodes) {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        [self addIPRow];
+    }
+}
+
+#pragma mark - Text field delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self addIPRow];
+    RSTextFieldCell *cell = [self tableView:self.tableView ipCellForRowAtIndexPath:[NSIndexPath indexPathForRow:[self.loadBalancer.nodes count] - 1 inSection:kNodes]];
+    //[textField resignFirstResponder];
+    NSLog(@"%i cell: %@ %@", [self.loadBalancer.nodes count] - 1, cell, cell.textField);
+    //[cell.textField becomeFirstResponder];
+    [NSTimer scheduledTimerWithTimeInterval:0.4 target:cell.textField selector:@selector(becomeFirstResponder) userInfo:nil repeats:NO];
+    return NO;
 }
 
 @end

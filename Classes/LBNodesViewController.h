@@ -10,7 +10,7 @@
 
 @class OpenStackAccount, LoadBalancer;
 
-@interface LBNodesViewController : UITableViewController {
+@interface LBNodesViewController : UITableViewController <UITextFieldDelegate> {
     OpenStackAccount *account;
     LoadBalancer *loadBalancer;
 }

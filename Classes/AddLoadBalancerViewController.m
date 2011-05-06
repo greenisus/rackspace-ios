@@ -100,7 +100,7 @@
     if (cell == nil) {
         cell = [[[RSTextFieldCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
         cell.textLabel.text = @"Name";
-        //cell.textField.placeholder = @"Ex: web-loadbalancer";
+        cell.textField.delegate = self;
     }
     return cell;
 }
@@ -208,6 +208,18 @@
         [self.navigationController pushViewController:vc animated:YES];
         [vc release];
     }
+}
+
+#pragma mark - Text field delegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    self.loadBalancer.name = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return NO;
 }
 
 @end
