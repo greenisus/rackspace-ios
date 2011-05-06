@@ -26,6 +26,8 @@
 - (void)dealloc {
     [account release];
     [loadBalancer release];
+    [textFieldIndexPaths release];
+    [indexPathTextFields release];
     [super dealloc];
 }
 
@@ -34,6 +36,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"Nodes";
+    textFieldIndexPaths = [[NSMutableDictionary alloc] init];
+    indexPathTextFields = [[NSMutableDictionary alloc] init];
 }
 
 #pragma mark - Table view data source
@@ -52,14 +56,25 @@
 }
 
 - (RSTextFieldCell *)tableView:(UITableView *)tableView ipCellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"IPCell";
+    NSString *CellIdentifier = [NSString stringWithFormat:@"IPCell%i", indexPath.row];
     
     RSTextFieldCell *cell = (RSTextFieldCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[RSTextFieldCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
         cell.textField.delegate = self;
         cell.textField.returnKeyType = UIReturnKeyNext;
+        cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     }
+    
+    [textFieldIndexPaths setObject:indexPath forKey:cell.textField];
+    [indexPathTextFields setObject:cell.textField forKey:indexPath];
+    
+//    if ([textFields count] < indexPath.row) {
+//        [textFields replaceObjectAtIndex:indexPath.row withObject:cell.textField];
+//    } else {
+//        [textFields addObject:cell.textField];
+//    }
+    
     return cell;
 }
 
@@ -123,6 +138,7 @@
     [self.loadBalancer.nodes addObject:node];
     NSArray *indexPath = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.loadBalancer.nodes count] - 1 inSection:kNodes]];
     [self.tableView insertRowsAtIndexPaths:indexPath withRowAnimation:UITableViewScrollPositionBottom];
+    //[self.tableView reloadData];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -134,13 +150,32 @@
 
 #pragma mark - Text field delegate
 
+- (void)refreshFocus:(NSTimer *)timer {
+    [[indexPathTextFields objectForKey:[timer.userInfo objectForKey:@"indexPath"]] becomeFirstResponder];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self addIPRow];
-    RSTextFieldCell *cell = [self tableView:self.tableView ipCellForRowAtIndexPath:[NSIndexPath indexPathForRow:[self.loadBalancer.nodes count] - 1 inSection:kNodes]];
+    
+    NSIndexPath *indexPath = [textFieldIndexPaths objectForKey:textField];    
+    NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:indexPath.row + 1 inSection:kNodes];
+
+    NSLog(@"indexPaths: %i to %i", indexPath.row, newIndexPath.row);
+    
+    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(refreshFocus:) userInfo:[NSDictionary dictionaryWithObject:newIndexPath forKey:@"indexPath"] repeats:NO];
+    
+    //[[indexPathTextFields objectForKey:newIndexPath] becomeFirstResponder];
+    
+    //RSTextFieldCell *cell = [self tableView:self.tableView ipCellForRowAtIndexPath:newIndexPath];
     //[textField resignFirstResponder];
-    NSLog(@"%i cell: %@ %@", [self.loadBalancer.nodes count] - 1, cell, cell.textField);
+    //NSLog(@"%i cell: %@ %@", [self.loadBalancer.nodes count] - 1, cell, cell.textField);
     //[cell.textField becomeFirstResponder];
-    [NSTimer scheduledTimerWithTimeInterval:0.4 target:cell.textField selector:@selector(becomeFirstResponder) userInfo:nil repeats:NO];
+    //[NSTimer scheduledTimerWithTimeInterval:0.4 target:cell.textField selector:@selector(becomeFirstResponder) userInfo:nil repeats:NO];
+    
+    //[[textFields objectAtIndex:indexPath.row] becomeFirstResponder];
+
+    
+    
     return NO;
 }
 

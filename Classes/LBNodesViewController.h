@@ -13,6 +13,10 @@
 @interface LBNodesViewController : UITableViewController <UITextFieldDelegate> {
     OpenStackAccount *account;
     LoadBalancer *loadBalancer;
+    @private
+    //NSMutableArray *textFields;
+    NSMutableDictionary *textFieldIndexPaths;
+    NSMutableDictionary *indexPathTextFields;
 }
 
 @property (retain) OpenStackAccount *account;
