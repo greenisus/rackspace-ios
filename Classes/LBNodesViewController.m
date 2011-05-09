@@ -16,6 +16,7 @@
 #import "Image.h"
 #import "RSTextFieldCell.h"
 #import "UIViewController+Conveniences.h"
+#import "LBServersViewController.h"
 
 #define kNodes 0
 #define kCloudServers 1
@@ -146,6 +147,10 @@
     if (indexPath.section == kNodes) {
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         [self addIPRow];
+    } else if (indexPath.section == kCloudServers) {
+        LBServersViewController *vc = [[LBServersViewController alloc] initWithAccount:self.account loadBalancer:self.loadBalancer];
+        [self presentModalViewControllerWithNavigation:vc];
+        [vc release];
     }
 }
 
