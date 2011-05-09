@@ -67,7 +67,7 @@
     if ([reachability currentReachabilityStatus] == kNotReachable) {
         [self failOnBadConnection];
     } else {
-        BOOL hadZeroServers = [self.account.servers count] == 0;
+        //BOOL hadZeroServers = [self.account.servers count] == 0;
         
         refreshButton.enabled = NO;
         [self showToolbarActivityMessage:@"Refreshing servers..."];
@@ -76,12 +76,13 @@
         getServersSucceededObserver = [[NSNotificationCenter defaultCenter] addObserverForName:@"getServersSucceeded" object:self.account 
                                                                                          queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification)
                                        {
+                                           serversLoaded = YES;
                                            [self.account persist];
                                            refreshButton.enabled = YES;
                                            [self hideToolbarActivityMessage];
-                                           if (!hadZeroServers && [self.account.servers count] > 0) {
+                                           //if (!hadZeroServers && [self.account.servers count] > 0) {
                                                [self.tableView reloadData];
-                                           }
+                                           //}
                                            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
                                                [NSTimer scheduledTimerWithTimeInterval:0.4 target:self selector:@selector(selectFirstServer) userInfo:nil repeats:NO];
                                            }
@@ -91,6 +92,7 @@
         getServersFailedObserver = [[NSNotificationCenter defaultCenter] addObserverForName:@"getServersFailed" object:self.account 
                                                                                       queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification)
                                     {
+                                        serversLoaded = YES;
                                         refreshButton.enabled = YES;
                                         [self hideToolbarActivityMessage];
                                         [self alert:@"There was a problem loading your servers." request:[notification.userInfo objectForKey:@"request"]];
@@ -165,6 +167,10 @@
         self.tableView.scrollEnabled = NO;
         [self.tableView reloadData];
     }
+    
+    if (!serversLoaded && [self.account.servers count] == 0) {
+        [self refreshButtonPressed:nil];
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -195,7 +201,11 @@
         self.tableView.allowsSelection = YES;
         self.tableView.scrollEnabled = YES;
     }
-    return MAX(1, [account.sortedServers count]);
+    if (!serversLoaded && [self.account.servers count] == 0) {
+        return 0;
+    } else {
+        return MAX(1, [account.sortedServers count]);
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)aTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -209,8 +219,10 @@
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {    
-    if ([account.servers count] == 0) {
+    if ([account.servers count] == 0 && serversLoaded) {
         return [self tableView:tableView emptyCellWithImage:[UIImage imageNamed:@"empty-servers.png"] title:@"No Servers" subtitle:@"Tap the + button to create a new Cloud Server"];
+    } else if ([account.servers count] == 0) {
+        return nil; // there will be no cells present while loading
     } else {
         static NSString *CellIdentifier = @"Cell";
 

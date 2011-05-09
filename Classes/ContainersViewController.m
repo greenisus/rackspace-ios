@@ -65,6 +65,10 @@
         [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
     }
     
+    if (!containersLoaded && [self.account.containers count] == 0) {
+        [self refreshButtonPressed:nil];
+    }
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -98,7 +102,7 @@
     } else {
         refreshButton.enabled = NO;
         
-        BOOL hadZeroContainers = [self.account.containers count] == 0;
+        //BOOL hadZeroContainers = [self.account.containers count] == 0;
         
         refreshButton.enabled = NO;
         [self showToolbarActivityMessage:@"Refreshing containers..."];
@@ -107,17 +111,19 @@
         getContainersSucceededObserver = [[NSNotificationCenter defaultCenter] addObserverForName:@"getContainersSucceeded" object:self.account 
                                                                                          queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification)
         {
+            containersLoaded = YES;
             refreshButton.enabled = YES;
             [self hideToolbarActivityMessage];
-            if (!hadZeroContainers && [self.account.containers count] > 0) {
+            //if (!hadZeroContainers && [self.account.containers count] > 0) {
                 [self.tableView reloadData];
-            }
+            //}
             [[NSNotificationCenter defaultCenter] removeObserver:getContainersSucceededObserver];
         }];
         
         getContainersFailedObserver = [[NSNotificationCenter defaultCenter] addObserverForName:@"getContainersFailed" object:self.account 
                                                                                       queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification)
         {
+            containersLoaded = YES;
             refreshButton.enabled = YES;
             [self hideToolbarActivityMessage];
             [self alert:@"There was a problem loading your containers." request:[notification.userInfo objectForKey:@"request"]];
@@ -141,7 +147,11 @@
         self.tableView.allowsSelection = YES;
         self.tableView.scrollEnabled = YES;
     }
-    return MAX(1, [account.containers count]);    
+    if (!containersLoaded && [self.account.containers count] == 0) {
+        return 0;
+    } else {
+        return MAX(1, [account.containers count]);    
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)aTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -152,7 +162,7 @@
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([account.containers count] == 0) {
+    if (containersLoaded && [self.account.containers count] == 0) {
         return [self tableView:tableView emptyCellWithImage:[UIImage imageNamed:@"empty-containers.png"] title:@"No Containers" subtitle:@"Tap the + button to create a new container"];
     } else {   
         static NSString *CellIdentifier = @"Cell";

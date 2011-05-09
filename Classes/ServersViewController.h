@@ -26,6 +26,8 @@
 
     BOOL loaded;
     BOOL comingFromAccountHome;
+    
+    BOOL serversLoaded;
 }
 
 @property (retain) IBOutlet UITableView *tableView;

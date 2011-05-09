@@ -21,6 +21,8 @@
     
     id getContainersSucceededObserver;
     id getContainersFailedObserver;
+    
+    BOOL containersLoaded;
 }
 
 @property (retain) IBOutlet UITableView *tableView;
