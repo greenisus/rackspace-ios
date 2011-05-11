@@ -23,6 +23,8 @@
 #import "LoadBalancerNode.h"
 #import "LBNodesViewController.h"
 #import "LoadBalancerProtocol.h"
+#import "AccountManager.h"
+#import "APICallback.h"
 
 #define kDetailsSection 0
 #define kNodesSection 1
@@ -150,7 +152,12 @@
         }
         
         cell.textLabel.text = @"Nodes";
-        cell.detailTextLabel.text = @"5 Nodes";
+        
+        if ([self.loadBalancer.nodes count] + [self.loadBalancer.cloudServerNodes count] == 1) {
+            cell.detailTextLabel.text = @"1 Node";
+        } else {
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%i Nodes", [self.loadBalancer.nodes count] + [self.loadBalancer.cloudServerNodes count]];
+        }
 
         return cell;
     }
@@ -201,6 +208,18 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return NO;
+}
+
+#pragma mark - Button Handlers
+
+- (void)saveButtonPressed:(id)sender {
+    //[self alert:@"Here goes nothing..." message:[self.loadBalancer toJSON]];
+    
+    [[self.account.manager createLoadBalancer:self.loadBalancer] success:^(OpenStackRequest *request) {
+        [self alert:@"Woot!" message:[request responseString]];
+    } failure:^(OpenStackRequest *request) {
+        [self alert:[NSString stringWithFormat:@"Fail! %i", [request responseStatusCode]] message:[request responseString]];
+    }];
 }
 
 @end

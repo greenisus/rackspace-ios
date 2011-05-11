@@ -11,7 +11,7 @@
 // this class performs API calls on accounts and broadcasts NSNotifications to any other
 // object that chooses to observe the notification
 
-@class OpenStackAccount, Server, Flavor, Image, Container, StorageObject, OpenStackRequest, ASINetworkQueue, APICallback;
+@class OpenStackAccount, Server, Flavor, Image, Container, StorageObject, OpenStackRequest, ASINetworkQueue, APICallback, LoadBalancer;
 
 @interface AccountManager : NSObject {
     OpenStackAccount *account;
@@ -69,5 +69,6 @@
 
 - (APICallback *)getLoadBalancers:(NSString *)endpoint;
 - (APICallback *)getLoadBalancerProtocols:(NSString *)endpoint;
+- (APICallback *)createLoadBalancer:(LoadBalancer *)loadBalancer;
 
 @end

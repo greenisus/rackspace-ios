@@ -14,9 +14,7 @@
     OpenStackAccount *account;
     LoadBalancer *loadBalancer;
     @private
-    //NSMutableArray *textFields;
-    NSMutableDictionary *textFieldIndexPaths;
-    NSMutableDictionary *indexPathTextFields;
+    NSMutableArray *textFields;
 }
 
 @property (retain) OpenStackAccount *account;

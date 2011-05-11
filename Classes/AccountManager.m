@@ -659,6 +659,29 @@
     }];
 }
 
+- (APICallback *)createLoadBalancer:(LoadBalancer *)loadBalancer {
+    NSString *endpoint = @"";
+    
+    for (NSString *url in [self.account loadBalancerURLs]) {
+        if ([url hasPrefix:[NSString stringWithFormat:@"https://%@", [loadBalancer.region lowercaseString]]]) {
+            endpoint = url;
+            break;
+        }
+    }
+    
+    __block LoadBalancerRequest *request = [LoadBalancerRequest createLoadBalancerRequest:self.account loadBalancer:loadBalancer endpoint:endpoint];
+    return [self callbackWithRequest:request success:^(OpenStackRequest *request) {
+//        if (!self.account.loadBalancers) {
+//            self.account.loadBalancers = [[NSMutableDictionary alloc] initWithCapacity:2];
+//        }
+//        [self.account.loadBalancers setObject:[(LoadBalancerRequest *)request loadBalancers] forKey:endpoint];
+//        [self.account persist];            
+//        for (LoadBalancer *lb in self.account.sortedLoadBalancers) {
+//            NSLog(@"Load Balancer at %@: %@", endpoint, lb.name);
+//        }
+    }];
+}
+
 - (APICallback *)authenticate {
     __block OpenStackRequest *request = [OpenStackRequest authenticationRequest:self.account];
     return [self callbackWithRequest:request success:^(OpenStackRequest *request) {

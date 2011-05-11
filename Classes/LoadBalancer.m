@@ -97,6 +97,16 @@
     json = [json stringByAppendingString:[NSString stringWithFormat:@"\"port\": \"%i\", ", self.protocol.port]];
     json = [json stringByAppendingString:[NSString stringWithFormat:@"\"algorithm\": \"%@\", ", self.algorithm]];
     
+    // virtualIPType
+    if ([self.virtualIPType isEqualToString:@"Public"]) {
+        json = [json stringByAppendingString:@"\"virtualIps\": [ { \"type\": \"PUBLIC\" } ], "];
+    } else if ([self.virtualIPType isEqualToString:@"ServiceNet"]) {
+        json = [json stringByAppendingString:@"\"virtualIps\": [ { \"type\": \"SERVICENET\" } ], "];
+//    } else if ([self.virtualIPType isEqualToString:@"Shared Virtual IP"]) {
+//        json = [json stringByAppendingString:@"\"virtualIps\": [ { \"type\": \"PUBLIC\" } ], "];
+    }
+    
+    /*
     json = [json stringByAppendingString:@"\"virtualIps\": ["];
     for (int i = 0; i < [self.virtualIPs count]; i++) {
         VirtualIP *vip = [self.virtualIPs objectAtIndex:i];
@@ -105,6 +115,7 @@
         json = [json stringByAppendingString:i == [self.virtualIPs count] - 1 ? @"}" : @"}, "];
     }
     json = [json stringByAppendingString:@"]"];
+     */
     
     json = [json stringByAppendingString:@"\"nodes\": ["];
     for (int i = 0; i < [self.nodes count]; i++) {
