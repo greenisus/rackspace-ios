@@ -8,11 +8,14 @@
 
 #import "LBServersViewController.h"
 #import "OpenStackAccount.h"
+#import "AccountManager.h"
 #import "LoadBalancer.h"
 #import "Server.h"
 #import "Flavor.h"
 #import "Image.h"
 #import "UIViewController+Conveniences.h"
+#import "ActivityIndicatorView.h"
+#import "APICallback.h"
 
 
 @implementation LBServersViewController
@@ -40,12 +43,23 @@
     [super viewDidLoad];
     self.navigationItem.title = @"Cloud Servers";
     [self addDoneButton];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    if ([self.account.servers count] == 0) {
+        // we may not have loaded the servers yet, so load them now
+        
+        NSString *activityMessage = @"Loading...";
+        ActivityIndicatorView *activityIndicatorView = [[ActivityIndicatorView alloc] initWithFrame:[ActivityIndicatorView frameForText:activityMessage] text:activityMessage];
+        [activityIndicatorView addToView:self.view];
+        
+        [[self.account.manager getServersWithCallback] success:^(OpenStackRequest *request) {
+            [activityIndicatorView removeFromSuperviewAndRelease];
+            [self.tableView reloadData];
+        } failure:^(OpenStackRequest *request) {
+            [activityIndicatorView removeFromSuperviewAndRelease];
+            [self alert:@"There was a problem loading your servers." request:request];
+        }];
+        
+    }
 }
 
 #pragma mark - Table view data source

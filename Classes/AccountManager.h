@@ -45,6 +45,7 @@
 - (void)updateBackupSchedule:(Server *)server;
 
 - (void)getServers;
+- (APICallback *)getServersWithCallback;
 - (void)getImages;
 - (void)getFlavors;
 - (void)getImage:(Server *)server;

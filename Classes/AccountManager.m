@@ -343,13 +343,19 @@
 
 #pragma mark Get Servers
 
-- (void)getServers {    
+- (void)getServers {
     if (![self queue]) {
         [self setQueue:[[[NSOperationQueue alloc] init] autorelease]];
     }
     GetServersRequest *request = [GetServersRequest request:self.account];
     [queue addOperation:request];
 }
+
+- (APICallback *)getServersWithCallback {
+    __block GetServersRequest *request = [GetServersRequest request:self.account];
+    return [self callbackWithRequest:request];
+}
+
 
 #pragma mark Get Flavors
 
