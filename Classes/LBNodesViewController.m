@@ -45,6 +45,21 @@
     [self.tableView reloadData];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    NSMutableArray *finalNodes = [[NSMutableArray alloc] init];
+    for (LoadBalancerNode *node in self.loadBalancer.nodes) {
+        if (node.address && ![node.address isEqualToString:@""]) {
+            [finalNodes addObject:node];
+        }
+    }
+    if ([finalNodes count] > 0) {
+        self.loadBalancer.nodes = [[NSMutableArray alloc] initWithArray:finalNodes];
+    }
+    [finalNodes release];
+    self.navigationItem.rightBarButtonItem = nil;    
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
