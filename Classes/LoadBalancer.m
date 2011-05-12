@@ -11,6 +11,7 @@
 #import "LoadBalancerNode.h"
 #import "NSObject+NSCoding.h"
 #import "LoadBalancerProtocol.h"
+#import "Server.h"
 
 
 @implementation LoadBalancer
@@ -125,6 +126,14 @@
         json = [json stringByAppendingString:[NSString stringWithFormat:@"\"port\": \"%@\",", node.port]];
         json = [json stringByAppendingString:[NSString stringWithFormat:@"\"condition\": \"%@\"", node.condition]];
         json = [json stringByAppendingString:i == [self.nodes count] - 1 ? @"}" : @"}, "];
+    }
+    for (int i = 0; i < [self.cloudServerNodes count]; i++) {
+        Server *server = [self.cloudServerNodes objectAtIndex:i];
+        json = [json stringByAppendingString:@"{"];        
+        json = [json stringByAppendingString:[NSString stringWithFormat:@"\"address\": \"%@\",", [[server.addresses objectForKey:@"public"] objectAtIndex:0]]];
+        json = [json stringByAppendingString:[NSString stringWithFormat:@"\"port\": \"%i\",", self.protocol.port]];
+        json = [json stringByAppendingString:@"\"condition\": \"ENABLED\""];
+        json = [json stringByAppendingString:i == [self.cloudServerNodes count] - 1 ? @"}" : @"}, "];
     }
     json = [json stringByAppendingString:@"]"];
     

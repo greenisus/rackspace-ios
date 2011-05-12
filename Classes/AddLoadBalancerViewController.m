@@ -213,13 +213,14 @@
 #pragma mark - Button Handlers
 
 - (void)saveButtonPressed:(id)sender {
-    //[self alert:@"Here goes nothing..." message:[self.loadBalancer toJSON]];
-    
+    [self alert:@"Load Balancer JSON" message:[self.loadBalancer toJSON]];
+    /*
     [[self.account.manager createLoadBalancer:self.loadBalancer] success:^(OpenStackRequest *request) {
         [self alert:@"Woot!" message:[request responseString]];
     } failure:^(OpenStackRequest *request) {
         [self alert:[NSString stringWithFormat:@"Fail! %i", [request responseStatusCode]] message:[request responseString]];
     }];
+     */
 }
 
 @end
