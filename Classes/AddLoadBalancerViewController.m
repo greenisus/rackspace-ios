@@ -57,6 +57,7 @@
 - (void)dealloc {
     [account release];
     [loadBalancer release];
+    [algorithmNames release];
     [super dealloc];
 }
 
@@ -68,6 +69,15 @@
     //[self addNextButton];
     [self addSaveButton];
     [self addCancelButton];
+    
+    algorithmNames = [[NSDictionary alloc] initWithObjectsAndKeys:
+                       @"Random",@"RANDOM", 
+                       @"Round Robin", @"ROUND_ROBIN", 
+                       @"Weighted Round Robin", @"WEIGHTED_ROUND_ROBIN", 
+                       @"Least Connections", @"LEAST_CONNECTIONS", 
+                       @"Weighted Least Connections", @"WEIGHTED_LEAST_CONNECTIONS", 
+                       nil];
+    
 }
 
 - (void)viewDidUnload {
@@ -134,7 +144,7 @@
                 break;
             case kAlgorithm:
                 cell.textLabel.text = @"Algorithm";
-                cell.detailTextLabel.text = self.loadBalancer.algorithm;
+                cell.detailTextLabel.text = [algorithmNames objectForKey:self.loadBalancer.algorithm];
                 break;
             default:
                 break;

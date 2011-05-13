@@ -14,6 +14,7 @@
     LoadBalancer *loadBalancer;
     @private
     NSDictionary *descriptions;
+    NSDictionary *algorithmValues;
 }
 
 @property (retain) LoadBalancer *loadBalancer;

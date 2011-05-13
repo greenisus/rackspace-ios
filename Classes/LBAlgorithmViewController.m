@@ -30,6 +30,7 @@
 - (void)dealloc {
     [loadBalancer release];
     [descriptions release];
+    [algorithmValues release];
     [super dealloc];
 }
 
@@ -38,6 +39,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"Algorithm";
+    self.tableView.backgroundColor = [UIColor whiteColor];
     descriptions = [[NSDictionary alloc] initWithObjectsAndKeys:
                         @"Directs traffic to a randomly selected node.", @"Random",
                         @"Directs traffic in a circular pattern to each node of a load balancer in succession.", @"Round Robin",
@@ -45,6 +47,15 @@
                         @"Directs traffic to the node with the fewest open connections to the load balancer.", @"Least Connections",
                         @"Directs traffic to the node with the fewest open connections between the load balancer.  Nodes with a larger weight will service more connections at any one time.", @"Weighted Least Connections",
                         nil];
+    
+    algorithmValues = [[NSDictionary alloc] initWithObjectsAndKeys:
+                       @"RANDOM", @"Random",
+                       @"ROUND_ROBIN", @"Round Robin",
+                       @"WEIGHTED_ROUND_ROBIN", @"Weighted Round Robin",
+                       @"LEAST_CONNECTIONS", @"Least Connections",
+                       @"WEIGHTED_LEAST_CONNECTIONS", @"Weighted Least Connections",
+                       nil];
+
 }
 
 #pragma mark - Table view data source
@@ -79,14 +90,19 @@
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
+- (UITableViewCell *)tableView:(UITableView *)tableView titleCellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"TitleCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell.textLabel.backgroundColor = [UIColor clearColor];
         cell.detailTextLabel.numberOfLines = 0;
     }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+    cell.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"grey-highlight.png"]] autorelease];
+    cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"purple-highlight.png"]] autorelease];
     
     switch (indexPath.section) {
         case kRandom:
@@ -109,12 +125,58 @@
     }
     
     cell.detailTextLabel.text = @"";
-    if (indexPath.row == 1) {
-        cell.detailTextLabel.text = [descriptions objectForKey:cell.textLabel.text];
-        cell.textLabel.text = @"";
+    
+    if ([self.loadBalancer.algorithm isEqualToString:[algorithmValues objectForKey:cell.textLabel.text]]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
     }
     
     return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView descriptionCellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"DescriptionCell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell.textLabel.backgroundColor = [UIColor clearColor];
+        cell.detailTextLabel.numberOfLines = 0;
+    }
+    
+    cell.textLabel.text = @"";
+    
+    switch (indexPath.section) {
+        case kRandom:
+            cell.detailTextLabel.text = [descriptions objectForKey:@"Random"];
+            break;
+        case kRoundRobin:
+            cell.detailTextLabel.text = [descriptions objectForKey:@"Round Robin"];
+            break;
+        case kWeightedRoundRobin:
+            cell.detailTextLabel.text = [descriptions objectForKey:@"Weighted Round Robin"];
+            break;
+        case kLeastConnections:
+            cell.detailTextLabel.text = [descriptions objectForKey:@"Least Connections"];
+            break;
+        case kWeightedLeastConnections:
+            cell.detailTextLabel.text = [descriptions objectForKey:@"Weighted Least Connections"];
+            break;
+        default:
+            break;
+    }
+    
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        return [self tableView:tableView titleCellForRowAtIndexPath:indexPath];
+    } else {
+        return [self tableView:tableView descriptionCellForRowAtIndexPath:indexPath];
+    }
 }
 
 #pragma mark - Table view delegate
@@ -139,6 +201,7 @@
         default:
             break;
     }
+    [self.tableView reloadData];
 }
 
 @end

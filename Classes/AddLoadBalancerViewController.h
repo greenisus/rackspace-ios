@@ -13,6 +13,8 @@
 @interface AddLoadBalancerViewController : UITableViewController <UITextFieldDelegate> {
     OpenStackAccount *account;
     LoadBalancer *loadBalancer;
+    @private
+    NSDictionary *algorithmNames;
 }
 
 @property (retain) OpenStackAccount *account;
