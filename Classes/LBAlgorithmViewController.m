@@ -7,6 +7,7 @@
 //
 
 #import "LBAlgorithmViewController.h"
+#import "LoadBalancer.h"
 
 #define kRandom 0
 #define kRoundRobin 1
@@ -16,15 +17,18 @@
 
 @implementation LBAlgorithmViewController
 
-- (id)initWithStyle:(UITableViewStyle)style {
-    self = [super initWithStyle:style];
+@synthesize loadBalancer;
+
+- (id)initWithLoadBalancer:(LoadBalancer *)lb {
+    self = [super initWithNibName:@"LBAlgorithmViewController" bundle:nil];
     if (self) {
-        // Custom initialization
+        self.loadBalancer = lb;
     }
     return self;
 }
 
 - (void)dealloc {
+    [loadBalancer release];
     [descriptions release];
     [super dealloc];
 }
@@ -116,6 +120,25 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.section) {
+        case kRandom:
+            self.loadBalancer.algorithm = @"RANDOM";
+            break;
+        case kRoundRobin:
+            self.loadBalancer.algorithm = @"ROUND_ROBIN";
+            break;
+        case kWeightedRoundRobin:
+            self.loadBalancer.algorithm = @"WEIGHTED_ROUND_ROBIN";
+            break;
+        case kLeastConnections:
+            self.loadBalancer.algorithm = @"LEAST_CONNECTIONS";
+            break;
+        case kWeightedLeastConnections:
+            self.loadBalancer.algorithm = @"WEIGHTED_LEAST_CONNECTIONS";
+            break;
+        default:
+            break;
+    }
 }
 
 @end

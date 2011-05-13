@@ -192,7 +192,7 @@
         [self.navigationController pushViewController:vc animated:YES];
         [vc release];
     } else if (indexPath.row == kAlgorithm) {
-        LBAlgorithmViewController *vc = [[LBAlgorithmViewController alloc] initWithNibName:@"LBAlgorithmViewController" bundle:nil];
+        LBAlgorithmViewController *vc = [[LBAlgorithmViewController alloc] initWithLoadBalancer:self.loadBalancer];
         [self.navigationController pushViewController:vc animated:YES];
         [vc release];
     }

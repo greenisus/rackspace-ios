@@ -8,10 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class LoadBalancer;
 
 @interface LBAlgorithmViewController : UITableViewController {
+    LoadBalancer *loadBalancer;
     @private
     NSDictionary *descriptions;
 }
+
+@property (retain) LoadBalancer *loadBalancer;
+
+- (id)initWithLoadBalancer:(LoadBalancer *)loadBalancer;
 
 @end
