@@ -144,7 +144,8 @@
     getImageSucceededObserver = [[NSNotificationCenter defaultCenter] addObserverForName:@"getImageSucceeded" object:nil
                                                                                    queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification* notification) 
       {
-          for (Server *server in self.account.sortedServers) {
+          NSArray *sortedServers = [self.account sortedServers];
+          for (Server *server in sortedServers) {
               BOOL updated = NO;
               if (!server.image) {
                   server.image = [self.account.images objectForKey:[NSNumber numberWithInt:server.imageId]];

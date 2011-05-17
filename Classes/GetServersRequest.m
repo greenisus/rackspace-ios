@@ -40,10 +40,9 @@
 
 - (void)requestFinished {        
     if ([self isSuccess]) {
-        NSLog(@"servers response: %@", [self responseString]);
+        //NSLog(@"servers response: %@", [self responseString]);
         
-        account.servers = [[NSMutableDictionary alloc] initWithDictionary:[self servers]];
-        account.serversByHost = [[NSMutableDictionary alloc] initWithCapacity:[account.servers count]];
+        account.servers = [NSMutableDictionary dictionaryWithDictionary:[self servers]];
         
         NSArray *keys = [account.servers allKeys];
         NSMutableDictionary *fullServers = [[NSMutableDictionary alloc] initWithCapacity:[keys count]];
@@ -54,17 +53,9 @@
             if (!server.image) {
                 [self.account.manager getImage:server];
             }
-            [fullServers setObject:server forKey:[NSNumber numberWithInt:server.identifier]];
-            
-            NSMutableArray *serversOnHost = [account.serversByHost objectForKey:server.hostId];
-            if (serversOnHost == nil) {
-                serversOnHost = [[NSMutableArray alloc] init];
-            }            
-            [serversOnHost addObject:server];
-            [account.serversByHost setObject:serversOnHost forKey:server.hostId];
+            [fullServers setObject:server forKey:[NSNumber numberWithInt:server.identifier]];            
         }
         self.account.servers = [NSMutableDictionary dictionaryWithDictionary:fullServers];
-        self.account.sortedServers = nil;
         [fullServers release];
         [self.account persist];
         [self.account.manager notify:@"getServersSucceeded" request:self object:self.account];

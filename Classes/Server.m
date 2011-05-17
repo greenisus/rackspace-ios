@@ -41,8 +41,16 @@
 #pragma mark -
 #pragma mark JSON
 
+- (id)initWithJSONDict:(NSDictionary *)dict {
+    self = [super initWithJSONDict:dict];
+    if (self) {
+        [self autoParse:&self fromJSONDict:dict];
+    }
+    return self;
+}
+
 + (Server *)fromJSON:(NSDictionary *)dict {
-    Server *server = [[[Server alloc] initWithJSONDict:dict] autorelease];    
+    Server *server = [[[Server alloc] initWithJSONDict:dict] autorelease];
     [self autoParse:&server fromJSONDict:dict];
     return server;
 }
@@ -123,6 +131,7 @@
 #pragma mark Memory Management
 
 - (void)dealloc {
+    NSLog(@"server dealloc");
     [status release];
     [hostId release];
     [addresses release];

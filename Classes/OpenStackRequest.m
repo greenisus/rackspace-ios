@@ -343,18 +343,15 @@ static NSRecursiveLock *accessDetailsLock = nil;
 }
 
 - (NSDictionary *)servers {
-    /* TODO: for all methods like this: set up servers to return autoreleased list of objects instead of retained NSMutableDictionary
-     * Analyzer perceives this as a potential leak since it's not a method named "alloc" or "copy"
-     */
-    //NSLog(@"about to parse %@", [self responseString]);
     SBJSON *parser = [[SBJSON alloc] init];
     NSArray *jsonObjects = [[parser objectWithString:[self responseString]] objectForKey:@"servers"];
-    NSMutableDictionary *objects = [[NSMutableDictionary alloc] initWithCapacity:[jsonObjects count]];
+    NSMutableDictionary *objects = [[[NSMutableDictionary alloc] initWithCapacity:[jsonObjects count]] autorelease];
     
     for (int i = 0; i < [jsonObjects count]; i++) {
         NSDictionary *dict = [jsonObjects objectAtIndex:i];
-        Server *server = [Server fromJSON:dict];
+        Server *server = [[Server alloc] initWithJSONDict:dict];
         [objects setObject:server forKey:[NSNumber numberWithInt:server.identifier]];
+        [server release];
     }
     
     [parser release];
@@ -418,12 +415,19 @@ static NSRecursiveLock *accessDetailsLock = nil;
 
 #pragma mark Server Actions
 
-+ (OpenStackRequest *)softRebootServerRequest:(OpenStackAccount *)account server:(Server *)server {
-	NSString *body = @"{ \"reboot\": { \"type\": \"SOFT\" } }";
+#define kSoft 0
+#define kHard 1
+
++ (OpenStackRequest *)rebootServerRequest:(OpenStackAccount *)account server:(Server *)server type:(NSInteger)type {
+    NSString *body = [NSString stringWithFormat:@"{ \"reboot\": { \"type\": \"%@\" } }", (type == kSoft) ? @"SOFT" : @"HARD"];
     OpenStackRequest *request = [OpenStackRequest serversRequest:account method:@"POST" path:[NSString stringWithFormat:@"/servers/%i/action", server.identifier]];	
-	NSData *data = [body dataUsingEncoding:NSUTF8StringEncoding];
-	[request setPostBody:[NSMutableData dataWithData:data]];
-	return request;
+    NSData *data = [body dataUsingEncoding:NSUTF8StringEncoding];
+    [request setPostBody:[NSMutableData dataWithData:data]];
+    return request;
+}
+
++ (OpenStackRequest *)softRebootServerRequest:(OpenStackAccount *)account server:(Server *)server {
+    return [OpenStackRequest rebootServerRequest:account server:server type:kSoft];
 }
 
 + (RateLimit *)softRebootServerLimit:(OpenStackAccount *)account server:(Server *)server {
@@ -431,11 +435,7 @@ static NSRecursiveLock *accessDetailsLock = nil;
 }
 
 + (OpenStackRequest *)hardRebootServerRequest:(OpenStackAccount *)account server:(Server *)server {
-	NSString *body = @"{ \"reboot\": { \"type\": \"HARD\" } }";
-    OpenStackRequest *request = [OpenStackRequest serversRequest:account method:@"POST" path:[NSString stringWithFormat:@"/servers/%i/action", server.identifier]];	
-	NSData *data = [body dataUsingEncoding:NSUTF8StringEncoding];
-	[request setPostBody:[NSMutableData dataWithData:data]];
-	return request;
+    return [OpenStackRequest rebootServerRequest:account server:server type:kHard];
 }
 
 + (RateLimit *)hardRebootServerLimit:(OpenStackAccount *)account server:(Server *)server {

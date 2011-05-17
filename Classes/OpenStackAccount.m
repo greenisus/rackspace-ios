@@ -26,9 +26,9 @@ static NSMutableDictionary *timers = nil;
 @implementation OpenStackAccount
 
 @synthesize uuid, provider, username, images, flavors, servers, serversURL, filesURL, cdnURL, manager, rateLimits,
-            sortedImages, sortedFlavors, sortedServers, lastUsedFlavorId, lastUsedImageId, sortedRateLimits,
+            sortedImages, sortedFlavors, lastUsedFlavorId, lastUsedImageId, sortedRateLimits,
             containerCount, totalBytesUsed, containers, sortedContainers, hasBeenRefreshed, flaggedForDelete,
-            loadBalancers, sortedLoadBalancers, serversByHost, lbProtocols;
+            loadBalancers, sortedLoadBalancers, lbProtocols;
 
 + (void)initialize {
     accounts = [Archiver retrieve:@"accounts"];
@@ -58,10 +58,7 @@ static NSMutableDictionary *timers = nil;
 }
 
 - (NSArray *)sortedServers {
-    if (!sortedServers || [sortedServers count] != [servers count]) {
-        sortedServers = [[NSArray alloc] initWithArray:[[self.servers allValues] sortedArrayUsingSelector:@selector(compare:)]];
-    }
-    return sortedServers;
+    return [[self.servers allValues] sortedArrayUsingSelector:@selector(compare:)];
 }
 
 - (NSArray *)sortedRateLimits {
@@ -172,7 +169,6 @@ static NSMutableDictionary *timers = nil;
     copy.totalBytesUsed = self.totalBytesUsed;
     copy.containers = self.containers;
     copy.loadBalancers = self.loadBalancers;
-    copy.serversByHost = self.serversByHost;
     manager = [[AccountManager alloc] init];
     manager.account = copy;
     return copy;
@@ -195,7 +191,6 @@ static NSMutableDictionary *timers = nil;
     [coder encodeInt:totalBytesUsed forKey:@"totalBytesUsed"];
 //    [coder encodeObject:containers forKey:@"containers"];
 //    [coder encodeObject:loadBalancers forKey:@"loadBalancers"];
-//    [coder encodeObject:serversByHost forKey:@"serversByHost"];
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
@@ -222,8 +217,6 @@ static NSMutableDictionary *timers = nil;
 //        containers = [[coder decodeObjectForKey:@"containers"] retain];
 //        loadBalancers = [[coder decodeObjectForKey:@"loadBalancers"] retain];
 
-        serversByHost = [[coder decodeObjectForKey:@"serversByHost"] retain];
-        
         manager = [[AccountManager alloc] init];
         manager.account = self;
     }
@@ -258,6 +251,8 @@ static NSMutableDictionary *timers = nil;
 }
 
 - (BOOL)persist {
+    //return NO;
+    //*
     if (!flaggedForDelete) {        
         NSMutableArray *accountArr = [NSMutableArray arrayWithArray:[OpenStackAccount accounts]];
         
@@ -283,6 +278,7 @@ static NSMutableDictionary *timers = nil;
     } else {
         return NO;
     }
+    //*/
 }
 
 // the API key and auth token are stored in the Keychain, so overriding the 
@@ -357,7 +353,6 @@ static NSMutableDictionary *timers = nil;
     [rateLimits release];
     [sortedImages release];
     [sortedFlavors release];
-    [sortedServers release];
     [sortedRateLimits release];
     [containers release];
     [sortedContainers release];

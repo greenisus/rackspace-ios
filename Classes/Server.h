@@ -56,6 +56,8 @@
 @property (retain) BackupSchedule *backupSchedule;
 @property (retain) NSString *rootPassword;
 
+- (id)initWithJSONDict:(NSDictionary *)dict;
+
 + (Server *)fromJSON:(NSDictionary *)jsonDict;
 - (NSString *)toJSON;
 - (BOOL)shouldBePolled;

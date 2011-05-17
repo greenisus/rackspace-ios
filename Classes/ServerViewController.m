@@ -241,7 +241,6 @@
         self.server.image = [self.account.images objectForKey:[NSNumber numberWithInt:self.server.imageId]];
         
         [self.account.servers setObject:server forKey:[NSNumber numberWithInt:self.server.identifier]];
-        self.account.sortedServers = nil;        
         [self.account persist];
         
         NSLog(@"polling server worked. %i, %@", self.server.progress, self.server.status);
@@ -515,16 +514,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == kOverview) {
-        if (self.account.serversByHost && [self.account.serversByHost count] > 0) {
-            NSArray *serversOnHost = [self.account.serversByHost objectForKey:self.server.hostId];
-            if (serversOnHost && [serversOnHost count] > 1) {
-                return 3;
-            } else {
-                return 2;
-            }
-        } else {
-            return 2;
-        }
+        return 2;
     } else if (section == kDetails) {
         return 2;
     } else if (section == kIPAddresses) {
@@ -767,7 +757,6 @@
         if (indexPath.row == kHostId) {
             ServersOnHostViewController *vc = [[ServersOnHostViewController alloc] initWithNibName:@"ServersOnHostViewController" bundle:nil];
             vc.account = self.account;
-            vc.servers = [self.account.serversByHost objectForKey:self.server.hostId];
             vc.hostID = self.server.hostId;
             [self.navigationController pushViewController:vc animated:YES];
             [vc release];

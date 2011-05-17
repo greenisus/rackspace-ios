@@ -1301,6 +1301,7 @@
 				27F7445D12611316002C6CB0 /* Categories */,
 				2798AAE3125E7F5900E02475 /* Custom Views */,
 				27828AEB125A7FF900004D33 /* View Controllers */,
+				27828ACF125A7F0400004D33 /* Utilities */,
 				271726ED12555E68003A1319 /* Third Party Libraries */,
 				271726E912555E47003A1319 /* OpenStack Binding */,
 				1D3623240D0F684500981E51 /* OpenStackAppDelegate.h */,
@@ -1366,7 +1367,6 @@
 			isa = PBXGroup;
 			children = (
 				276EB6111275FB02001C8FDE /* Models */,
-				27828ACF125A7F0400004D33 /* Utilities */,
 				271726EC12555E5A003A1319 /* HTTP Requests */,
 			);
 			name = "OpenStack Binding";
@@ -3390,6 +3390,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = "~/src/rackspace/openstack/OpenStack/Entitlements.plist";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rackspace Hosting";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -3397,6 +3399,8 @@
 				GCC_PREFIX_HEADER = OpenStack_Prefix.pch;
 				INFOPLIST_FILE = "OpenStack-Info.plist";
 				PRODUCT_NAME = OpenStack;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5BCFCA41-4E17-4282-8CE2-0F993731422B";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3424,7 +3428,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "~/src/rackspace/openstack/OpenStack/Entitlements.plist";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Eric Johnson (5D9RVMU5AT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -3442,6 +3447,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = "Rackspace Cloud";
 				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2F99AAF9-F4DA-4719-88E0-BF7A185F181F";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;

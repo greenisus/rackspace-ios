@@ -38,7 +38,6 @@
     
     NSArray *sortedImages;
     NSArray *sortedFlavors;
-    NSArray *sortedServers;
     NSArray *sortedLoadBalancers;
 
     id getLimitsObserver;
@@ -56,8 +55,6 @@
     NSArray *sortedContainers; 
     
     BOOL flaggedForDelete;
-    
-    NSMutableDictionary *serversByHost;
     
     NSMutableArray *lbProtocols;
 }
@@ -78,7 +75,6 @@
 @property (retain) AccountManager *manager;
 @property (retain) NSArray *sortedImages;
 @property (retain) NSArray *sortedFlavors;
-@property (retain) NSArray *sortedServers;
 @property (retain) NSArray *sortedRateLimits;
 @property (assign) NSInteger lastUsedFlavorId;
 @property (assign) NSInteger lastUsedImageId;
@@ -89,7 +85,6 @@
 @property (assign) BOOL flaggedForDelete;
 @property (retain) NSMutableDictionary *loadBalancers;
 @property (retain) NSArray *sortedLoadBalancers;
-@property (retain) NSMutableDictionary *serversByHost;
 @property (retain) NSMutableArray *lbProtocols;
 
 + (NSArray *)accounts;
@@ -99,5 +94,7 @@
 - (NSArray *)loadBalancerURLs;
 
 - (NSString *)accountNumber;
+
+- (NSArray *)sortedServers;
 
 @end
