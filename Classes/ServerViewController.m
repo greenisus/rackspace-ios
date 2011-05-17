@@ -123,13 +123,16 @@
             tableView.backgroundView = backgroundContainer;
             [backgroundContainer release];
             
-        } else {        
+        } else { 
+            self.tableView.backgroundView = nil;
+            /*
             NSString *logoFilename = [[server.image logoPrefix] stringByAppendingString:@"-large.png"];    
             UIImageView *osLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:logoFilename]];
             osLogo.contentMode = UIViewContentModeScaleAspectFit;
             osLogo.frame = CGRectMake(0.0, 0.0, 320.0, 480.0);
             tableView.backgroundView = osLogo;
             [osLogo release];
+             */
         }
     } else {
         UIView *container = [[UIView alloc] init];
@@ -357,13 +360,14 @@
             Image *image = [self.account.images objectForKey:[NSNumber numberWithInt:self.server.imageId]];
             self.server.image = image;
 
+            /*
             NSString *logoFilename = [[server.image logoPrefix] stringByAppendingString:@"-large.png"];    
             UIImageView *osLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:logoFilename]];
             osLogo.contentMode = UIViewContentModeScaleAspectFit;
             osLogo.frame = CGRectMake(0.0, 0.0, 320.0, 480.0);
             tableView.backgroundView = osLogo;
             [osLogo release];
-
+             */
             [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:kImage inSection:kDetails]] withRowAnimation:UITableViewRowAnimationNone];
         }];
         
@@ -550,7 +554,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
-        cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.93];
+        //cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.93];
         cell.textLabel.backgroundColor = [UIColor clearColor];
         cell.detailTextLabel.backgroundColor = [UIColor clearColor];
         cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;

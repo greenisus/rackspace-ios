@@ -81,10 +81,12 @@
         tableView.backgroundView = backgroundContainer;
         [backgroundContainer release];
     } else {        
-        logo.contentMode = UIViewContentModeScaleAspectFit;
-        logo.frame = CGRectMake(0.0, 0.0, 320.0, 480.0);
-        tableView.backgroundView = logo;
-        [logo release];
+        self.tableView.backgroundView = nil;
+        
+//        logo.contentMode = UIViewContentModeScaleAspectFit;
+//        logo.frame = CGRectMake(0.0, 0.0, 320.0, 480.0);
+//        tableView.backgroundView = logo;
+//        [logo release];
     }
 }
 
@@ -220,11 +222,15 @@
     UITableViewCell *cell = [aTableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
-        cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.93];
+        //cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.93];
         cell.textLabel.backgroundColor = [UIColor clearColor];
         cell.detailTextLabel.backgroundColor = [UIColor clearColor];
         cell.detailTextLabel.numberOfLines = 0;
         cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
+    }
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        cell.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.8];
     }
     
     cell.detailTextLabel.textAlignment = UITextAlignmentRight;
