@@ -211,7 +211,7 @@
         cell.imageView.image = [self.account.provider isRackspace] ? [UIImage imageNamed:@"cloud-files-icon.png"] : [UIImage imageNamed:@"openstack-icon.png"];
     } else if (indexPath.row == loadBalancingRow) {
         cell.textLabel.text = @"Load Balancers";
-        cell.detailTextLabel.text = [NSObject pluralizedStringForArray:account.sortedLoadBalancers noun:@"Load Balancer"];
+        cell.detailTextLabel.text = [NSObject pluralizedStringForArray:[account sortedLoadBalancers] noun:@"Load Balancer"];
         cell.imageView.image = [UIImage imageNamed:@"load-balancers-icon.png"];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else if (indexPath.row == rssFeedsRow) {

@@ -28,7 +28,7 @@ static NSMutableDictionary *timers = nil;
 @synthesize uuid, provider, username, images, flavors, servers, serversURL, filesURL, cdnURL, manager, rateLimits,
             lastUsedFlavorId, lastUsedImageId,
             containerCount, totalBytesUsed, containers, hasBeenRefreshed, flaggedForDelete,
-            loadBalancers, sortedLoadBalancers, lbProtocols;
+            loadBalancers, lbProtocols;
 
 + (void)initialize {
     accounts = [Archiver retrieve:@"accounts"];
@@ -63,18 +63,23 @@ static NSMutableDictionary *timers = nil;
 }
 
 - (NSArray *)sortedLoadBalancers {
-    if (!sortedLoadBalancers || [sortedLoadBalancers count] != [sortedLoadBalancers count]) {
-        NSMutableArray *allLoadBalancers = [[NSMutableArray alloc] init];
-        for (NSString *endpoint in self.loadBalancers) {
-            NSDictionary *lbs = [self.loadBalancers objectForKey:endpoint];
+    NSMutableArray *allLoadBalancers = [[NSMutableArray alloc] init];
+    for (NSString *endpoint in self.loadBalancers) {
+        NSDictionary *lbs = [self.loadBalancers objectForKey:endpoint];
+        if ([lbs isKindOfClass:[LoadBalancer class]]) {
+            NSLog(@"load balancers not persisted properly.  replacing.");
+            self.loadBalancers = nil;
+            lbs = nil;
+            [self persist];
+        } else {
             NSLog(@"lbs for %@: %@", endpoint, lbs);
             for (NSString *key in lbs) {
                 [allLoadBalancers addObject:[lbs objectForKey:key]];
             }
         }
-        sortedLoadBalancers = [[NSArray alloc] initWithArray:[allLoadBalancers sortedArrayUsingSelector:@selector(compare:)]];
+        
     }
-    return sortedLoadBalancers;
+    return [NSArray arrayWithArray:[allLoadBalancers sortedArrayUsingSelector:@selector(compare:)]];
 }
 
 #pragma mark -
@@ -98,15 +103,15 @@ static NSMutableDictionary *timers = nil;
         
         [self.manager getImages];
         [self.manager getFlavors];
-        //[self.manager getServers];
+//        [self.manager getServers];
         [self.manager getLimits];
-        //[self.manager getContainers];
+//        [self.manager getContainers];
         
         //[self.manager getStorageAccountInfo];
         
-        for (NSString *endpoint in [self loadBalancerURLs]) {
-            [self.manager getLoadBalancers:endpoint];
-        }
+//        for (NSString *endpoint in [self loadBalancerURLs]) {
+//            [self.manager getLoadBalancers:endpoint];
+//        }
         
         // handle success; don't worry about failure
         getLimitsObserver = [[NSNotificationCenter defaultCenter] addObserverForName:@"getLimitsSucceeded" object:self
@@ -165,9 +170,11 @@ static NSMutableDictionary *timers = nil;
     [coder encodeObject:uuid forKey:@"uuid"];
     [coder encodeObject:provider forKey:@"provider"];
     [coder encodeObject:username forKey:@"username"];
-//    [coder encodeObject:images forKey:@"images"];
-//    [coder encodeObject:flavors forKey:@"flavors"];
-//    [coder encodeObject:servers forKey:@"servers"];
+
+    [coder encodeObject:images forKey:@"images"];
+    [coder encodeObject:flavors forKey:@"flavors"];
+    [coder encodeObject:servers forKey:@"servers"];
+    
     [coder encodeObject:serversURL forKey:@"serversURL"];
     [coder encodeObject:filesURL forKey:@"filesURL"];
     [coder encodeObject:cdnURL forKey:@"cdnURL"];
@@ -176,8 +183,9 @@ static NSMutableDictionary *timers = nil;
     [coder encodeInt:lastUsedImageId forKey:@"lastUsedImageId"];
     [coder encodeInt:containerCount forKey:@"containerCount"];
     [coder encodeInt:totalBytesUsed forKey:@"totalBytesUsed"];
-//    [coder encodeObject:containers forKey:@"containers"];
-//    [coder encodeObject:loadBalancers forKey:@"loadBalancers"];
+    
+    [coder encodeObject:containers forKey:@"containers"];
+    [coder encodeObject:loadBalancers forKey:@"loadBalancers"];
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
@@ -185,9 +193,11 @@ static NSMutableDictionary *timers = nil;
         uuid = [[coder decodeObjectForKey:@"uuid"] retain];
         provider = [[coder decodeObjectForKey:@"provider"] retain];
         username = [[coder decodeObjectForKey:@"username"] retain];
-//        images = [[coder decodeObjectForKey:@"images"] retain];
-//        flavors = [[coder decodeObjectForKey:@"flavors"] retain];
-//        servers = [[coder decodeObjectForKey:@"servers"] retain];
+        
+        images = [[coder decodeObjectForKey:@"images"] retain];
+        flavors = [[coder decodeObjectForKey:@"flavors"] retain];
+        servers = [[coder decodeObjectForKey:@"servers"] retain];
+        
         serversURL = [[coder decodeObjectForKey:@"serversURL"] retain];
         filesURL = [[coder decodeObjectForKey:@"filesURL"] retain];
         cdnURL = [[coder decodeObjectForKey:@"cdnURL"] retain];
@@ -201,8 +211,8 @@ static NSMutableDictionary *timers = nil;
         containerCount = [coder decodeIntForKey:@"containerCount"];
         //totalBytesUsed = [coder decodeIntForKey:@"totalBytesUsed"];
         
-//        containers = [[coder decodeObjectForKey:@"containers"] retain];
-//        loadBalancers = [[coder decodeObjectForKey:@"loadBalancers"] retain];
+        containers = [[coder decodeObjectForKey:@"containers"] retain];
+        loadBalancers = [[coder decodeObjectForKey:@"loadBalancers"] retain];
 
         manager = [[AccountManager alloc] init];
         manager.account = self;
@@ -229,15 +239,14 @@ static NSMutableDictionary *timers = nil;
     return accounts;
 }
 
-+ (BOOL)persist:(NSArray *)accountArray {
++ (void)persist:(NSArray *)accountArray {
     accounts = [[NSArray arrayWithArray:accountArray] retain];
-    BOOL result = [Archiver persist:accounts key:@"accounts"];
+    [Archiver persist:accounts key:@"accounts"];
     [accounts release];
     accounts = nil;
-    return result;
 }
 
-- (BOOL)persist {
+- (void)persist {
     //return NO;
     //*
     if (!flaggedForDelete) {        
@@ -258,14 +267,11 @@ static NSMutableDictionary *timers = nil;
             [accountArr insertObject:self atIndex:0];
         }
         
-        BOOL result = [Archiver persist:[NSArray arrayWithArray:accountArr] key:@"accounts"];    
+        [Archiver persist:[NSArray arrayWithArray:accountArr] key:@"accounts"];    
         [accounts release];
         accounts = nil;
-        return result;
-    } else {
-        return NO;
-    }
-    //*/
+        //return result;
+    }     //*/
 }
 
 // the API key and auth token are stored in the Keychain, so overriding the 
@@ -288,7 +294,11 @@ static NSMutableDictionary *timers = nil;
 }
 
 - (NSString *)authToken {
-    return [Keychain getStringForKey:[self authTokenKeychainKey]];
+    NSString *authToken = [Keychain getStringForKey:[self authTokenKeychainKey]];
+    if (!authToken) {
+        authToken = @"";
+    }
+    return authToken;
 }
 
 - (void)setAuthToken:(NSString *)newAuthToken {
@@ -340,7 +350,6 @@ static NSMutableDictionary *timers = nil;
     [rateLimits release];
     [containers release];
     [loadBalancers release];
-    [sortedLoadBalancers release];
     [lbProtocols release];
     
     [super dealloc];

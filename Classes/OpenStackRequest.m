@@ -300,7 +300,11 @@ static NSRecursiveLock *accessDetailsLock = nil;
     request.account = account;
     //NSLog(@"auth: %@ %@", account.username, account.apiKey);
 	[request addRequestHeader:@"X-Auth-User" value:account.username];
-	[request addRequestHeader:@"X-Auth-Key" value:account.apiKey];
+    if (account.apiKey) {
+        [request addRequestHeader:@"X-Auth-Key" value:account.apiKey];
+    } else {
+        [request addRequestHeader:@"X-Auth-Key" value:@""];
+    }
     
     //NSLog(@"Authenticating to %@ with %@/%@", account.provider.authEndpointURL, account.username, account.apiKey);
     

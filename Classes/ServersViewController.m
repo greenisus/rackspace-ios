@@ -241,7 +241,7 @@
         Server *server = [account.sortedServers objectAtIndex:indexPath.row];
         
         cell.textLabel.text = server.name;
-        cell.detailTextLabel.text = server.flavor.name;
+        cell.detailTextLabel.text = [[server.addresses objectForKey:@"public"] objectAtIndex:0];
         
         if ([[server.image logoPrefix] isEqualToString:@"custom"]) {
             cell.imageView.image = [UIImage imageNamed:@"cloud-servers-icon.png"];

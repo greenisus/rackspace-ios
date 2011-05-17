@@ -21,11 +21,13 @@
      */
 }
 
-+ (BOOL)persist:(id)object key:(NSString *)key {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath = [documentsDirectory stringByAppendingString:[NSString stringWithFormat:@"/%@.archive", key]];
-    return [NSKeyedArchiver archiveRootObject:object toFile:filePath];
++ (void)persist:(id)object key:(NSString *)key {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *filePath = [documentsDirectory stringByAppendingString:[NSString stringWithFormat:@"/%@.archive", key]];
+        [NSKeyedArchiver archiveRootObject:object toFile:filePath];
+    });
 }
 
 + (BOOL)delete:(NSString *)key {
