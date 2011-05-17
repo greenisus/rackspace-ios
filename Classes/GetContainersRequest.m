@@ -41,7 +41,6 @@
     if ([self isSuccess]) {
         self.account.containers = [self containers];
         self.account.containerCount = [self.account.containers count];
-        self.account.sortedContainers = nil;
         [self.account persist];
         [self.account.manager notify:@"getContainersSucceeded" request:self object:self.account];
         

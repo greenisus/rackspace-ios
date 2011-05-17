@@ -89,6 +89,7 @@
                 server.name = [NSString stringWithFormat:@"%@%i", nameTextField.text, i + 1];
             }
         }
+        
         server.flavor = [self.account.sortedFlavors objectAtIndex:flavorIndex];
         
         server.image = selectedImage;
@@ -303,9 +304,11 @@
         // select the newest ubuntu as a default.  if there's not a newest ubuntu, select the 
         // first image id
         NSMutableArray *ubuntus = [[NSMutableArray alloc] init];
+
+        NSArray *sortedImages = [self.account sortedImages];
         
-        for (int i = 0; i < [self.account.sortedImages count]; i++) {
-            Image *image = [self.account.sortedImages objectAtIndex:i];
+        for (int i = 0; i < [sortedImages count]; i++) {
+            Image *image = [sortedImages objectAtIndex:i];
             if ([[image logoPrefix] isEqualToString:@"ubuntu"]) {
                 [ubuntus addObject:image];
             }
@@ -314,7 +317,7 @@
         if ([ubuntus count] > 0) {
             selectedImage = [ubuntus lastObject];
         } else {
-            selectedImage = [self.account.sortedImages objectAtIndex:0];
+            selectedImage = [sortedImages objectAtIndex:0];
         }
         account.lastUsedImageId = selectedImage.identifier;
         [ubuntus release];

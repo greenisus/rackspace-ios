@@ -42,7 +42,7 @@
         // go through results and add, rather than full replace
         NSMutableDictionary *newImages = [[NSMutableDictionary alloc] initWithDictionary:[self images]];
         if (!self.account.images) {
-            self.account.images = [[NSMutableDictionary alloc] initWithCapacity:[newImages count]];
+            self.account.images = [NSMutableDictionary dictionaryWithCapacity:[newImages count]];
         }
         // set them all to unlaunchable, then we'll update them
         for (Image *image in [self.account.images allValues]) {

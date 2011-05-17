@@ -26,8 +26,8 @@ static NSMutableDictionary *timers = nil;
 @implementation OpenStackAccount
 
 @synthesize uuid, provider, username, images, flavors, servers, serversURL, filesURL, cdnURL, manager, rateLimits,
-            sortedImages, sortedFlavors, lastUsedFlavorId, lastUsedImageId, sortedRateLimits,
-            containerCount, totalBytesUsed, containers, sortedContainers, hasBeenRefreshed, flaggedForDelete,
+            lastUsedFlavorId, lastUsedImageId,
+            containerCount, totalBytesUsed, containers, hasBeenRefreshed, flaggedForDelete,
             loadBalancers, sortedLoadBalancers, lbProtocols;
 
 + (void)initialize {
@@ -43,18 +43,11 @@ static NSMutableDictionary *timers = nil;
 // we at least return something
 
 - (NSArray *)sortedImages {
-    if (!sortedImages || [sortedImages count] != [images count]) {
-        NSLog(@"%@", [self.images allValues]);
-        sortedImages = [[NSArray alloc] initWithArray:[[self.images allValues] sortedArrayUsingSelector:@selector(compare:)]];
-    }
-    return sortedImages;
+    return [[self.images allValues] sortedArrayUsingSelector:@selector(compare:)];
 }
 
 - (NSArray *)sortedFlavors {
-    if (!sortedFlavors || [sortedFlavors count] != [flavors count]) {
-        sortedFlavors = [[NSArray alloc] initWithArray:[[self.flavors allValues] sortedArrayUsingSelector:@selector(compare:)]];
-    }
-    return sortedFlavors;
+    return [[self.flavors allValues] sortedArrayUsingSelector:@selector(compare:)];
 }
 
 - (NSArray *)sortedServers {
@@ -62,17 +55,11 @@ static NSMutableDictionary *timers = nil;
 }
 
 - (NSArray *)sortedRateLimits {
-    if (!sortedRateLimits || [sortedRateLimits count] != [rateLimits count]) {
-        sortedRateLimits = [[NSArray alloc] initWithArray:[self.rateLimits sortedArrayUsingSelector:@selector(compare:)]];
-    }
-    return sortedRateLimits;
+    return [self.rateLimits sortedArrayUsingSelector:@selector(compare:)];
 }
 
 - (NSArray *)sortedContainers {
-    if (!sortedContainers || [sortedContainers count] != [containers count]) {
-        sortedContainers = [[NSArray alloc] initWithArray:[[self.containers allValues] sortedArrayUsingSelector:@selector(compare:)]];
-    }
-    return sortedContainers;
+    return [[self.containers allValues] sortedArrayUsingSelector:@selector(compare:)];
 }
 
 - (NSArray *)sortedLoadBalancers {
@@ -178,8 +165,8 @@ static NSMutableDictionary *timers = nil;
     [coder encodeObject:uuid forKey:@"uuid"];
     [coder encodeObject:provider forKey:@"provider"];
     [coder encodeObject:username forKey:@"username"];
-    [coder encodeObject:images forKey:@"images"];
-    [coder encodeObject:flavors forKey:@"flavors"];
+//    [coder encodeObject:images forKey:@"images"];
+//    [coder encodeObject:flavors forKey:@"flavors"];
 //    [coder encodeObject:servers forKey:@"servers"];
     [coder encodeObject:serversURL forKey:@"serversURL"];
     [coder encodeObject:filesURL forKey:@"filesURL"];
@@ -198,8 +185,8 @@ static NSMutableDictionary *timers = nil;
         uuid = [[coder decodeObjectForKey:@"uuid"] retain];
         provider = [[coder decodeObjectForKey:@"provider"] retain];
         username = [[coder decodeObjectForKey:@"username"] retain];
-        images = [[coder decodeObjectForKey:@"images"] retain];
-        flavors = [[coder decodeObjectForKey:@"flavors"] retain];
+//        images = [[coder decodeObjectForKey:@"images"] retain];
+//        flavors = [[coder decodeObjectForKey:@"flavors"] retain];
 //        servers = [[coder decodeObjectForKey:@"servers"] retain];
         serversURL = [[coder decodeObjectForKey:@"serversURL"] retain];
         filesURL = [[coder decodeObjectForKey:@"filesURL"] retain];
@@ -351,11 +338,7 @@ static NSMutableDictionary *timers = nil;
     [filesURL release];
     [cdnURL release];
     [rateLimits release];
-    [sortedImages release];
-    [sortedFlavors release];
-    [sortedRateLimits release];
     [containers release];
-    [sortedContainers release];
     [loadBalancers release];
     [sortedLoadBalancers release];
     [lbProtocols release];

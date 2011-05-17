@@ -30,8 +30,8 @@
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
-    
-    if (self = [super init]) {
+    self = [super init];
+    if (self) {
         [self autoDecode:coder];
         /*
         identifier = [coder decodeIntForKey:@"id"];
@@ -47,6 +47,14 @@
 
 #pragma mark -
 #pragma mark JSON
+
+- (id)initWithJSONDict:(NSDictionary *)dict {
+    self = [super initWithJSONDict:dict];
+    if (self) {
+        [self autoParse:&self fromJSONDict:dict];
+    }
+    return self;
+}
 
 + (Image *)fromJSON:(NSDictionary *)dict {
     Image *image = [[[Image alloc] initWithJSONDict:dict] autorelease];

@@ -345,7 +345,7 @@ static NSRecursiveLock *accessDetailsLock = nil;
 - (NSDictionary *)servers {
     SBJSON *parser = [[SBJSON alloc] init];
     NSArray *jsonObjects = [[parser objectWithString:[self responseString]] objectForKey:@"servers"];
-    NSMutableDictionary *objects = [[[NSMutableDictionary alloc] initWithCapacity:[jsonObjects count]] autorelease];
+    NSMutableDictionary *objects = [NSMutableDictionary dictionaryWithCapacity:[jsonObjects count]];
     
     for (int i = 0; i < [jsonObjects count]; i++) {
         NSDictionary *dict = [jsonObjects objectAtIndex:i];
@@ -369,12 +369,13 @@ static NSRecursiveLock *accessDetailsLock = nil;
 - (NSDictionary *)images {
     SBJSON *parser = [[SBJSON alloc] init];
     NSArray *jsonObjects = [[parser objectWithString:[self responseString]] objectForKey:@"images"];
-    NSMutableDictionary *objects = [[NSMutableDictionary alloc] initWithCapacity:[jsonObjects count]];
+    NSMutableDictionary *objects = [NSMutableDictionary dictionaryWithCapacity:[jsonObjects count]];
     
     for (int i = 0; i < [jsonObjects count]; i++) {
         NSDictionary *dict = [jsonObjects objectAtIndex:i];
-        Image *image = [Image fromJSON:dict];
+        Image *image = [[Image alloc] initWithJSONDict:dict];
         [objects setObject:image forKey:[NSNumber numberWithInt:image.identifier]];
+        [image release];
     }
     
     [parser release];
@@ -401,7 +402,7 @@ static NSRecursiveLock *accessDetailsLock = nil;
 - (NSDictionary *)flavors {
     SBJSON *parser = [[SBJSON alloc] init];
     NSArray *jsonObjects = [[parser objectWithString:[self responseString]] objectForKey:@"flavors"];
-    NSMutableDictionary *objects = [[NSMutableDictionary alloc] initWithCapacity:[jsonObjects count]];
+    NSMutableDictionary *objects = [NSMutableDictionary dictionaryWithCapacity:[jsonObjects count]];
 
     for (int i = 0; i < [jsonObjects count]; i++) {
         NSDictionary *dict = [jsonObjects objectAtIndex:i];
@@ -587,7 +588,7 @@ static NSRecursiveLock *accessDetailsLock = nil;
 - (NSMutableDictionary *)containers {
     SBJSON *parser = [[SBJSON alloc] init];
     NSArray *jsonObjects = [parser objectWithString:[self responseString]];
-    NSMutableDictionary *objects = [[NSMutableDictionary alloc] initWithCapacity:[jsonObjects count]];
+    NSMutableDictionary *objects = [NSMutableDictionary dictionaryWithCapacity:[jsonObjects count]];
     
     for (int i = 0; i < [jsonObjects count]; i++) {
         NSDictionary *dict = [jsonObjects objectAtIndex:i];
