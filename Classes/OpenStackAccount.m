@@ -79,7 +79,9 @@ static NSMutableDictionary *timers = nil;
         }
         
     }
-    return [NSArray arrayWithArray:[allLoadBalancers sortedArrayUsingSelector:@selector(compare:)]];
+    NSArray *sortedArray = [NSArray arrayWithArray:[allLoadBalancers sortedArrayUsingSelector:@selector(compare:)]];
+    [allLoadBalancers release];
+    return sortedArray;
 }
 
 #pragma mark -
