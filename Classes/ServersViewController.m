@@ -171,6 +171,8 @@
     
     if (!serversLoaded && [self.account.servers count] == 0) {
         [self refreshButtonPressed:nil];
+    } else if (comingFromAccountHome) {
+        [self refreshButtonPressed:nil];
     }
 }
 
