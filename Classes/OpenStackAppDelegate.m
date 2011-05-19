@@ -73,9 +73,7 @@
     // Override point for customization after application launch.
     
     [self setupDependencies];
-    
-    [[HTNotifier sharedNotifier] writeTestNotice];
-    
+        
     [self loadSettingsDefaults];
     
     rootViewController = [navigationController.viewControllers objectAtIndex:0];
