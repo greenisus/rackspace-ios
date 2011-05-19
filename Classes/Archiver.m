@@ -22,12 +22,6 @@
 }
 
 + (void)persist:(id)object key:(NSString *)key {
-    // persisting asynchronously causes a rendering error at the moment, so disabling for now
-    // until we switch to a new persistence model
-    
-    // dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    // });
-    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *filePath = [documentsDirectory stringByAppendingString:[NSString stringWithFormat:@"/%@.archive", key]];
