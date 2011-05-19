@@ -26,8 +26,6 @@
 #import "RootViewController.h"
 #import "HTNotifier.h"
 #import "Analytics.h"
-#import "Constants.h"
-
 
 @implementation OpenStackAppDelegate
 
@@ -118,11 +116,21 @@
 - (void) setupDependencies{
     
 #if TARGET_OS_EMBEDDED
-    [HTNotifier startNotifierWithAPIKey:HOPTOAD_ACCOUNT_KEY
-                        environmentName:HTNotifierAppStoreEnvironment];
     
-    [[GANTracker sharedTracker] startTrackerWithAccountID:ANALYTICS_ACCOUNT_KEY dispatchPeriod:ANALYTICS_DISPATCH_INTERVAL delegate:nil];
-    DispatchAnalytics();
+    NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:@"Constants" ofType:@"plist"];
+    
+    if([[NSFileManager defaultManager] fileExistsAtPath:path]){
+        
+        NSDictionary *constants = [NSDictionary dictionaryWithContentsOfFile:path];
+        
+        [HTNotifier startNotifierWithAPIKey:[constants objectForKey:@"HOPTOAD_ACCOUNT_KEY"]
+                            environmentName:HTNotifierAppStoreEnvironment];
+                
+        [[GANTracker sharedTracker] startTrackerWithAccountID:[constants objectForKey:@"ANALYTICS_ACCOUNT_KEY"] dispatchPeriod:10 delegate:nil];
+        DispatchAnalytics();
+
+    }
+    
 #endif
 }
 

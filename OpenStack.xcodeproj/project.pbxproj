@@ -764,6 +764,9 @@
 		7F8F374913859F190034710B /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F8F374813859F190034710B /* libxml2.dylib */; };
 		7F8F374A1385A0160034710B /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F8F374813859F190034710B /* libxml2.dylib */; };
 		7F8F374B1385A0160034710B /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F8F374813859F190034710B /* libxml2.dylib */; };
+		7F8F374E1385B8680034710B /* Constants.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F8F374D1385B8680034710B /* Constants.plist */; };
+		7F8F374F1385B8680034710B /* Constants.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F8F374D1385B8680034710B /* Constants.plist */; };
+		7F8F37501385B8680034710B /* Constants.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F8F374D1385B8680034710B /* Constants.plist */; };
 		7F9351B4138457D80097720F /* Analytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9351B3138457D80097720F /* Analytics.m */; };
 		7F9351B5138457D80097720F /* Analytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9351B3138457D80097720F /* Analytics.m */; };
 		7F9351B913845AC80097720F /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9351B813845AC80097720F /* libsqlite3.0.dylib */; };
@@ -1309,7 +1312,7 @@
 		7F8F372313859EDA0034710B /* NSStringAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringAdditions.h; sourceTree = "<group>"; };
 		7F8F372413859EDA0034710B /* NSStringAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringAdditions.m; sourceTree = "<group>"; };
 		7F8F374813859F190034710B /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
-		7F8F374C1385A2AC0034710B /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; path = Constants.h; sourceTree = "<group>"; };
+		7F8F374D1385B8680034710B /* Constants.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Constants.plist; sourceTree = "<group>"; };
 		7F9351A613843B950097720F /* Analytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Analytics.h; sourceTree = "<group>"; };
 		7F9351AF138455290097720F /* GANTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GANTracker.h; sourceTree = "<group>"; };
 		7F9351B3138457D80097720F /* Analytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Analytics.m; sourceTree = "<group>"; };
@@ -2573,7 +2576,7 @@
 				277FEA1F1317214E00BA594E /* Entitlements.plist */,
 				7F9351A613843B950097720F /* Analytics.h */,
 				7F9351B3138457D80097720F /* Analytics.m */,
-				7F8F374C1385A2AC0034710B /* Constants.h */,
+				7F8F374D1385B8680034710B /* Constants.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -2981,6 +2984,7 @@
 				27CFD89B1371D9CD00116BBD /* grey-highlight@2x.png in Resources */,
 				2728B4FD13786CEE007DBD80 /* LBServersViewController.xib in Resources */,
 				7F8F372513859EDA0034710B /* HTNotifier.strings in Resources */,
+				7F8F374E1385B8680034710B /* Constants.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3197,6 +3201,7 @@
 				27CFD89C1371D9CD00116BBD /* grey-highlight@2x.png in Resources */,
 				2728B4FE13786CEE007DBD80 /* LBServersViewController.xib in Resources */,
 				7F8F372713859EDA0034710B /* HTNotifier.strings in Resources */,
+				7F8F37501385B8680034710B /* Constants.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3205,6 +3210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F8F372613859EDA0034710B /* HTNotifier.strings in Resources */,
+				7F8F374F1385B8680034710B /* Constants.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
