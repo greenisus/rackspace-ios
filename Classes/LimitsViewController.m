@@ -86,8 +86,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    RateLimit *limit = [self.account.sortedRateLimits objectAtIndex:section];
-    return [[LimitsViewController timeUntilDate:limit.resetTime] isEqualToString:@""] ? 2 : 3;
+    return 3;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {

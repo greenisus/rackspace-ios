@@ -3593,7 +3593,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = "~/src/rackspace/openstack/OpenStack/Entitlements.plist";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rackspace Hosting";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Eric Johnson (5D9RVMU5AT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -3606,7 +3606,7 @@
 				);
 				PRODUCT_NAME = OpenStack;
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5BCFCA41-4E17-4282-8CE2-0F993731422B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6410C441-8FC7-49DF-A935-CC646A59EF2E";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3661,7 +3661,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = "Rackspace Cloud";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2F99AAF9-F4DA-4719-88E0-BF7A185F181F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F8167EB6-8ADE-446A-A9D6-60C7BC228F11";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3671,7 +3671,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "~/src/rackspace/openstack/OpenStack/Entitlements.plist";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Eric Johnson (5D9RVMU5AT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Eric Johnson (5D9RVMU5AT)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -3692,7 +3693,8 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = "Rackspace Cloud";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "F8167EB6-8ADE-446A-A9D6-60C7BC228F11";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F8167EB6-8ADE-446A-A9D6-60C7BC228F11";
 				SDKROOT = iphoneos;
 				ZERO_LINK = NO;
 			};
