@@ -40,7 +40,7 @@
 	<key>NSMainNibFile~ipad</key>
 	<string>MainWindow-Rackspace-iPad</string>
 	<key>UIApplicationExitsOnSuspend</key>
-	<true/>
+	<false/>
 	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>UILaunchImageFile</key>

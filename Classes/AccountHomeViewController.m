@@ -129,8 +129,8 @@
     totalRows = 0;
     computeRow = (self.account.serversURL && [self.account.serversURL host]) ? totalRows++ : -1;
     storageRow = (self.account.filesURL && [self.account.filesURL host]) ? totalRows++ : -1;
-    //loadBalancingRow = [self.account loadBalancerURLs] ? totalRows++ : -1;
-    loadBalancingRow = -1;
+    loadBalancingRow = [self.account loadBalancerURLs] ? totalRows++ : -1;
+    //loadBalancingRow = -1;
 
     if (self.account.provider.rssFeeds && [self.account.provider.rssFeeds count] > 0) {
         rssFeedsRow = totalRows++;

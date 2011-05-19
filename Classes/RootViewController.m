@@ -163,49 +163,12 @@
         [vc release];
     }
 
-    if ([[Keychain getStringForKey:@"passcode_lock_passcode_on"] isEqualToString:@"YES"]) {
-        PasscodeViewController *vc = [[PasscodeViewController alloc] initWithNibName:@"PasscodeViewController" bundle:nil];
-        vc.mode = kModeEnterPasscode;
-        vc.rootViewController = self;
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            vc.modalPresentationStyle = UIModalPresentationFullScreen;
-        }                
-        
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-//            
-//            [self presentModalViewController:vc animated:NO];
-//            
-//            //            OpenStackAppDelegate *app = [[UIApplication sharedApplication] delegate];
-//            //            for (UIViewController *svc in app.splitViewController.viewControllers) {
-//            //                //svc.view.alpha = 0.0;
-//            //            }
-//            //            UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Enter your passcode" message:nil delegate:nil cancelButtonTitle:@"Awww yeah" otherButtonTitles:nil];
-//            //            CGRect rect = av.frame;
-//            //            rect.size.width += 200.0;
-//            //            rect.size.height += 200.0;
-//            //            av.frame = rect;
-//            //            [av show];
-//            //            [av release];
-//            
-            
-            OpenStackAppDelegate *app = [[UIApplication sharedApplication] delegate];
-            for (UIViewController *svc in app.splitViewController.viewControllers) {
-                svc.view.alpha = 0.0;
-            }
-            
-            // for some reason, this needs to be delayed
-            [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(presentAndRelease:) userInfo:[NSDictionary dictionaryWithObject:vc forKey:@"vc"] repeats:NO];
-            
-        } else {
-            [self presentModalViewControllerWithNavigation:vc animated:NO];
-            [vc release];
-        }
-    }
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+//    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self.tableView selector:@selector(reloadData) userInfo:nil repeats:NO];
     [self.tableView reloadData];    
 }
 
