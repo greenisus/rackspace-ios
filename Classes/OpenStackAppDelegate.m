@@ -24,6 +24,8 @@
 #import "RSSFeedViewController.h"
 
 #import "RootViewController.h"
+#import "PasscodeViewController.h"
+#import "UIViewController+Conveniences.h"
 
 
 
@@ -61,6 +63,31 @@
 
     [defaults synchronize];
     
+}
+
+- (void)showPasscodeLock {
+    if ([[Keychain getStringForKey:@"passcode_lock_passcode_on"] isEqualToString:@"YES"]) {
+        PasscodeViewController *vc = [[PasscodeViewController alloc] initWithNibName:@"PasscodeViewController" bundle:nil];
+        vc.mode = kModeEnterPasscode;
+        //vc.rootViewController = self;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            vc.modalPresentationStyle = UIModalPresentationFullScreen;
+        }                
+        
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            OpenStackAppDelegate *app = [[UIApplication sharedApplication] delegate];
+            for (UIViewController *svc in app.splitViewController.viewControllers) {
+                svc.view.alpha = 0.0;
+            }
+            
+            // for some reason, this needs to be delayed
+            [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(presentAndRelease:) userInfo:[NSDictionary dictionaryWithObject:vc forKey:@"vc"] repeats:NO];
+            
+        } else {
+            [[self.navigationController topViewController] presentModalViewControllerWithNavigation:vc animated:NO];
+            [vc release];
+        }
+    }
 }
 
 #pragma mark -
@@ -105,7 +132,6 @@
         [[NSNotificationCenter defaultCenter] removeObserver:serviceUnavailableObserver];
     }];
     
-
     return YES;
 }
 
@@ -137,6 +163,7 @@
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
+    [self showPasscodeLock];
 }
 
 
