@@ -15,6 +15,7 @@
 #import "UIColor+MoreColors.h"
 #import "ErrorAlerter.h"
 #import "RootViewController.h"
+#import "Analytics.h"
 
 #define kUpcoming 0
 #define kAllEvents 1
@@ -63,6 +64,8 @@
 - (void)presentModalViewControllerWithNavigation:(UIViewController *)viewController animated:(BOOL)animated {
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:viewController];
     
+    TrackViewController(viewController);
+    
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         nav.modalPresentationStyle = UIModalPresentationFormSheet;
         nav.navigationBar.barStyle = UIBarStyleBlack;
@@ -84,6 +87,8 @@
 
 - (void)presentPrimaryViewController:(UIViewController *)viewController animated:(BOOL)animated {
     // if we're on iphone, do a regular push, on iPad, let's change the split view
+    TrackViewController(viewController);
+    
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         OpenStackAppDelegate *app = [[UIApplication sharedApplication] delegate];
         app.masterNavigationController.viewControllers = [NSArray arrayWithObject:viewController];

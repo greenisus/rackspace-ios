@@ -32,6 +32,7 @@
 #import "NameAndStatusTitleView.h"
 #import "APICallback.h"
 #import "Provider.h"
+#import "Analytics.h"
 
 // TODO: bring back host id section as "n servers on this (physical) host"
 
@@ -1030,6 +1031,9 @@
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"ssh://%@", selectedIPAddress]];
         
         if (buttonIndex == 0) { // Ping IP Address
+            
+            TrackEvent(CATEGORY_SERVER, EVENT_PINGED);
+            
             PingIPAddressViewController *vc = [[PingIPAddressViewController alloc] initWithNibName:@"PingIPAddressViewController" bundle:nil ipAddress:selectedIPAddress];
             vc.serverViewController = self;
             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -1128,6 +1132,9 @@
 
 - (IBAction)pingIPButtonPressed:(id)sender {
     if ([[server.addresses objectForKey:@"public"] count] > 0) {
+        
+        TrackEvent(CATEGORY_SERVER, EVENT_PINGED);
+        
         NSString *ipAddress = [[server.addresses objectForKey:@"public"] objectAtIndex:0];
         PingIPAddressViewController *vc = [[PingIPAddressViewController alloc] initWithNibName:@"PingIPAddressViewController" bundle:nil ipAddress:ipAddress];
         vc.serverViewController = self;

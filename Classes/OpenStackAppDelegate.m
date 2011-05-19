@@ -24,7 +24,9 @@
 #import "RSSFeedViewController.h"
 
 #import "RootViewController.h"
-
+#import "HTNotifier.h"
+#import "Analytics.h"
+#import "Constants.h"
 
 
 @implementation OpenStackAppDelegate
@@ -70,9 +72,15 @@
     
     // Override point for customization after application launch.
     
+    [self setupDependencies];
+    
+    [[HTNotifier sharedNotifier] writeTestNotice];
+    
     [self loadSettingsDefaults];
     
     rootViewController = [navigationController.viewControllers objectAtIndex:0];
+    OpenStackAppDelegate <UINavigationControllerDelegate> *delegate = self;
+    navigationController.delegate = delegate;
         
     // Add the navigation controller's view to the window and display.
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -109,12 +117,21 @@
     return YES;
 }
 
+- (void) setupDependencies{
+    
+#if TARGET_OS_EMBEDDED
+    [HTNotifier startNotifierWithAPIKey:HOPTOAD_ACCOUNT_KEY
+                        environmentName:HTNotifierAppStoreEnvironment];
+    
+    [[GANTracker sharedTracker] startTrackerWithAccountID:ANALYTICS_ACCOUNT_KEY dispatchPeriod:ANALYTICS_DISPATCH_INTERVAL delegate:nil];
+    DispatchAnalytics();
+#endif
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    /*
-     Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-     Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-     */
+    
+    DispatchAnalytics();
 }
 
 
@@ -161,6 +178,11 @@
     [[SettingsPluginHandler plugins] release];
     [[AddServerPluginHandler plugins] release];
     [[OpenStackAccount accounts] release];
+}
+
+- (void) navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    
+    TrackViewController(viewController);
 }
 
 

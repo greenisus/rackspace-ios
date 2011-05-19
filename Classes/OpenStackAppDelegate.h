@@ -27,5 +27,7 @@
 @property (retain) UIBarButtonItem *barButtonItem;
 @property (retain) RootViewController *rootViewController;
 
+- (void) setupDependencies;
+
 @end
 
