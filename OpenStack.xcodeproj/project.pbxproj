@@ -504,6 +504,8 @@
 		277D9EBB126E7A0C002C69D9 /* openstack_providers.json in Resources */ = {isa = PBXBuildFile; fileRef = 27828B1A125A827700004D33 /* openstack_providers.json */; };
 		277D9ED2126E7A0C002C69D9 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		277F29221321A9DA001F8685 /* libobjc.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 277F29211321A9DA001F8685 /* libobjc.A.dylib */; };
+		277F71031386EBD5009377AD /* Constants.plist in Resources */ = {isa = PBXBuildFile; fileRef = 277F71021386EBD5009377AD /* Constants.plist */; };
+		277F71051386EC20009377AD /* Constants.plist in Resources */ = {isa = PBXBuildFile; fileRef = 277F71021386EBD5009377AD /* Constants.plist */; };
 		2781F99D133D24060085E1EA /* LoadBalancerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2781F99B133D24050085E1EA /* LoadBalancerViewController.m */; };
 		2781F99E133D24060085E1EA /* LoadBalancerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2781F99B133D24050085E1EA /* LoadBalancerViewController.m */; };
 		2781F99F133D24060085E1EA /* LoadBalancerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2781F99C133D24050085E1EA /* LoadBalancerViewController.xib */; };
@@ -1064,6 +1066,7 @@
 		277D9D10126E77A6002C69D9 /* Rackspace Cloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rackspace Cloud.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		277D9E98126E7963002C69D9 /* MainWindow-Rackspace.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "MainWindow-Rackspace.xib"; sourceTree = "<group>"; };
 		277F29211321A9DA001F8685 /* libobjc.A.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libobjc.A.dylib; path = usr/lib/libobjc.A.dylib; sourceTree = SDKROOT; };
+		277F71021386EBD5009377AD /* Constants.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Constants.plist; sourceTree = "<group>"; };
 		277FEA1F1317214E00BA594E /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		2781F99A133D24050085E1EA /* LoadBalancerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadBalancerViewController.h; sourceTree = "<group>"; };
 		2781F99B133D24050085E1EA /* LoadBalancerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadBalancerViewController.m; sourceTree = "<group>"; };
@@ -2560,6 +2563,7 @@
 		27FC363F12F32C200014FB4E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				277F71021386EBD5009377AD /* Constants.plist */,
 				27CFD87E1371D54500116BBD /* Load Balancers */,
 				27C69D2A13257474001F1370 /* Temp */,
 				2787C14012F0D273009EAD7C /* Files for Icon Loading */,
@@ -2979,6 +2983,7 @@
 				27CFD89B1371D9CD00116BBD /* grey-highlight@2x.png in Resources */,
 				2728B4FD13786CEE007DBD80 /* LBServersViewController.xib in Resources */,
 				7F8F372513859EDA0034710B /* HTNotifier.strings in Resources */,
+				277F71031386EBD5009377AD /* Constants.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2986,6 +2991,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				277F71051386EC20009377AD /* Constants.plist in Resources */,
 				277D9E99126E7963002C69D9 /* MainWindow-Rackspace.xib in Resources */,
 				277D9EA2126E79A1002C69D9 /* AccountHomeViewController.xib in Resources */,
 				277D9EA3126E79A5002C69D9 /* APILogsViewController.xib in Resources */,
@@ -3637,6 +3643,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
+				GCC_WARN_SHADOW = NO;
 				INFOPLIST_FILE = "Rackspace Cloud-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
@@ -3670,6 +3677,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
+				GCC_WARN_SHADOW = NO;
 				INFOPLIST_FILE = "Rackspace Cloud-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;

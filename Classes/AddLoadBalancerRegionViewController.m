@@ -64,10 +64,6 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 2;
 }
@@ -87,13 +83,11 @@
     // Configure the cell...
     switch (indexPath.row) {
         case kORD:
-            cell.textLabel.text = @"Chicago";
-            cell.detailTextLabel.text = @"ORD Region";            
+            cell.textLabel.text = @"ORD";
             cell.accessoryType = [self.loadBalancer.region isEqualToString:@"ORD"] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
             break;
         case kDFW:
-            cell.textLabel.text = @"Dallas";
-            cell.detailTextLabel.text = @"DFW Region";
+            cell.textLabel.text = @"DFW";
             cell.accessoryType = [self.loadBalancer.region isEqualToString:@"DFW"] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
             break;
         default:
@@ -111,13 +105,8 @@
     } else if (indexPath.row == kDFW) {
         self.loadBalancer.region = @"DFW";
     }
-    
-    [self.navigationController popViewControllerAnimated:YES];
-    /*
-    AddLoadBalancerViewController *vc = [[AddLoadBalancerViewController alloc] initWithAccount:self.account];
-    [self.navigationController pushViewController:vc animated:YES];
-    [vc release];
-     */
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [NSTimer scheduledTimerWithTimeInterval:0.35 target:self.tableView selector:@selector(reloadData) userInfo:nil repeats:NO];
 }
 
 @end
