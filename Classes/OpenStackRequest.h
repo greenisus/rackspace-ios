@@ -24,7 +24,7 @@
 
 @property (nonatomic, retain) OpenStackAccount *account;
 @property (nonatomic, retain) APICallback *callback;
-@property (assign) NSInteger retriedCount;
+@property (nonatomic, assign) NSInteger retriedCount;
 
 - (void)setCompletionBlock:(ASIBasicBlock)aCompletionBlock;
 - (void)setFailedBlock:(ASIBasicBlock)aFailedBlock;

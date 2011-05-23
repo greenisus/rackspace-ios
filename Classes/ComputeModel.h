@@ -14,7 +14,7 @@
     NSString *name;
 }
 
-@property (assign) NSInteger identifier;
+@property (nonatomic, assign) NSInteger identifier;
 @property (nonatomic, retain) NSString *name;
 
 // parses the stuff common to all models for you

@@ -31,8 +31,8 @@
 @property (nonatomic, retain) OpenStackAccount *account;
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) IBOutlet UIPickerView *pickerView;
-@property (assign) NSUInteger selectedImageId;
-@property (assign) NSInteger mode;
+@property (nonatomic, assign) NSUInteger selectedImageId;
+@property (nonatomic, assign) NSInteger mode;
 @property (nonatomic, retain) ServerViewController *serverViewController;
 
 // should respond to setNewSelectedImage:(Image *)image;

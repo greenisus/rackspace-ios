@@ -36,6 +36,6 @@
 @property (nonatomic, retain) FolderViewController *parentFolderViewController;
 @property (nonatomic, retain) NSIndexPath *selectedFolderIndexPath;
 
-@property (assign) BOOL contentsLoaded;
+@property (nonatomic, assign) BOOL contentsLoaded;
 
 @end

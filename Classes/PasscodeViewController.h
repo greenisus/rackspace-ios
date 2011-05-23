@@ -58,7 +58,7 @@
     CGFloat viewWidth;
 }
 
-@property (assign) NSUInteger mode;
+@property (nonatomic, assign) NSUInteger mode;
 @property (nonatomic, retain) PasscodeLockViewController *passcodeLockViewController;
 @property (nonatomic, retain) SettingsViewController *settingsViewController;
 @property (nonatomic, retain) RootViewController *rootViewController;

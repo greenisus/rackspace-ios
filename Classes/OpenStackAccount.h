@@ -54,7 +54,7 @@
     NSMutableArray *lbProtocols;
 }
 
-@property (assign) BOOL hasBeenRefreshed;
+@property (nonatomic, assign) BOOL hasBeenRefreshed;
 @property (nonatomic, retain) NSString *uuid;
 @property (nonatomic, retain) Provider *provider;
 @property (nonatomic, retain) NSString *username;
@@ -68,12 +68,12 @@
 @property (nonatomic, retain) NSURL *cdnURL;
 @property (nonatomic, retain) NSArray *rateLimits;
 @property (nonatomic, retain) AccountManager *manager;
-@property (assign) NSInteger lastUsedFlavorId;
-@property (assign) NSInteger lastUsedImageId;
-@property (assign) NSInteger containerCount;
-@property (assign) unsigned long long totalBytesUsed;
+@property (nonatomic, assign) NSInteger lastUsedFlavorId;
+@property (nonatomic, assign) NSInteger lastUsedImageId;
+@property (nonatomic, assign) NSInteger containerCount;
+@property (nonatomic, assign) unsigned long long totalBytesUsed;
 @property (nonatomic, retain) NSMutableDictionary *containers;
-@property (assign) BOOL flaggedForDelete;
+@property (nonatomic, assign) BOOL flaggedForDelete;
 @property (nonatomic, retain) NSMutableDictionary *loadBalancers;
 @property (nonatomic, retain) NSMutableArray *lbProtocols;
 

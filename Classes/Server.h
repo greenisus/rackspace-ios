@@ -42,9 +42,9 @@
     
 }
 
-@property (assign) NSInteger progress;
-@property (assign) NSInteger imageId;
-@property (assign) NSInteger flavorId;
+@property (nonatomic, assign) NSInteger progress;
+@property (nonatomic, assign) NSInteger imageId;
+@property (nonatomic, assign) NSInteger flavorId;
 @property (nonatomic, retain) NSString *status;
 @property (nonatomic, retain) NSString *hostId;
 @property (nonatomic, retain) NSDictionary *addresses;

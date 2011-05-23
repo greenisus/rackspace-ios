@@ -25,7 +25,7 @@
 @property (nonatomic, retain) NSString *requestMethod;
 @property (nonatomic, retain) NSString *requestBody;
 @property (nonatomic, retain) NSDictionary *requestHeaders;
-@property (assign) NSInteger responseStatusCode;
+@property (nonatomic, assign) NSInteger responseStatusCode;
 @property (nonatomic, retain) NSDictionary *responseHeaders;
 @property (nonatomic, retain) NSString *responseBody;
 @property (nonatomic, retain) NSDate *requestDate;

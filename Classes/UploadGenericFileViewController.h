@@ -34,6 +34,6 @@
 @property (nonatomic, retain) NSData *data;
 @property (nonatomic, retain) NSString *format;
 @property (nonatomic, retain) NSString *contentType;
-@property (assign) BOOL contentTypeEditable;
+@property (nonatomic, assign) BOOL contentTypeEditable;
 
 @end

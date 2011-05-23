@@ -20,10 +20,10 @@
 }
 
 @property (nonatomic, retain) NSString *unit;
-@property (assign) NSInteger remaining;
+@property (nonatomic, assign) NSInteger remaining;
 @property (nonatomic, retain) NSString *verb;
 @property (nonatomic, retain) NSString *regex;
-@property (assign) NSInteger value;
+@property (nonatomic, assign) NSInteger value;
 @property (nonatomic, retain) NSDate *resetTime;
 @property (nonatomic, retain) NSString *uri;
 

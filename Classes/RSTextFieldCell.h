@@ -15,6 +15,6 @@
 }
 
 @property (readonly, retain) UITextField *textField;
-@property (assign) UIModalPresentationStyle modalPresentationStyle;
+@property (nonatomic, assign) UIModalPresentationStyle modalPresentationStyle;
 
 @end

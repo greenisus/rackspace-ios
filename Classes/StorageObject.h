@@ -23,7 +23,7 @@
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *fullPath;
 @property (nonatomic, retain) NSString *hash;
-@property (assign) NSUInteger bytes;
+@property (nonatomic, assign) NSUInteger bytes;
 @property (nonatomic, retain) NSString *contentType;
 @property (nonatomic, retain) NSDate *lastModified;
 @property (nonatomic, retain) NSData *data;	

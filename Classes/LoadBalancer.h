@@ -48,18 +48,18 @@ https://dfw.loadbalancers.api.rackspacecloud.com/v1.0/420600/
 @property (nonatomic, retain) NSMutableArray *virtualIPs;
 @property (nonatomic, retain) NSDate *created;
 @property (nonatomic, retain) NSDate *updated;
-@property (assign) NSUInteger maxConcurrentConnections;
-@property (assign) BOOL connectionLoggingEnabled;
+@property (nonatomic, assign) NSUInteger maxConcurrentConnections;
+@property (nonatomic, assign) BOOL connectionLoggingEnabled;
 @property (nonatomic, retain) NSMutableArray *nodes;
 @property (nonatomic, retain) NSMutableArray *cloudServerNodes;
 @property (nonatomic, retain) NSString *sessionPersistenceType;    
-@property (assign) NSUInteger connectionThrottleMinConnections;
-@property (assign) NSUInteger connectionThrottleMaxConnections;
-@property (assign) NSUInteger connectionThrottleMaxConnectionRate;
-@property (assign) NSUInteger connectionThrottleRateInterval;
+@property (nonatomic, assign) NSUInteger connectionThrottleMinConnections;
+@property (nonatomic, assign) NSUInteger connectionThrottleMaxConnections;
+@property (nonatomic, assign) NSUInteger connectionThrottleMaxConnectionRate;
+@property (nonatomic, assign) NSUInteger connectionThrottleRateInterval;
 @property (nonatomic, retain) NSString *clusterName;
-@property (assign) NSInteger progress;
-@property (assign) NSString *region;
+@property (nonatomic, assign) NSInteger progress;
+@property (nonatomic, assign) NSString *region;
 
 + (LoadBalancer *)fromJSON:(NSDictionary *)dict;
 - (BOOL)shouldBePolled;
