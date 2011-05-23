@@ -23,11 +23,11 @@
     IBOutlet UITableView *nodesTableView;
 }
 
-@property (retain) LoadBalancer *loadBalancer;
-@property (retain) NameAndStatusTitleView *titleView;
-@property (retain) IBOutlet UIView *tableViewContainer;
-@property (retain) IBOutlet UITableView *detailsTableView;
-@property (retain) IBOutlet UITableView *nodesTableView;
+@property (nonatomic, retain) LoadBalancer *loadBalancer;
+@property (nonatomic, retain) NameAndStatusTitleView *titleView;
+@property (nonatomic, retain) IBOutlet UIView *tableViewContainer;
+@property (nonatomic, retain) IBOutlet UITableView *detailsTableView;
+@property (nonatomic, retain) IBOutlet UITableView *nodesTableView;
 
 
 -(id)initWithLoadBalancer:(LoadBalancer *)loadBalancer;

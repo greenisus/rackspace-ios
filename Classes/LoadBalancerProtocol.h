@@ -14,7 +14,7 @@
     NSInteger port;
 }
 
-@property (retain) NSString *name;
+@property (nonatomic, retain) NSString *name;
 @property (assign) NSInteger port;
 
 + (LoadBalancerProtocol *)fromJSON:(NSDictionary *)dict;

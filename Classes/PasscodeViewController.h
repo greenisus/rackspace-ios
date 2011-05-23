@@ -59,10 +59,10 @@
 }
 
 @property (assign) NSUInteger mode;
-@property (retain) PasscodeLockViewController *passcodeLockViewController;
-@property (retain) SettingsViewController *settingsViewController;
-@property (retain) RootViewController *rootViewController;
-@property (retain) AccountHomeViewController *accountHomeViewController;
+@property (nonatomic, retain) PasscodeLockViewController *passcodeLockViewController;
+@property (nonatomic, retain) SettingsViewController *settingsViewController;
+@property (nonatomic, retain) RootViewController *rootViewController;
+@property (nonatomic, retain) AccountHomeViewController *accountHomeViewController;
 
 
 

@@ -18,7 +18,7 @@
     NSString *selectedFamily;
 }
 
-@property (retain) OpenStackAccount *account;
-@property (retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) OpenStackAccount *account;
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
 
 @end

@@ -26,15 +26,15 @@
     UIActionSheet *deleteActionSheet;
 }
 
-@property (retain) OpenStackAccount *account;
-@property (retain) Container *container;
-@property (retain) Folder *folder;
+@property (nonatomic, retain) OpenStackAccount *account;
+@property (nonatomic, retain) Container *container;
+@property (nonatomic, retain) Folder *folder;
 
-@property (retain) ContainersViewController *containersViewController;
-@property (retain) NSIndexPath *selectedContainerIndexPath;
+@property (nonatomic, retain) ContainersViewController *containersViewController;
+@property (nonatomic, retain) NSIndexPath *selectedContainerIndexPath;
 
-@property (retain) FolderViewController *parentFolderViewController;
-@property (retain) NSIndexPath *selectedFolderIndexPath;
+@property (nonatomic, retain) FolderViewController *parentFolderViewController;
+@property (nonatomic, retain) NSIndexPath *selectedFolderIndexPath;
 
 @property (assign) BOOL contentsLoaded;
 

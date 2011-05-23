@@ -19,7 +19,7 @@
     id observer;
 }
 
-@property (retain) Container *container;
-@property (retain) StorageObject *object;
+@property (nonatomic, retain) Container *container;
+@property (nonatomic, retain) StorageObject *object;
 
 @end

@@ -17,11 +17,11 @@
     NSString *status;
 }
 
-@property (retain) NSString *identifier;
-@property (retain) NSString *address;
-@property (retain) NSString *port;
-@property (retain) NSString *condition;
-@property (retain) NSString *status;
+@property (nonatomic, retain) NSString *identifier;
+@property (nonatomic, retain) NSString *address;
+@property (nonatomic, retain) NSString *port;
+@property (nonatomic, retain) NSString *condition;
+@property (nonatomic, retain) NSString *status;
 
 + (LoadBalancerNode *)fromJSON:(NSDictionary *)dict;
 

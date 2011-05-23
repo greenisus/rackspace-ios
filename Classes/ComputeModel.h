@@ -15,7 +15,7 @@
 }
 
 @property (assign) NSInteger identifier;
-@property (retain) NSString *name;
+@property (nonatomic, retain) NSString *name;
 
 // parses the stuff common to all models for you
 - (id)initWithJSONDict:(NSDictionary *)dict;

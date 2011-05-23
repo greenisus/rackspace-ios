@@ -108,13 +108,13 @@
     IBOutlet UIButton *pingButton;
 }
 
-@property (retain) Server *server;
-@property (retain) OpenStackAccount *account;
-@property (retain) IBOutlet UITableView *tableView;
-@property (retain) NSIndexPath *selectedIPAddressIndexPath;
-@property (retain) ServersViewController *serversViewController;
-@property (retain) NSIndexPath *selectedServerIndexPath;
-@property (retain) AccountHomeViewController *accountHomeViewController;
+@property (nonatomic, retain) Server *server;
+@property (nonatomic, retain) OpenStackAccount *account;
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) NSIndexPath *selectedIPAddressIndexPath;
+@property (nonatomic, retain) ServersViewController *serversViewController;
+@property (nonatomic, retain) NSIndexPath *selectedServerIndexPath;
+@property (nonatomic, retain) AccountHomeViewController *accountHomeViewController;
 
 - (void)refreshLimitStrings;
 

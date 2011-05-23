@@ -18,9 +18,9 @@
     NSString *hostID;
 }
 
-@property (retain) UITableView *tableView;
-@property (retain) OpenStackAccount *account;
-@property (retain) NSArray *servers;
-@property (retain) NSString *hostID;
+@property (nonatomic, retain) UITableView *tableView;
+@property (nonatomic, retain) OpenStackAccount *account;
+@property (nonatomic, retain) NSArray *servers;
+@property (nonatomic, retain) NSString *hostID;
 
 @end

@@ -14,6 +14,6 @@
     UITableView *addServerTableView;
 }
 
-@property (retain) UISwitch *puppetBootstrappingSwitch;
+@property (nonatomic, retain) UISwitch *puppetBootstrappingSwitch;
 
 @end

@@ -39,10 +39,10 @@
     AccountHomeViewController *accountHomeViewController;
 }
 
-@property (retain) OpenStackAccount *account;
-@property (retain) Image *selectedImage;
-@property (retain) ServersViewController *serversViewController;
-@property (retain) AccountHomeViewController *accountHomeViewController;
+@property (nonatomic, retain) OpenStackAccount *account;
+@property (nonatomic, retain) Image *selectedImage;
+@property (nonatomic, retain) ServersViewController *serversViewController;
+@property (nonatomic, retain) AccountHomeViewController *accountHomeViewController;
 
 - (void)saveButtonPressed:(id)sender;
 - (void)setNewSelectedImage:(Image *)image;

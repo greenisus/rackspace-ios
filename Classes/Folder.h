@@ -25,10 +25,10 @@
     NSArray *sortedContents;
 }
 
-@property (retain) NSString *name;
-@property (retain) Folder *parent;
-@property (retain) NSMutableDictionary *folders;
-@property (retain) NSMutableDictionary *objects;
+@property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) Folder *parent;
+@property (nonatomic, retain) NSMutableDictionary *folders;
+@property (nonatomic, retain) NSMutableDictionary *objects;
 @property (readonly, retain) NSArray *sortedContents;
 
 + (id)folder;

@@ -95,12 +95,12 @@
 + (Provider *)fromJSON:(NSDictionary *)dict;
 - (BOOL)isRackspace;
 
-@property (retain) NSString *name;
-@property (retain) NSURL *authEndpointURL;
-@property (retain) NSString *authHelpMessage;
-@property (retain) NSArray *rssFeeds;
-@property (retain) NSArray *contactURLs;
-@property (retain) NSDictionary *logoURLs;
-@property (retain) NSDictionary *logoObjects;
+@property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) NSURL *authEndpointURL;
+@property (nonatomic, retain) NSString *authHelpMessage;
+@property (nonatomic, retain) NSArray *rssFeeds;
+@property (nonatomic, retain) NSArray *contactURLs;
+@property (nonatomic, retain) NSDictionary *logoURLs;
+@property (nonatomic, retain) NSDictionary *logoObjects;
 
 @end

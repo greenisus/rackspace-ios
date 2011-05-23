@@ -16,7 +16,7 @@
     OpenStackAccount *account;
 }
 
-@property (retain) ContainersViewController *containersViewController;
-@property (retain) OpenStackAccount *account;
+@property (nonatomic, retain) ContainersViewController *containersViewController;
+@property (nonatomic, retain) OpenStackAccount *account;
 
 @end

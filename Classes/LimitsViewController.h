@@ -16,6 +16,6 @@
     IBOutlet UITableView *theTableView;
 }
 
-@property (retain) OpenStackAccount *account;
+@property (nonatomic, retain) OpenStackAccount *account;
 
 @end

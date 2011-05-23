@@ -24,8 +24,8 @@
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 @property (nonatomic, retain) IBOutlet UISplitViewController *splitViewController;
 @property (nonatomic, retain) UINavigationController *masterNavigationController;
-@property (retain) UIBarButtonItem *barButtonItem;
-@property (retain) RootViewController *rootViewController;
+@property (nonatomic, retain) UIBarButtonItem *barButtonItem;
+@property (nonatomic, retain) RootViewController *rootViewController;
 
 - (void) setupDependencies;
 

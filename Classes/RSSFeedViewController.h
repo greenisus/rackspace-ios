@@ -17,7 +17,7 @@
     BOOL requestFailed;
 }
 
-@property (retain) NSDictionary *feed;
-@property (retain) NSMutableArray *feedItems;
+@property (nonatomic, retain) NSDictionary *feed;
+@property (nonatomic, retain) NSMutableArray *feedItems;
 
 @end

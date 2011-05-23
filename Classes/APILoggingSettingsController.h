@@ -14,6 +14,6 @@
     SettingsViewController *settingsViewController;
 }
 
-@property (retain) SettingsViewController *settingsViewController;
+@property (nonatomic, retain) SettingsViewController *settingsViewController;
 
 @end

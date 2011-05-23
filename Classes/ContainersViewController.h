@@ -25,8 +25,8 @@
     BOOL containersLoaded;
 }
 
-@property (retain) IBOutlet UITableView *tableView;
-@property (retain) OpenStackAccount *account;
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) OpenStackAccount *account;
 
 - (void)refreshButtonPressed:(id)sender;
 

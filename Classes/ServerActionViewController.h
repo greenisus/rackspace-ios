@@ -16,8 +16,8 @@
     IBOutlet UINavigationBar *navigationBar;
 }
 
-@property (retain) ServerViewController *serverViewController;
-@property (retain) NSIndexPath *actionIndexPath;
+@property (nonatomic, retain) ServerViewController *serverViewController;
+@property (nonatomic, retain) NSIndexPath *actionIndexPath;
 
 -(void)cancelButtonPressed:(id)sender;
 

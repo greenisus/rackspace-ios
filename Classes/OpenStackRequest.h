@@ -22,8 +22,8 @@
     NSInteger retriedCount;
 }
 
-@property (retain) OpenStackAccount *account;
-@property (retain) APICallback *callback;
+@property (nonatomic, retain) OpenStackAccount *account;
+@property (nonatomic, retain) APICallback *callback;
 @property (assign) NSInteger retriedCount;
 
 - (void)setCompletionBlock:(ASIBasicBlock)aCompletionBlock;

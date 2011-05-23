@@ -27,13 +27,13 @@
     BOOL contentTypeEditable;
 }
 
-@property (retain) OpenStackAccount *account;
-@property (retain) Container *container;
-@property (retain) Folder *folder;
-@property (retain) FolderViewController *folderViewController;
-@property (retain) NSData *data;
-@property (retain) NSString *format;
-@property (retain) NSString *contentType;
+@property (nonatomic, retain) OpenStackAccount *account;
+@property (nonatomic, retain) Container *container;
+@property (nonatomic, retain) Folder *folder;
+@property (nonatomic, retain) FolderViewController *folderViewController;
+@property (nonatomic, retain) NSData *data;
+@property (nonatomic, retain) NSString *format;
+@property (nonatomic, retain) NSString *contentType;
 @property (assign) BOOL contentTypeEditable;
 
 @end

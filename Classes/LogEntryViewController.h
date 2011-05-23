@@ -16,6 +16,6 @@
     APILogEntry *logEntry;
 }
 
-@property (retain) APILogEntry *logEntry;
+@property (nonatomic, retain) APILogEntry *logEntry;
 
 @end

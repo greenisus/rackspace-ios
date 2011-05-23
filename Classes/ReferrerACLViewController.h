@@ -20,9 +20,9 @@
     id failureObserver;
 }
 
-@property (retain) ContainerDetailViewController *containerDetailViewController;
-@property (retain) OpenStackAccount *account;
-@property (retain) Container *container;
+@property (nonatomic, retain) ContainerDetailViewController *containerDetailViewController;
+@property (nonatomic, retain) OpenStackAccount *account;
+@property (nonatomic, retain) Container *container;
 
 -(void)saveButtonPressed:(id)sender;
 

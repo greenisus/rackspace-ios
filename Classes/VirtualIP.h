@@ -16,10 +16,10 @@
     NSString *ipVersion;
 }
 
-@property (retain) NSString *identifier;
-@property (retain) NSString *address;
-@property (retain) NSString *type;
-@property (retain) NSString *ipVersion;
+@property (nonatomic, retain) NSString *identifier;
+@property (nonatomic, retain) NSString *address;
+@property (nonatomic, retain) NSString *type;
+@property (nonatomic, retain) NSString *ipVersion;
 
 + (VirtualIP *)fromJSON:(NSDictionary *)dict;
 

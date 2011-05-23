@@ -25,10 +25,10 @@
     BOOL dailyMode;
 }
 
-@property (retain) IBOutlet UITableView *tableView;
-@property (retain) IBOutlet UIPickerView *picker;
-@property (retain) OpenStackAccount *account;
-@property (retain) Server *server;
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) IBOutlet UIPickerView *picker;
+@property (nonatomic, retain) OpenStackAccount *account;
+@property (nonatomic, retain) Server *server;
 
 - (void)saveButtonPressed:(id)sender;
 

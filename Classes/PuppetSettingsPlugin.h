@@ -15,7 +15,7 @@
 }
 
 
-@property (retain) SettingsViewController *settingsViewController;
-@property (retain) UINavigationController *navigationController;
+@property (nonatomic, retain) SettingsViewController *settingsViewController;
+@property (nonatomic, retain) UINavigationController *navigationController;
 
 @end

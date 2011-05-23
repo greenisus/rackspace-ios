@@ -14,6 +14,6 @@
     OpenStackAccount *account;
 }
 
-@property (retain) OpenStackAccount *account;
+@property (nonatomic, retain) OpenStackAccount *account;
 
 @end

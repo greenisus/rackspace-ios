@@ -55,27 +55,27 @@
 }
 
 @property (assign) BOOL hasBeenRefreshed;
-@property (retain) NSString *uuid;
-@property (retain) Provider *provider;
-@property (retain) NSString *username;
-@property (retain) NSString *apiKey;
-@property (retain) NSString *authToken;
-@property (retain) NSMutableDictionary *images;
-@property (retain) NSDictionary *flavors;
-@property (retain) NSMutableDictionary *servers;
-@property (retain) NSURL *serversURL;
-@property (retain) NSURL *filesURL;
-@property (retain) NSURL *cdnURL;
-@property (retain) NSArray *rateLimits;
-@property (retain) AccountManager *manager;
+@property (nonatomic, retain) NSString *uuid;
+@property (nonatomic, retain) Provider *provider;
+@property (nonatomic, retain) NSString *username;
+@property (nonatomic, retain) NSString *apiKey;
+@property (nonatomic, retain) NSString *authToken;
+@property (nonatomic, retain) NSMutableDictionary *images;
+@property (nonatomic, retain) NSDictionary *flavors;
+@property (nonatomic, retain) NSMutableDictionary *servers;
+@property (nonatomic, retain) NSURL *serversURL;
+@property (nonatomic, retain) NSURL *filesURL;
+@property (nonatomic, retain) NSURL *cdnURL;
+@property (nonatomic, retain) NSArray *rateLimits;
+@property (nonatomic, retain) AccountManager *manager;
 @property (assign) NSInteger lastUsedFlavorId;
 @property (assign) NSInteger lastUsedImageId;
 @property (assign) NSInteger containerCount;
 @property (assign) unsigned long long totalBytesUsed;
-@property (retain) NSMutableDictionary *containers;
+@property (nonatomic, retain) NSMutableDictionary *containers;
 @property (assign) BOOL flaggedForDelete;
-@property (retain) NSMutableDictionary *loadBalancers;
-@property (retain) NSMutableArray *lbProtocols;
+@property (nonatomic, retain) NSMutableDictionary *loadBalancers;
+@property (nonatomic, retain) NSMutableArray *lbProtocols;
 
 + (NSArray *)accounts;
 - (void)persist;

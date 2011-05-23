@@ -16,6 +16,6 @@
     UITextField *apiKeyTextField;
 }
 
-@property (retain) OpenStackAccount *account;
+@property (nonatomic, retain) OpenStackAccount *account;
 
 @end

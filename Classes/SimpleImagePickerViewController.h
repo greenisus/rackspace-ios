@@ -28,14 +28,14 @@
     ServerViewController *serverViewController;
 }
 
-@property (retain) OpenStackAccount *account;
-@property (retain) IBOutlet UITableView *tableView;
-@property (retain) IBOutlet UIPickerView *pickerView;
+@property (nonatomic, retain) OpenStackAccount *account;
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) IBOutlet UIPickerView *pickerView;
 @property (assign) NSUInteger selectedImageId;
 @property (assign) NSInteger mode;
-@property (retain) ServerViewController *serverViewController;
+@property (nonatomic, retain) ServerViewController *serverViewController;
 
 // should respond to setNewSelectedImage:(Image *)image;
-@property (retain) id delegate;
+@property (nonatomic, retain) id delegate;
 
 @end

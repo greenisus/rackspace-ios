@@ -24,8 +24,8 @@
     NSIndexPath *selectedIndexPath;
 }
 
-@property (retain) IBOutlet UIToolbar *toolbar;
-@property (retain) NSIndexPath *selectedIndexPath;
+@property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, retain) NSIndexPath *selectedIndexPath;
 
 // assumes the first two items in the toolbar are flexible width spaces
 - (void)showToolbarActivityMessage:(NSString *)text progress:(BOOL)hasProgress;

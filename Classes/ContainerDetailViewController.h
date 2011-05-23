@@ -30,9 +30,9 @@
     BOOL transitioning;
 }
 
-@property (retain) OpenStackAccount *account;
-@property (retain) Container *container;
-@property (retain) ContainersViewController *containersViewController;
-@property (retain) NSIndexPath *selectedContainerIndexPath;
+@property (nonatomic, retain) OpenStackAccount *account;
+@property (nonatomic, retain) Container *container;
+@property (nonatomic, retain) ContainersViewController *containersViewController;
+@property (nonatomic, retain) NSIndexPath *selectedContainerIndexPath;
 
 @end

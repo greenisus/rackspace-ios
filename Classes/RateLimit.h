@@ -19,13 +19,13 @@
     NSString *uri;
 }
 
-@property (retain) NSString *unit;
+@property (nonatomic, retain) NSString *unit;
 @property (assign) NSInteger remaining;
-@property (retain) NSString *verb;
-@property (retain) NSString *regex;
+@property (nonatomic, retain) NSString *verb;
+@property (nonatomic, retain) NSString *regex;
 @property (assign) NSInteger value;
-@property (retain) NSDate *resetTime;
-@property (retain) NSString *uri;
+@property (nonatomic, retain) NSDate *resetTime;
+@property (nonatomic, retain) NSString *uri;
 
 + (RateLimit *)fromJSON:(NSDictionary *)dict;
 

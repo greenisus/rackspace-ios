@@ -20,11 +20,11 @@
     NSString *url;
 }
 
-@property (retain) APILogEntry *logEntry;
-@property (retain) NSString *requestDescription;
-@property (retain) NSString *responseDescription;
-@property (retain) NSString *requestMethod;
-@property (retain) NSString *url;
+@property (nonatomic, retain) APILogEntry *logEntry;
+@property (nonatomic, retain) NSString *requestDescription;
+@property (nonatomic, retain) NSString *responseDescription;
+@property (nonatomic, retain) NSString *requestMethod;
+@property (nonatomic, retain) NSString *url;
 
 - (void)cancelButtonPressed:(id)sender;
 - (void)emailLogEntryButtonPressed:(id)sender;

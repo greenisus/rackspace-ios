@@ -33,10 +33,10 @@
     IBOutlet UIBarButtonItem *refreshButton;
 }
 
-@property (retain) OpenStackAccount *account;
-@property (retain) RootViewController *rootViewController;
-@property (retain) NSIndexPath *rootViewIndexPath;
-@property (retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) OpenStackAccount *account;
+@property (nonatomic, retain) RootViewController *rootViewController;
+@property (nonatomic, retain) NSIndexPath *rootViewIndexPath;
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
 
 - (void)refreshButtonPressed:(id)sender;
 

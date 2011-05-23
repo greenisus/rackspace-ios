@@ -22,11 +22,11 @@ typedef void (^APIResponseBlock)(OpenStackRequest *request);
     id failureObserver;
 }
 
-@property (retain) NSString *uuid;
-@property (retain) NSURL *url;
-@property (retain) NSString *verb;
-@property (retain) OpenStackAccount *account;
-@property (retain) OpenStackRequest *request;
+@property (nonatomic, retain) NSString *uuid;
+@property (nonatomic, retain) NSURL *url;
+@property (nonatomic, retain) NSString *verb;
+@property (nonatomic, retain) OpenStackAccount *account;
+@property (nonatomic, retain) OpenStackRequest *request;
 
 - (id)initWithAccount:(OpenStackAccount *)account url:(NSURL *)url;
 - (id)initWithAccount:(OpenStackAccount *)account url:(NSURL *)url verb:(NSString *)verb;

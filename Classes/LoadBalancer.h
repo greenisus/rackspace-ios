@@ -41,23 +41,23 @@ https://dfw.loadbalancers.api.rackspacecloud.com/v1.0/420600/
 */
 }
 
-@property (retain) LoadBalancerProtocol *protocol;
-@property (retain) NSString *algorithm;
-@property (retain) NSString *status;
-@property (retain) NSString *virtualIPType;
-@property (retain) NSMutableArray *virtualIPs;
-@property (retain) NSDate *created;
-@property (retain) NSDate *updated;
+@property (nonatomic, retain) LoadBalancerProtocol *protocol;
+@property (nonatomic, retain) NSString *algorithm;
+@property (nonatomic, retain) NSString *status;
+@property (nonatomic, retain) NSString *virtualIPType;
+@property (nonatomic, retain) NSMutableArray *virtualIPs;
+@property (nonatomic, retain) NSDate *created;
+@property (nonatomic, retain) NSDate *updated;
 @property (assign) NSUInteger maxConcurrentConnections;
 @property (assign) BOOL connectionLoggingEnabled;
-@property (retain) NSMutableArray *nodes;
-@property (retain) NSMutableArray *cloudServerNodes;
-@property (retain) NSString *sessionPersistenceType;    
+@property (nonatomic, retain) NSMutableArray *nodes;
+@property (nonatomic, retain) NSMutableArray *cloudServerNodes;
+@property (nonatomic, retain) NSString *sessionPersistenceType;    
 @property (assign) NSUInteger connectionThrottleMinConnections;
 @property (assign) NSUInteger connectionThrottleMaxConnections;
 @property (assign) NSUInteger connectionThrottleMaxConnectionRate;
 @property (assign) NSUInteger connectionThrottleRateInterval;
-@property (retain) NSString *clusterName;
+@property (nonatomic, retain) NSString *clusterName;
 @property (assign) NSInteger progress;
 @property (assign) NSString *region;
 

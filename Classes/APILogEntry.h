@@ -22,15 +22,15 @@
     NSURL *url;
 }
 
-@property (retain) NSString *requestMethod;
-@property (retain) NSString *requestBody;
-@property (retain) NSDictionary *requestHeaders;
+@property (nonatomic, retain) NSString *requestMethod;
+@property (nonatomic, retain) NSString *requestBody;
+@property (nonatomic, retain) NSDictionary *requestHeaders;
 @property (assign) NSInteger responseStatusCode;
-@property (retain) NSDictionary *responseHeaders;
-@property (retain) NSString *responseBody;
-@property (retain) NSDate *requestDate;
-@property (retain) NSString *responseStatusMessage;
-@property (retain) NSURL *url;
+@property (nonatomic, retain) NSDictionary *responseHeaders;
+@property (nonatomic, retain) NSString *responseBody;
+@property (nonatomic, retain) NSDate *requestDate;
+@property (nonatomic, retain) NSString *responseStatusMessage;
+@property (nonatomic, retain) NSURL *url;
 
 - (id)initWithRequest:(OpenStackRequest *)request;
 - (NSString *)requestDescription;

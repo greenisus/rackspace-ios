@@ -14,6 +14,6 @@
     RootViewController *rootViewController;
 }
 
-@property (retain) RootViewController *rootViewController;
+@property (nonatomic, retain) RootViewController *rootViewController;
 
 @end

@@ -19,9 +19,9 @@
     BOOL canBeLaunched;
 }
 
-@property (retain) NSString *status;
-@property (retain) NSDate *created;
-@property (retain) NSDate *updated;
+@property (nonatomic, retain) NSString *status;
+@property (nonatomic, retain) NSDate *created;
+@property (nonatomic, retain) NSDate *updated;
 @property (assign) BOOL canBeLaunched;
 
 - (id)initWithJSONDict:(NSDictionary *)dict;

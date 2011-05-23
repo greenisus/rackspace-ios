@@ -20,13 +20,13 @@
     NSDate *endTime;
 }
 
-@property (retain) NSString *identifier;
+@property (nonatomic, retain) NSString *identifier;
 @property (assign) double averageNumConnections;
 @property (assign) unsigned long long incomingTransfer;
 @property (assign) unsigned long long outgoingTransfer;
 @property (assign) NSInteger numVips;
 @property (assign) NSInteger numPolls;
-@property (retain) NSDate *startTime;
-@property (retain) NSDate *endTime;
+@property (nonatomic, retain) NSDate *startTime;
+@property (nonatomic, retain) NSDate *endTime;
 
 @end

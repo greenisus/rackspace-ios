@@ -18,9 +18,9 @@
     FolderViewController *folderViewController;
 }
 
-@property (retain) OpenStackAccount *account;
-@property (retain) Container *container;
-@property (retain) Folder *folder;
-@property (retain) FolderViewController *folderViewController;
+@property (nonatomic, retain) OpenStackAccount *account;
+@property (nonatomic, retain) Container *container;
+@property (nonatomic, retain) Folder *folder;
+@property (nonatomic, retain) FolderViewController *folderViewController;
 
 @end

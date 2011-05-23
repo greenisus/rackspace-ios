@@ -19,10 +19,10 @@
     UITableView *tableView;
 }
 
-@property (retain) OpenStackAccount *account;
-@property (retain) UITableView *tableView;
-@property (retain) NSDictionary *images;
-@property (retain) NSString *selectedFamily;
+@property (nonatomic, retain) OpenStackAccount *account;
+@property (nonatomic, retain) UITableView *tableView;
+@property (nonatomic, retain) NSDictionary *images;
+@property (nonatomic, retain) NSString *selectedFamily;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier account:(OpenStackAccount *)openStackAccount tableView:(UITableView *)aTableView;
 

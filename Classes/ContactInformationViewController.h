@@ -16,6 +16,6 @@
     NSIndexPath *selectedIndexPath;
 }
 
-@property (retain) Provider *provider;
+@property (nonatomic, retain) Provider *provider;
 
 @end

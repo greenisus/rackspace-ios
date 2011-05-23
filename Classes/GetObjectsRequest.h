@@ -14,7 +14,7 @@
     Container *container;
 }
 
-@property (retain) Container *container;
+@property (nonatomic, retain) Container *container;
 
 + (GetObjectsRequest *)request:(OpenStackAccount *)account container:(Container *)container;
 

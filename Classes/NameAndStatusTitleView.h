@@ -24,13 +24,13 @@
     DDProgressView *progressView;
 }
 
-@property (retain) id entity;
-@property (retain) UIView *statusTint;
-@property (retain) UILabel *nameLabel;
-@property (retain) UILabel *statusLabel;
-@property (retain) UIImageView *logoView;
-@property (retain) NSString *logoFilename;
-@property (retain) DDProgressView *progressView;
+@property (nonatomic, retain) id entity;
+@property (nonatomic, retain) UIView *statusTint;
+@property (nonatomic, retain) UILabel *nameLabel;
+@property (nonatomic, retain) UILabel *statusLabel;
+@property (nonatomic, retain) UIImageView *logoView;
+@property (nonatomic, retain) NSString *logoFilename;
+@property (nonatomic, retain) DDProgressView *progressView;
 
 - (id)initWithEntity:(id)entity;
 - (id)initWithEntity:(id)entity logoFilename:(NSString *)filename;

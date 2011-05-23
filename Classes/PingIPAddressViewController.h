@@ -17,8 +17,8 @@
     IBOutlet UINavigationBar *navigationBar;
 }
 
-@property (retain) IBOutlet UIWebView *webView;
-@property (retain) ServerViewController *serverViewController;
+@property (nonatomic, retain) IBOutlet UIWebView *webView;
+@property (nonatomic, retain) ServerViewController *serverViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil ipAddress:(NSString *)anIPAddress;
 - (void)cancelButtonPressed:(id)sender;

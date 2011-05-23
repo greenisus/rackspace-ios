@@ -29,9 +29,9 @@
     ActivityIndicatorView *activityIndicatorView;
 }
 
-@property (retain) Provider *provider;
-@property (retain) RootViewController *rootViewController;
-@property (retain) ProvidersViewController *providersViewController;
+@property (nonatomic, retain) Provider *provider;
+@property (nonatomic, retain) RootViewController *rootViewController;
+@property (nonatomic, retain) ProvidersViewController *providersViewController;
 
 - (void)saveButtonPressed:(id)sender;
 

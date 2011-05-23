@@ -23,8 +23,8 @@
     //NSString *selectedFamily;
 }
 
-//@property (retain) OpenStackAccount *account;
-@property (retain) Server *server;
+//@property (nonatomic, retain) OpenStackAccount *account;
+@property (nonatomic, retain) Server *server;
 
 -(void)saveButtonPressed:(id)sender;
 

@@ -19,7 +19,7 @@
     AnimatedProgressView *progressView;
 }
 
-@property (retain) AnimatedProgressView *progressView;
+@property (nonatomic, retain) AnimatedProgressView *progressView;
 
 + (CGRect)frameForText:(NSString *)text;
 + (CGRect)frameForText:(NSString *)text withProgress:(BOOL)withProgress;

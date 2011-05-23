@@ -16,6 +16,6 @@
     BOOL usingOpscodePlatform;
 }
 
-@property (retain) UISwitch *chefBootstrappingSwitch;
+@property (nonatomic, retain) UISwitch *chefBootstrappingSwitch;
 
 @end

@@ -15,7 +15,7 @@
     id detailItem;    
 }
 
-@property (retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
 
 @property (nonatomic, retain) id detailItem;
 @property (nonatomic, retain) UIPopoverController *popoverController;

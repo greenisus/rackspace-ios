@@ -17,7 +17,7 @@
     NSDictionary *algorithmValues;
 }
 
-@property (retain) LoadBalancer *loadBalancer;
+@property (nonatomic, retain) LoadBalancer *loadBalancer;
 
 - (id)initWithLoadBalancer:(LoadBalancer *)loadBalancer;
 

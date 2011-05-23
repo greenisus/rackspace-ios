@@ -21,10 +21,10 @@
     LoadBalancer *loadBalancer;
 }
 
-@property (retain) OpenStackAccount *account;
-@property (retain) LoadBalancer *loadBalancer;
-@property (retain) IBOutlet UITableView *tableView;
-@property (retain) IBOutlet UIPickerView *pickerView;
+@property (nonatomic, retain) OpenStackAccount *account;
+@property (nonatomic, retain) LoadBalancer *loadBalancer;
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) IBOutlet UIPickerView *pickerView;
 
 - (id)initWithAccount:(OpenStackAccount *)account;
 - (void)animateDots;

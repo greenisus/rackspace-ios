@@ -13,6 +13,6 @@
     UITextView *textView;
 }
 
-@property (retain) UITextView *textView;
+@property (nonatomic, retain) UITextView *textView;
 
 @end

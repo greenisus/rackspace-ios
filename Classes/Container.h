@@ -37,7 +37,7 @@
 }
 
 // regular container attributes
-@property (retain) NSString *name;
+@property (nonatomic, retain) NSString *name;
 @property (assign) NSUInteger count;
 @property (assign) unsigned long long bytes;
 
@@ -46,11 +46,11 @@
 // CDN container attributes
 @property (assign) BOOL cdnEnabled;
 @property (assign) NSUInteger ttl;
-@property (retain) NSString *cdnURL;
+@property (nonatomic, retain) NSString *cdnURL;
 @property (assign) BOOL logRetention;
-@property (retain) NSString *referrerACL;
-@property (retain) NSString *useragentACL;
-@property (retain) Folder *rootFolder;
+@property (nonatomic, retain) NSString *referrerACL;
+@property (nonatomic, retain) NSString *useragentACL;
+@property (nonatomic, retain) Folder *rootFolder;
 
 @property (assign) BOOL hasEverBeenCDNEnabled;
 

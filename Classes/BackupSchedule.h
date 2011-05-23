@@ -16,8 +16,8 @@
 }
 
 @property (assign) BOOL enabled;
-@property (retain) NSString *weekly;
-@property (retain) NSString *daily;
+@property (nonatomic, retain) NSString *weekly;
+@property (nonatomic, retain) NSString *daily;
 
 + (NSArray *)weeklyOptions;
 + (NSArray *)dailyOptions;
