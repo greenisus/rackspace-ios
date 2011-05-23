@@ -37,6 +37,10 @@
 		271EFE5D127E840900431D19 /* ChefAddServerPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 271EFE59127E840900431D19 /* ChefAddServerPlugin.m */; };
 		271EFE95127E884000431D19 /* AddServerPluginHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 271EFE93127E884000431D19 /* AddServerPluginHandler.m */; };
 		271EFE97127E884000431D19 /* AddServerPluginHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 271EFE93127E884000431D19 /* AddServerPluginHandler.m */; };
+		2725061813873755009E5EB4 /* OpenStackAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 2717275812565ED9003A1319 /* OpenStackAccount.m */; };
+		2725061A1387382A009E5EB4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 272506191387382A009E5EB4 /* Security.framework */; };
+		2725061C13873830009E5EB4 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2725061B13873830009E5EB4 /* CFNetwork.framework */; };
+		2725061E13873836009E5EB4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2725061D13873835009E5EB4 /* UIKit.framework */; };
 		272833A61270C87C00F8CCDD /* OpenStackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272833A41270C87C00F8CCDD /* OpenStackViewController.m */; };
 		272833A81270C87C00F8CCDD /* OpenStackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272833A41270C87C00F8CCDD /* OpenStackViewController.m */; };
 		272834C41270D19000F8CCDD /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 272834C21270D19000F8CCDD /* AccountManager.m */; };
@@ -734,19 +738,14 @@
 		7F8F372613859EDA0034710B /* HTNotifier.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7F8F370613859EDA0034710B /* HTNotifier.strings */; };
 		7F8F372713859EDA0034710B /* HTNotifier.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7F8F370613859EDA0034710B /* HTNotifier.strings */; };
 		7F8F372813859EDA0034710B /* HTFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8F370C13859EDA0034710B /* HTFunctions.m */; };
-		7F8F372913859EDA0034710B /* HTFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8F370C13859EDA0034710B /* HTFunctions.m */; };
 		7F8F372A13859EDA0034710B /* HTFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8F370C13859EDA0034710B /* HTFunctions.m */; };
 		7F8F372B13859EDA0034710B /* HTNotice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8F370E13859EDA0034710B /* HTNotice.m */; };
-		7F8F372C13859EDA0034710B /* HTNotice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8F370E13859EDA0034710B /* HTNotice.m */; };
 		7F8F372D13859EDA0034710B /* HTNotice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8F370E13859EDA0034710B /* HTNotice.m */; };
 		7F8F372E13859EDA0034710B /* HTNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8F371013859EDA0034710B /* HTNotifier.m */; };
-		7F8F372F13859EDA0034710B /* HTNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8F371013859EDA0034710B /* HTNotifier.m */; };
 		7F8F373013859EDA0034710B /* HTNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8F371013859EDA0034710B /* HTNotifier.m */; };
 		7F8F373113859EDA0034710B /* HTNotifier_iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8F371213859EDA0034710B /* HTNotifier_iOS.m */; };
-		7F8F373213859EDA0034710B /* HTNotifier_iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8F371213859EDA0034710B /* HTNotifier_iOS.m */; };
 		7F8F373313859EDA0034710B /* HTNotifier_iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8F371213859EDA0034710B /* HTNotifier_iOS.m */; };
 		7F8F373413859EDA0034710B /* HTNotifier_Mac.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8F371413859EDA0034710B /* HTNotifier_Mac.m */; };
-		7F8F373513859EDA0034710B /* HTNotifier_Mac.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8F371413859EDA0034710B /* HTNotifier_Mac.m */; };
 		7F8F373613859EDA0034710B /* HTNotifier_Mac.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8F371413859EDA0034710B /* HTNotifier_Mac.m */; };
 		7F8F373713859EDA0034710B /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8F371B13859EDA0034710B /* DDXMLDocument.m */; };
 		7F8F373813859EDA0034710B /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8F371B13859EDA0034710B /* DDXMLDocument.m */; };
@@ -812,6 +811,9 @@
 		271EFE59127E840900431D19 /* ChefAddServerPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChefAddServerPlugin.m; sourceTree = "<group>"; };
 		271EFE92127E884000431D19 /* AddServerPluginHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddServerPluginHandler.h; sourceTree = "<group>"; };
 		271EFE93127E884000431D19 /* AddServerPluginHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddServerPluginHandler.m; sourceTree = "<group>"; };
+		272506191387382A009E5EB4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		2725061B13873830009E5EB4 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		2725061D13873835009E5EB4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		272833A31270C87C00F8CCDD /* OpenStackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenStackViewController.h; sourceTree = "<group>"; };
 		272833A41270C87C00F8CCDD /* OpenStackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenStackViewController.m; sourceTree = "<group>"; };
 		272834C11270D19000F8CCDD /* AccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountManager.h; sourceTree = "<group>"; };
@@ -1369,6 +1371,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2725061E13873836009E5EB4 /* UIKit.framework in Frameworks */,
+				2725061C13873830009E5EB4 /* CFNetwork.framework in Frameworks */,
+				2725061A1387382A009E5EB4 /* Security.framework in Frameworks */,
 				7F9351BB13845B380097720F /* libsqlite3.0.dylib in Frameworks */,
 				7F9351C313846B620097720F /* libGoogleAnalytics.a in Frameworks */,
 				7F8F374A1385A0160034710B /* libxml2.dylib in Frameworks */,
@@ -2583,6 +2588,9 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				2725061D13873835009E5EB4 /* UIKit.framework */,
+				2725061B13873830009E5EB4 /* CFNetwork.framework */,
+				272506191387382A009E5EB4 /* Security.framework */,
 				27828720125A2A4200004D33 /* Tests */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				27FC363F12F32C200014FB4E /* Resources */,
@@ -3552,16 +3560,12 @@
 				27828827125A31AE00004D33 /* SBJSON.m in Sources */,
 				27828828125A31AE00004D33 /* NSString+SBJSON.m in Sources */,
 				27828829125A31AE00004D33 /* NSObject+SBJSON.m in Sources */,
-				7F8F372913859EDA0034710B /* HTFunctions.m in Sources */,
-				7F8F372C13859EDA0034710B /* HTNotice.m in Sources */,
-				7F8F372F13859EDA0034710B /* HTNotifier.m in Sources */,
-				7F8F373213859EDA0034710B /* HTNotifier_iOS.m in Sources */,
-				7F8F373513859EDA0034710B /* HTNotifier_Mac.m in Sources */,
 				7F8F373813859EDA0034710B /* DDXMLDocument.m in Sources */,
 				7F8F373B13859EDA0034710B /* DDXMLElement.m in Sources */,
 				7F8F373E13859EDA0034710B /* DDXMLElementAdditions.m in Sources */,
 				7F8F374113859EDA0034710B /* DDXMLNode.m in Sources */,
 				7F8F374413859EDA0034710B /* NSStringAdditions.m in Sources */,
+				2725061813873755009E5EB4 /* OpenStackAccount.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
