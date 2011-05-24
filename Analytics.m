@@ -11,25 +11,21 @@
 
 void TrackEvent(NSString *category, NSString *action){
         
-    [[GANTracker sharedTracker] trackEvent:category action:action label:nil value:0 withError:nil];
- 
-    NSLog(@"EVENT - %@ - %@", category, action);
+    [[GANTracker sharedTracker] trackEvent:category action:action label:nil value:-1 withError:nil];
 }
 
 void TrackViewController(UIViewController *vc){
         
+    NSError *error;
+    
     NSMutableString *className = [NSMutableString stringWithUTF8String:class_getName([vc class])];
     [className replaceOccurrencesOfString:@"ViewController" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [className length])];
+    [className insertString:@"/" atIndex:0];
     
-    [[GANTracker sharedTracker] trackPageview:className withError:nil];
-    
-    NSLog(@"PAGE VIEW - %@", className);
+    [[GANTracker sharedTracker] trackPageview:className withError:&error];
 }
 
 void DispatchAnalytics(){
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        [[GANTracker sharedTracker] dispatch]; 
-    });
+    [[GANTracker sharedTracker] dispatch]; 
 }
