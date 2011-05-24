@@ -14,6 +14,7 @@
 #import "APICallback.h"
 #import "RSTextFieldCell.h"
 #import "LoadBalancerProtocol.h"
+#import "ActivityIndicatorView.h"
 
 #define kPort 0
 #define kProtocols 1
@@ -50,11 +51,17 @@
         self.loadBalancer.protocol.name = @"HTTP";
         self.loadBalancer.protocol.port = 80;
     }
+
+    ActivityIndicatorView *activityIndicatorView = [[ActivityIndicatorView alloc] initWithFrame:[ActivityIndicatorView frameForText:@"Loading..."] text:@"Loading..."];
+
+    [activityIndicatorView addToView:self.view];
     
     NSString *endpoint = [account.loadBalancerURLs objectAtIndex:0];
-    [[self.account.manager getLoadBalancerProtocols:endpoint] success:^(OpenStackRequest *request){
+    [[self.account.manager getLoadBalancerProtocols:endpoint] success:^(OpenStackRequest *request) {
+        [activityIndicatorView removeFromSuperviewAndRelease];
         [self.tableView reloadData];
     } failure:^(OpenStackRequest *request){
+        [activityIndicatorView removeFromSuperviewAndRelease];
         [self alert:@"Could not load Load Balancer protocols." request:request];
     }];
 }

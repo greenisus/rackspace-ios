@@ -17,7 +17,7 @@
 
 @implementation LoadBalancersViewController
 
-@synthesize account;
+@synthesize account, tableView, toolbar;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -75,7 +75,7 @@
     
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
@@ -156,8 +156,16 @@
 #pragma mark -
 #pragma mark Memory management
 
+- (void)viewDidUnload {
+    self.tableView = nil;
+    self.toolbar = nil;
+    [super viewDidUnload];
+}
+
 - (void)dealloc {
     [account release];
+    [tableView release];
+    [toolbar release];
     [super dealloc];
 }
 

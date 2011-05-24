@@ -8,6 +8,7 @@
 
 #import "LBAlgorithmViewController.h"
 #import "LoadBalancer.h"
+#import "UIViewController+Conveniences.h"
 
 #define kRandom 0
 #define kRoundRobin 1
@@ -144,9 +145,18 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
         cell.textLabel.backgroundColor = [UIColor clearColor];
         cell.detailTextLabel.numberOfLines = 0;
+        cell.selectionStyle = UITableViewCellEditingStyleNone;
+        
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(0, 0, 22, 22);
+        [button setImage:[UIImage imageNamed:@"purple-camera.png"] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(cameraButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        cell.accessoryView = button;
+         
     }
     
     cell.textLabel.text = @"";
+//    cell.imageView.image = [UIImage imageNamed:@"purple-camera.png"];
     
     switch (indexPath.section) {
         case kRandom:
@@ -202,6 +212,12 @@
             break;
     }
     [self.tableView reloadData];
+}
+
+#pragma mark - Button Handlers
+
+- (void)cameraButtonPressed:(id)sender {
+    [self alert:@"Algorithm Video" message:@"Not yet implemented."];
 }
 
 @end

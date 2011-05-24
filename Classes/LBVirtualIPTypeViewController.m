@@ -102,8 +102,8 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {    
+    return [self.account.loadBalancers objectForKey:self.loadBalancer.region] > 0 ? 3 : 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -201,6 +201,7 @@
         self.loadBalancer.virtualIPType = @"ServiceNet";
     } else if (indexPath.section == kSharedVirtualIP) {
         self.loadBalancer.virtualIPType = @"Shared Virtual IP";
+        [self alert:@"not implemented" message:@"you'll need to choose another load balancer for this option"];
     }    
 
     [self.tableView reloadData];

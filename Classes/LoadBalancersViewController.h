@@ -10,10 +10,14 @@
 
 @class OpenStackAccount;
 
-@interface LoadBalancersViewController : UITableViewController {
+@interface LoadBalancersViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     OpenStackAccount *account;
+    IBOutlet UITableView *tableView;
+    IBOutlet UIToolbar *toolbar;
 }
 
 @property (nonatomic, retain) OpenStackAccount *account;
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 
 @end
