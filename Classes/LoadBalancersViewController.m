@@ -8,16 +8,19 @@
 
 #import "LoadBalancersViewController.h"
 #import "OpenStackAccount.h"
+#import "AccountManager.h"
 #import "LoadBalancer.h"
 #import "NSObject+Conveniences.h"
 #import "UIViewController+Conveniences.h"
 #import "LoadBalancerViewController.h"
 #import "AddLoadBalancerViewController.h"
+#import "APICallback.h"
+#import "UIViewController+Conveniences.h"
 
 
 @implementation LoadBalancersViewController
 
-@synthesize account, tableView, toolbar;
+@synthesize account, tableView;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -33,11 +36,14 @@
     [super viewWillAppear:animated];
 }
 */
-/*
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    if (!lbsLoaded) {
+        [self refreshButtonPressed:nil];
+    }
 }
-*/
+
 /*
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -86,7 +92,7 @@
     if ([loadBalancer.nodes count] == 1) {
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ to 1 node", loadBalancer.algorithm];
     } else {
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ to %i nodes", loadBalancer.algorithm, [loadBalancer.nodes count]];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%i: %@ to %i nodes", loadBalancer.identifier, loadBalancer.algorithm, [loadBalancer.nodes count]];
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.imageView.image = [UIImage imageNamed:@"load-balancers-icon.png"];
@@ -153,6 +159,29 @@
     [vc release];
 }
 
+- (IBAction)refreshButtonPressed:(id)sender {
+    
+    lbsLoaded = YES;
+    [self showToolbarActivityMessage:@"Refreshing load balancers..."];
+    __block NSInteger refreshCount = 0;
+    
+    for (NSString *endpoint in [self.account loadBalancerURLs]) {
+        [[self.account.manager getLoadBalancers:endpoint] success:^(OpenStackRequest *request) {
+            refreshCount++;
+            if (refreshCount == [[self.account loadBalancerURLs] count]) {
+                [self hideToolbarActivityMessage];
+            }
+            [self.tableView reloadData];
+        } failure:^(OpenStackRequest *request) {
+            refreshCount++;
+            if (refreshCount == [[self.account loadBalancerURLs] count]) {
+                [self hideToolbarActivityMessage];
+            }
+        }];
+    }
+    
+}
+
 #pragma mark -
 #pragma mark Memory management
 
@@ -165,7 +194,6 @@
 - (void)dealloc {
     [account release];
     [tableView release];
-    [toolbar release];
     [super dealloc];
 }
 

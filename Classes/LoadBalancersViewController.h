@@ -6,18 +6,20 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "OpenStackViewController.h"
 
 @class OpenStackAccount;
 
-@interface LoadBalancersViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface LoadBalancersViewController : OpenStackViewController <UITableViewDelegate, UITableViewDataSource> {
     OpenStackAccount *account;
     IBOutlet UITableView *tableView;
-    IBOutlet UIToolbar *toolbar;
+    @private
+    BOOL lbsLoaded;
 }
 
 @property (nonatomic, retain) OpenStackAccount *account;
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
-@property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
+
+- (IBAction)refreshButtonPressed:(id)sender;
 
 @end
