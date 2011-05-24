@@ -25,6 +25,7 @@
 #import "LoadBalancer.h"
 #import "LoadBalancerRequest.h"
 #import "APICallback.h"
+#import "Analytics.h"
 
 
 @implementation AccountManager
@@ -131,6 +132,8 @@
 #pragma mark Reboot Server
 
 - (void)softRebootServer:(Server *)server {
+    TrackEvent(CATEGORY_SERVER, EVENT_REBOOTED);
+    
     __block OpenStackRequest *request = [OpenStackRequest softRebootServerRequest:self.account server:server];
     request.delegate = self;
     request.userInfo = [NSDictionary dictionaryWithObject:server forKey:@"server"];
@@ -144,6 +147,8 @@
 }
 
 - (void)hardRebootServer:(Server *)server {
+    TrackEvent(CATEGORY_SERVER, EVENT_REBOOTED);
+    
     __block OpenStackRequest *request = [OpenStackRequest hardRebootServerRequest:self.account server:server];
     request.delegate = self;
     request.userInfo = [NSDictionary dictionaryWithObject:server forKey:@"server"];
@@ -159,6 +164,8 @@
 #pragma mark Change Admin Password
 
 - (void)changeAdminPassword:(Server *)server password:(NSString *)password {
+    TrackEvent(CATEGORY_SERVER, EVENT_PASSWORD_CHANGED);
+    
     __block OpenStackRequest *request = [OpenStackRequest changeServerAdminPasswordRequest:self.account server:server password:password];
     request.delegate = self;
     request.userInfo = [NSDictionary dictionaryWithObject:server forKey:@"server"];
@@ -174,6 +181,8 @@
 #pragma mark Rename Server
 
 - (APICallback *)renameServer:(Server *)server name:(NSString *)name {
+    TrackEvent(CATEGORY_SERVER, EVENT_RENAMED);
+    
     __block OpenStackRequest *request = [OpenStackRequest renameServerRequest:self.account server:server name:name];
     return [self callbackWithRequest:request];
 }
@@ -181,6 +190,8 @@
 #pragma mark Delete Server
 
 - (void)deleteServer:(Server *)server {
+    TrackEvent(CATEGORY_SERVER, EVENT_DELETED);
+    
     __block OpenStackRequest *request = [OpenStackRequest deleteServerRequest:self.account server:server];
     request.delegate = self;
     request.userInfo = [NSDictionary dictionaryWithObject:server forKey:@"server"];
@@ -200,6 +211,8 @@
 #pragma mark Create Server
 
 - (void)createServer:(Server *)server {
+    TrackEvent(CATEGORY_SERVER, EVENT_CREATED);
+    
     __block OpenStackRequest *request = [OpenStackRequest createServerRequest:self.account server:server];
     request.delegate = self;
     request.userInfo = [NSDictionary dictionaryWithObject:server forKey:@"server"];
@@ -225,6 +238,8 @@
 #pragma mark Resize Server
 
 - (void)resizeServer:(Server *)server flavor:(Flavor *)flavor {
+    TrackEvent(CATEGORY_SERVER, EVENT_RESIZED);
+    
     __block OpenStackRequest *request = [OpenStackRequest resizeServerRequest:self.account server:server flavor:flavor];
     request.delegate = self;
     request.userInfo = [NSDictionary dictionaryWithObject:server forKey:@"server"];
@@ -274,6 +289,8 @@
 }
 
 - (void)rebuildServer:(Server *)server image:(Image *)image {
+    TrackEvent(CATEGORY_SERVER, EVENT_REBUILT);
+    
     __block OpenStackRequest *request = [OpenStackRequest rebuildServerRequest:self.account server:server image:image];
     request.delegate = self;
     request.userInfo = [NSDictionary dictionaryWithObject:server forKey:@"server"];
@@ -304,6 +321,8 @@
 }
 
 - (void)updateBackupSchedule:(Server *)server {
+    TrackEvent(CATEGORY_SERVER, EVENT_BACKUP_SCHEDULE_CHANGED);
+    
     __block OpenStackRequest *request = [OpenStackRequest updateBackupScheduleRequest:self.account server:server];
     request.delegate = self;
     request.userInfo = [NSDictionary dictionaryWithObject:server forKey:@"server"];
@@ -413,6 +432,8 @@
 }
 
 - (void)createContainer:(Container *)container {
+    TrackEvent(CATEGORY_CONTAINERS, EVENT_CREATED);
+    
     OpenStackRequest *request = [OpenStackRequest createContainerRequest:self.account container:container];
     request.delegate = self;
     request.didFinishSelector = @selector(createContainerSucceeded:);
@@ -438,6 +459,8 @@
 }
 
 - (void)deleteContainer:(Container *)container {
+    TrackEvent(CATEGORY_CONTAINERS, EVENT_DELETED);
+    
     OpenStackRequest *request = [OpenStackRequest deleteContainerRequest:self.account container:container];
     request.delegate = self;
     request.didFinishSelector = @selector(deleteContainerSucceeded:);
@@ -473,6 +496,8 @@
 }
 
 - (void)updateCDNContainer:(Container *)container {
+    TrackEvent(CATEGORY_CONTAINERS, EVENT_UPDATED);
+    
     if (![self queue]) {
         [self setQueue:[[[NSOperationQueue alloc] init] autorelease]];
     }
@@ -570,6 +595,8 @@
 }
 
 - (void)writeObject:(Container *)container object:(StorageObject *)object downloadProgressDelegate:(id)downloadProgressDelegate {
+    TrackEvent(CATEGORY_FILES, EVENT_CREATED);
+    
     OpenStackRequest *request = [OpenStackRequest writeObjectRequest:self.account container:container object:object];
     request.delegate = self;
     request.didFinishSelector = @selector(writeObjectSucceeded:);
@@ -618,6 +645,8 @@
 }
 
 - (void)deleteObject:(Container *)container object:(StorageObject *)object {
+    TrackEvent(CATEGORY_FILES, EVENT_DELETED);
+    
     OpenStackRequest *request = [OpenStackRequest deleteObjectRequest:self.account container:container object:object];
     request.delegate = self;
     request.didFinishSelector = @selector(deleteObjectSucceeded:);
@@ -666,6 +695,8 @@
 }
 
 - (APICallback *)createLoadBalancer:(LoadBalancer *)loadBalancer {
+    TrackEvent(CATEGORY_LOAD_BALANCER, EVENT_CREATED);
+    
     NSString *endpoint = @"";
     
     for (NSString *url in [self.account loadBalancerURLs]) {
