@@ -65,7 +65,10 @@
 
     Reachability *reachability = [Reachability reachabilityForInternetConnection];
     if ([reachability currentReachabilityStatus] == kNotReachable) {
-        [self failOnBadConnection];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        if (![defaults boolForKey:@"already_failed_on_bad_connection"]) {
+            [self failOnBadConnection];
+        }
     } else {
         //BOOL hadZeroServers = [self.account.servers count] == 0;
         
