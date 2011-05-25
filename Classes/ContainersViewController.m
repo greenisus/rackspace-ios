@@ -98,7 +98,10 @@
 - (void)refreshButtonPressed:(id)sender {
     Reachability *reachability = [Reachability reachabilityForInternetConnection];
     if ([reachability currentReachabilityStatus] == kNotReachable) {
-        [self failOnBadConnection];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        if (![defaults boolForKey:@"already_failed_on_connection"]) {
+            [self failOnBadConnection];
+        }
     } else {
         refreshButton.enabled = NO;
         

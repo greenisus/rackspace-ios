@@ -118,6 +118,9 @@
 
 - (void)failOnBadConnection {
     [self alert:@"Connection Error" message:@"Please check your connection or API URL and try again."];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:YES forKey:@"already_failed_on_connection"];
+    [defaults synchronize];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView emptyCellWithImage:(UIImage *)image title:(NSString *)title subtitle:(NSString *)subtitle deleteButtonTitle:(NSString *)deleteButtonTitle deleteButtonSelector:(SEL)deleteButtonSelector {
