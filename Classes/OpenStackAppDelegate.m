@@ -191,7 +191,7 @@
     [defaults synchronize];
     
     [self showPasscodeLock];
-    //DispatchAnalytics();
+    DispatchAnalytics();
 }
 
 
