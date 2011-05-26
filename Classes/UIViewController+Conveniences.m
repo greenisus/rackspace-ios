@@ -119,7 +119,7 @@
 - (void)failOnBadConnection {
     [self alert:@"Connection Error" message:@"Please check your connection or API URL and try again."];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:YES forKey:@"already_failed_on_bad_connection"];
+    [defaults setBool:YES forKey:@"already_failed_on_connection"];
     [defaults synchronize];
 }
 

@@ -54,7 +54,6 @@
 - (void)success:(APIResponseBlock)successBlock failure:(APIResponseBlock)failureBlock {
 
     NSString *successName = [NSString stringWithFormat:@"SUCCESS %@ %@%@", self.verb, [self.url description], (self.request ? [NSString stringWithFormat:@" %@", self.uuid] : @"")];
-    NSLog(@"registering success: %@", successName);
     successObserver = [[NSNotificationCenter defaultCenter] addObserverForName:successName object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification* notification)
     {
         successBlock([notification.userInfo objectForKey:@"response"]);
@@ -65,7 +64,6 @@
     }];
     
     NSString *failureName = [NSString stringWithFormat:@"FAILURE %@ %@%@", self.verb, [self.url description], (self.request ? [NSString stringWithFormat:@" %@", self.uuid] : @"")];
-    NSLog(@"registering failure: %@", failureName);
     failureObserver = [[NSNotificationCenter defaultCenter] addObserverForName:failureName object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification* notification)
     {
         failureBlock([notification.userInfo objectForKey:@"response"]);

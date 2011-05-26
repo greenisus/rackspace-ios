@@ -93,9 +93,6 @@ static NSMutableDictionary *timers = nil;
 }
 
 - (void)refreshCollections {
-    NSLog(@"Refreshing collections for %@", self.username);
-    NSLog(@"servers URL: %@", self.serversURL);
-    
     if (!self.manager) {
         self.manager = [[AccountManager alloc] init];
         self.manager.account = self;
@@ -105,15 +102,7 @@ static NSMutableDictionary *timers = nil;
         
         [self.manager getImages];
         [self.manager getFlavors];
-//        [self.manager getServers];
         [self.manager getLimits];
-//        [self.manager getContainers];
-        
-        //[self.manager getStorageAccountInfo];
-        
-//        for (NSString *endpoint in [self loadBalancerURLs]) {
-//            [self.manager getLoadBalancers:endpoint];
-//        }
         
         // handle success; don't worry about failure
         getLimitsObserver = [[NSNotificationCenter defaultCenter] addObserverForName:@"getLimitsSucceeded" object:self
@@ -123,8 +112,6 @@ static NSMutableDictionary *timers = nil;
                              }];
     } failure:^(OpenStackRequest *request){
     }];
-    
-    NSLog(@"End refreshing method");
 }
 
 #pragma mark -

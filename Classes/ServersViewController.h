@@ -19,9 +19,6 @@
     id getImageSucceededObserver;
     id getImageFailedObserver;
     
-    id getServersSucceededObserver;
-    id getServersFailedObserver;
-    
     IBOutlet UIBarButtonItem *refreshButton;
 
     BOOL loaded;

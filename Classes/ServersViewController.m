@@ -20,8 +20,8 @@
 #import "RootViewController.h"
 #import "AccountHomeViewController.h"
 #import "AccountManager.h"
-#import "Reachability.h"
 #import "Provider.h"
+#import "APICallback.h"
 
 
 @implementation ServersViewController
@@ -61,47 +61,31 @@
     [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 
+- (void)enableRefreshButton {
+    serversLoaded = YES;
+    refreshButton.enabled = YES;
+    [self hideToolbarActivityMessage];
+}
+
 - (void)refreshButtonPressed:(id)sender {
 
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    if ([reachability currentReachabilityStatus] == kNotReachable) {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        if (![defaults boolForKey:@"already_failed_on_bad_connection"]) {
-            [self failOnBadConnection];
+    refreshButton.enabled = NO;
+    [self showToolbarActivityMessage:@"Refreshing servers..."];
+
+    [[self.account.manager getServersWithCallback] success:^(OpenStackRequest *request) {
+        [self enableRefreshButton];
+        self.account.servers = [NSMutableDictionary dictionaryWithDictionary:[request servers]];
+        [self.account persist];
+        [self.tableView reloadData];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            [NSTimer scheduledTimerWithTimeInterval:0.4 target:self selector:@selector(selectFirstServer) userInfo:nil repeats:NO];
+        }        
+    } failure:^(OpenStackRequest *request) {
+        [self enableRefreshButton];
+        if (request.responseStatusCode != 0) {
+            [self alert:@"There was a problem loading your servers." request:request];
         }
-    } else {
-        //BOOL hadZeroServers = [self.account.servers count] == 0;
-        
-        refreshButton.enabled = NO;
-        [self showToolbarActivityMessage:@"Refreshing servers..."];
-        [self.account.manager getServers];
-        
-        getServersSucceededObserver = [[NSNotificationCenter defaultCenter] addObserverForName:@"getServersSucceeded" object:self.account 
-                                                                                         queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification)
-                                       {
-                                           serversLoaded = YES;
-                                           [self.account persist];
-                                           refreshButton.enabled = YES;
-                                           [self hideToolbarActivityMessage];
-                                           //if (!hadZeroServers && [self.account.servers count] > 0) {
-                                               [self.tableView reloadData];
-                                           //}
-                                           if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-                                               [NSTimer scheduledTimerWithTimeInterval:0.4 target:self selector:@selector(selectFirstServer) userInfo:nil repeats:NO];
-                                           }
-                                           [[NSNotificationCenter defaultCenter] removeObserver:getServersSucceededObserver];
-                                       }];
-        
-        getServersFailedObserver = [[NSNotificationCenter defaultCenter] addObserverForName:@"getServersFailed" object:self.account 
-                                                                                      queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification)
-                                    {
-                                        serversLoaded = YES;
-                                        refreshButton.enabled = YES;
-                                        [self hideToolbarActivityMessage];
-                                        [self alert:@"There was a problem loading your servers." request:[notification.userInfo objectForKey:@"request"]];
-                                        [[NSNotificationCenter defaultCenter] removeObserver:getServersFailedObserver];
-                                    }];
-    }
+    }];
 }
 
 #pragma mark -

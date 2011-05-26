@@ -54,6 +54,7 @@
 
 - (void)getStorageAccountInfo;
 - (void)getContainers;
+- (APICallback *)getContainersWithCallback;
 - (void)createContainer:(Container *)container;
 - (void)deleteContainer:(Container *)container;
 

@@ -16,7 +16,7 @@
 #import "AccountManager.h"
 #import "OpenStackAppDelegate.h"
 #import "RootViewController.h"
-#import "Reachability.h"
+#import "APICallback.h"
 
 
 @implementation ContainersViewController
@@ -95,44 +95,33 @@
     [vc release];
 }
 
+- (void)enableRefreshButton {
+    containersLoaded = YES;
+    refreshButton.enabled = YES;
+    [self hideToolbarActivityMessage];
+}
+
 - (void)refreshButtonPressed:(id)sender {
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    if ([reachability currentReachabilityStatus] == kNotReachable) {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        if (![defaults boolForKey:@"already_failed_on_bad_connection"]) {
-            [self failOnBadConnection];
-        }
-    } else {
-        refreshButton.enabled = NO;
+
+    refreshButton.enabled = NO;
         
         //BOOL hadZeroContainers = [self.account.containers count] == 0;
         
-        refreshButton.enabled = NO;
-        [self showToolbarActivityMessage:@"Refreshing containers..."];
-        [self.account.manager getContainers];
-        
-        getContainersSucceededObserver = [[NSNotificationCenter defaultCenter] addObserverForName:@"getContainersSucceeded" object:self.account 
-                                                                                         queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification)
-        {
-            containersLoaded = YES;
-            refreshButton.enabled = YES;
-            [self hideToolbarActivityMessage];
-            //if (!hadZeroContainers && [self.account.containers count] > 0) {
-                [self.tableView reloadData];
-            //}
-            [[NSNotificationCenter defaultCenter] removeObserver:getContainersSucceededObserver];
-        }];
-        
-        getContainersFailedObserver = [[NSNotificationCenter defaultCenter] addObserverForName:@"getContainersFailed" object:self.account 
-                                                                                      queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification)
-        {
-            containersLoaded = YES;
-            refreshButton.enabled = YES;
-            [self hideToolbarActivityMessage];
-            [self alert:@"There was a problem loading your containers." request:[notification.userInfo objectForKey:@"request"]];
-            [[NSNotificationCenter defaultCenter] removeObserver:getContainersFailedObserver];
-        }];
-    }
+    refreshButton.enabled = NO;
+    [self showToolbarActivityMessage:@"Refreshing containers..."];
+    
+    [[self.account.manager getContainersWithCallback] success:^(OpenStackRequest *request) {
+        self.account.containers = [request containers];
+        self.account.containerCount = [self.account.containers count];
+        [self.account persist];
+        [self enableRefreshButton];
+        [self.tableView reloadData];
+    } failure:^(OpenStackRequest *request) {
+        [self enableRefreshButton];
+        if (request.responseStatusCode != 0) {
+            [self alert:@"There was a problem loading your containers." request:request];
+        }
+    }];
 }
 
 #pragma mark -

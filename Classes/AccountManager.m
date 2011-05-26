@@ -371,7 +371,7 @@
 }
 
 - (APICallback *)getServersWithCallback {
-    __block GetServersRequest *request = [GetServersRequest request:self.account];
+    __block OpenStackRequest *request = [OpenStackRequest serversRequest:self.account method:@"GET" path:@"/servers/detail"];
     return [self callbackWithRequest:request];
 }
 
@@ -429,6 +429,11 @@
     GetContainersRequest *request = [GetContainersRequest request:self.account];
     //[request startAsynchronous];
     [queue addOperation:request];
+}
+
+- (APICallback *)getContainersWithCallback {
+    __block OpenStackRequest *request = [OpenStackRequest filesRequest:self.account method:@"GET" path:@""];
+    return [self callbackWithRequest:request];    
 }
 
 - (void)createContainer:(Container *)container {

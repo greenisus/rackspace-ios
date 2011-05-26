@@ -36,20 +36,14 @@ static NSRecursiveLock *accessDetailsLock = nil;
 }
 
 - (void)notify:(NSString *)name {
-    NSLog(@"notify: %@", name);
     NSDictionary *callbackUserInfo = [NSDictionary dictionaryWithObject:self forKey:@"response"];
     NSNotification *notification = [NSNotification notificationWithName:name object:nil userInfo:callbackUserInfo];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
 - (void)notify {
-//    [self notify:[NSString stringWithFormat:@"%@ %@ %@", [self isSuccess] ? @"SUCCESS" : @"FAILURE", self.requestMethod, [self.url description]]];
-//    [self notify:[NSString stringWithFormat:@"%@ %@ %@ %@", [self isSuccess] ? @"SUCCESS" : @"FAILURE", self.requestMethod, [self.url description], self.callback.uuid]];
     NSString *observeName = [NSString stringWithFormat:@"%@ %@ %@", [self isSuccess] ? @"SUCCESS" : @"FAILURE", self.requestMethod, [self.url description]];
     NSString *callbackName = [NSString stringWithFormat:@"%@ %@ %@ %@", [self isSuccess] ? @"SUCCESS" : @"FAILURE", self.requestMethod, [self.url description], self.callback.uuid];
-    
-    NSLog(@"notify: %@", observeName);
-    NSLog(@"notify: %@", callbackName);
     
     NSDictionary *callbackUserInfo = [NSDictionary dictionaryWithObject:self forKey:@"response"];
 
@@ -232,16 +226,10 @@ static NSRecursiveLock *accessDetailsLock = nil;
 }
 
 - (void)failWithError:(NSError *)theError {
-    NSLog(@"request failed: %i %@: %@", self.responseStatusCode, self.url, [theError description]);
-    
-    // if the response code is 401 and this isn't the auth request, we have
-    // an expired auth token.  So we need to get a fresh auth token and try the request
-    // again.
+
     if (responseStatusCode == 401 && ![url isEqual:account.provider.authEndpointURL]) {
+        // auth is expired, so get a fresh token
         if (account) {
-            //NSLog(@"Expired auth token for %@", url);
-            //NSLog(@"Expired user: %@, %@", account, account.username);
-            
             OpenStackRequest *retryRequest = [OpenStackRequest authenticationRequest:account];
             retryRequest.delegate = self;
             retryRequest.didFinishSelector = @selector(authRetrySucceded:);
@@ -252,39 +240,18 @@ static NSRecursiveLock *accessDetailsLock = nil;
         NSNotification *notification = [NSNotification notificationWithName:@"serviceUnavailable" object:nil userInfo:nil];
         [[NSNotificationCenter defaultCenter] postNotification:notification];        
         [super failWithError:theError];
-    } else if (responseStatusCode == 0 && [url host] && self.retriedCount < 10) {
-        
-        NSLog(@"Retrying from timeout for %@, host: %@", url, [url host]);
-        retried = YES;
-        retriedRequest = [self copy];
-        retriedRequest.retriedCount = self.retriedCount + 1;
-        if (backupCompletionBlock) {
-            [retriedRequest setCompletionBlock:^{
-                backupCompletionBlock();
-            }];
-        }
-        if (backupFailureBlock) {
-            [retriedRequest setFailedBlock:^{
-                backupFailureBlock();
-            }];
-        }
-        // delay a little to not get a string of timeouts all at once
-        //[NSTimer scheduledTimerWithTimeInterval:0.25 target:retriedRequest selector:@selector(startSynchronous) userInfo:nil repeats:NO];
-        /*
-        APILogEntry *e = [[APILogEntry alloc] initWithRequest:retriedRequest];
-        NSLog(@"%@", [e requestDescription]);
-        */
-        [retriedRequest startSynchronous];      
-        //[retriedRequest startAsynchronous];
-        
-    } else {
+    } else if (responseStatusCode == 0) {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *loggingLevel = [defaults valueForKey:@"api_logging_level"];    
-        if ([loggingLevel isEqualToString:@"all"] || ([loggingLevel isEqualToString:@"errors"] && ![self isSuccess])) {
-            [APILogger log:self];
+        if (![defaults boolForKey:@"already_failed_on_connection"]) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection Error" message:@"Please check your connection or API URL and try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+            [alert release];
         }
-        [super failWithError:theError];
+        [defaults setBool:YES forKey:@"already_failed_on_connection"];
+        [defaults synchronize];              
     }
+
+    [super failWithError:theError];
 }
 
 #pragma mark -
